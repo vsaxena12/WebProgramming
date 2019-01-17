@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="../../assets/styles/article.css" rel="stylesheet" type="text/css" />
+  <title>Homework 4</title>
+<link href="hw4/hl-fine_blue.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="page">
+<span id="opennav"><i class="material-icons">&#xe5d2;</i></span>
+<div id="nav">
+<div id="closenav"><i class="material-icons">&#xe5cd;</i></div>
+<ul>
+<li><a href="../../index.html">Home</a></li>
+<li><a href="../../docs/index.html">Documentation</a></li>
+<li><a href="../../exams-quizzes/index.html">Exams & Quizzes</a></li>
+<li><a href="../../exercises/index.html">Exercises</a></li>
+<li><a href="../../hws/index.html">Homeworks</a></li>
+<li><a href="../../misc/index.html">Miscellaneous</a></li>
+<li><a href="../../projects/index.html">Projects</a></li>
+<li><a href="../../slides/index.html">Slides</a></li>
+
+</ul>
+</div> <!-- #nav -->
+<div id="main">
+  <div id="header">
+<h1>Programming for the Web</h1>
+</div> <!-- #header -->
+<div id="content">
+<section data-coord="hw4.umt:1:0"><h1 data-coord="hw4.umt:1:0">Homework 4</h1><p data-coord="hw4.umt:3:0"><strong data-coord="hw4.umt:3:0">Due Date</strong>: CS 580W: Dec 5; CS 480W: Dec 7 <br data-coord="hw4.umt:3:43"/>
+<strong data-coord="hw4.umt:3:46">No late submissions</strong>
+</p><p data-coord="hw4.umt:6:0">To be turned in on paper in class.
+</p><p data-coord="hw4.umt:8:0"><strong data-coord="hw4.umt:8:0">Important Reminder</strong>: As per the course <em data-coord="hw4.umt:8:110"><a href="../../misc/academic-honesty-statement/academic-honesty-policy.html" data-coord="hw4.umt:8:110">Academic Honesty Statement</a></em>,
+cheating of any kind will minimally result in receiving an F letter
+grade for the entire course.
+</p><p data-coord="hw4.umt:12:0">Please remember to justify all answers.
+</p><p data-coord="hw4.umt:21:0">You are encouraged to use the web or the library but are required to
+cite any external sources used in your answers.
+</p><ol data-coord="hw4.umt:24:0"><li data-coord="hw4.umt:24:0"><p data-coord="hw4.umt:24:4">The course discussed two approaches for maintaining state
+across multiple HTTP requests:
+</p><ol data-coord="hw4.umt:27:0"><li data-coord="hw4.umt:27:0"><p data-coord="hw4.umt:27:8">Include the state as part of the URL for each request,
+usually as a query parameter.
+</p></li><li data-coord="hw4.umt:30:0"><p data-coord="hw4.umt:30:8">Use cookies.
+</p></li></ol><p data-coord="hw4.umt:32:4">Usually the state maintained in a client is some kind of id
+which identifies state stored on the server.
+</p><p data-coord="hw4.umt:35:4">Discuss the tradeoffs between these two approaches. <em data-coord="hw4.umt:35:56">10-points</em>
+</p></li><li data-coord="hw4.umt:37:0"><p data-coord="hw4.umt:37:4">John is a non-technical proprietor for a small business.  He hires
+a consultant to develop a web site where customers can place
+orders.  The consultant successfully delivers a slick looking web
+site based on express.js and sets up the express.js server using
+a web hosting company.  The web site works well and orders
+are pouring in.
+</p><ol data-coord="hw4.umt:44:0"><li data-coord="hw4.umt:44:0"><p data-coord="hw4.umt:44:9">Unfortunately, after a few days of successful operation John
+gets a call from the web hosting company informing him that
+the memory footprint of the express.js server has increased
+tremendously.
+</p></li><li data-coord="hw4.umt:49:0"><p data-coord="hw4.umt:49:9">John has no idea what that means and places a call to the
+consultant requesting assistance.
+</p></li><li data-coord="hw4.umt:52:0"><p data-coord="hw4.umt:52:9">Before the consultant can get back to him, John receives
+another call from the web hosting company informing him
+that his server crashed and they have restarted it.
+</p></li><li data-coord="hw4.umt:56:0"><p data-coord="hw4.umt:56:9">The web site is working well with the server having a small
+memory footprint.  However, John starts receiving complaints
+from customers saying that they have lost the contents of
+their shopping carts.
+</p></li></ol><p data-coord="hw4.umt:61:4">Give a possible reason for this sequence of events. <em data-coord="hw4.umt:61:56">5-points</em>
+</p></li><li data-coord="hw4.umt:63:0"><p data-coord="hw4.umt:63:4">One disadvantage of the PRG Post-Redirect-Get pattern is
+difficulty sending information from a successful <samp data-coord="hw4.umt:63:114">POST</samp>
+to the <samp data-coord="hw4.umt:63:132">GET</samp>.  Discuss alternative solutions to this
+problem? <em data-coord="hw4.umt:63:191">10-points</em>
+</p></li><li data-coord="hw4.umt:68:0"><p data-coord="hw4.umt:68:4">You are hired to help an ecommerce web site evaluate two
+alternatives for allowing users to checkout their shopping carts:
+</p><ol data-coord="hw4.umt:71:0"><li data-coord="hw4.umt:71:0"><p data-coord="hw4.umt:71:9">A checkout flow:
+</p><ol data-coord="hw4.umt:73:0"><li data-coord="hw4.umt:73:0"><p data-coord="hw4.umt:73:13">A shipping page where the user provides shipping
+information for the order.
+</p></li><li data-coord="hw4.umt:76:0"><p data-coord="hw4.umt:76:13">A billing page where the user provides a credit card
+number to pay for the order.
+</p></li><li data-coord="hw4.umt:79:0"><p data-coord="hw4.umt:79:13">A page where the user can review all the order information
+before deciding whether to place the order.
+</p></li><li data-coord="hw4.umt:82:0"><p data-coord="hw4.umt:82:13">An invoice page for the order after it has been
+successfully placed.
+</p></li></ol></li><li data-coord="hw4.umt:85:0"><p data-coord="hw4.umt:85:9">A single checkout page on which the user provides all
+necessary information like shipping and billing. When
+an order is placed, the checkout page is replaced
+by an invoice when an order is sucessfully placed.
+</p></li></ol><p data-coord="hw4.umt:90:4">The web site may need to support the following:
+</p><ul data-coord="hw4.umt:92:0"><li data-coord="hw4.umt:92:0"><p data-coord="hw4.umt:92:9">Allow the user to specify promotional offers like coupons
+during the checkout.  These offers may affect the total cost
+of the order.
+</p></li><li data-coord="hw4.umt:96:0"><p data-coord="hw4.umt:96:9">Allow a discounted (possibly free) shipping based
+on the total cost of the order.
+</p></li></ul><p data-coord="hw4.umt:99:4">Provide a technical evaluation for the two alternatives.  Your
+evaluation should include the following:
+</p><ul data-coord="hw4.umt:102:0"><li data-coord="hw4.umt:102:0"><p data-coord="hw4.umt:102:9">For the checkout flow, suggest possible URLs for the
+different pages as well as the HTTP methods used.
+</p></li><li data-coord="hw4.umt:105:0"><p data-coord="hw4.umt:105:9">The information flow between the user and the application.
+</p></li><li data-coord="hw4.umt:107:0"><p data-coord="hw4.umt:107:9">Requests sent between the browser and server.
+</p></li></ul><p data-coord="hw4.umt:109:4">You may assume that the server stores all details of the shopping
+cart and current state of the checkout flow with cookies being
+used to link browser requests to the server state.  However, for
+security reasons, credit card numbers are not permitted to ever be
+stored on the server. <em data-coord="hw4.umt:109:303">15-points</em>
+</p></li><li data-coord="hw4.umt:118:0"><p data-coord="hw4.umt:118:4">A code base uses <samp data-coord="hw4.umt:118:21">XMLHttpRequest</samp> to provide an <samp data-coord="hw4.umt:118:52">insertContent()</samp>
+ function which asynchronously inserts content from a
+ specified <samp data-coord="hw4.umt:118:143">url</samp> into the DOM element specified by an <samp data-coord="hw4.umt:118:186">id</samp>:
+</p><pre>    function <span class="hl kwd">insertContent</span><span class="hl opt">(</span>id<span class="hl opt">,</span> url<span class="hl opt">) {</span>
+      <span class="hl kwb">const</span> req <span class="hl opt">=</span> <span class="hl kwa">new</span> <span class="hl kwd">XMLHttpRequest</span><span class="hl opt">();</span>
+      req<span class="hl opt">.</span>onreadystatechange <span class="hl opt">= () =&gt; {</span>
+        <span class="hl kwa">if</span> <span class="hl opt">(</span><span class="hl kwa">this</span><span class="hl opt">.</span>readyState <span class="hl opt">==</span> <span class="hl num">4</span> <span class="hl opt">&amp;&amp;</span>
+            <span class="hl kwa">this</span><span class="hl opt">.</span>status <span class="hl opt">==</span> <span class="hl num">200</span><span class="hl opt">) {</span>
+          <span class="hl slc">//insert into page</span>
+          document<span class="hl opt">.</span><span class="hl kwd">getElementById</span><span class="hl opt">(</span>id<span class="hl opt">).</span>
+            innerHTML <span class="hl opt">=</span> req<span class="hl opt">.</span>responseText<span class="hl opt">;</span>
+        <span class="hl opt">}</span>
+      <span class="hl opt">};</span>
+      req<span class="hl opt">.</span><span class="hl kwd">open</span><span class="hl opt">(</span><span class="hl str">&quot;GET&quot;</span><span class="hl opt">,</span> url<span class="hl opt">);</span>
+      req<span class="hl opt">.</span><span class="hl kwd">send</span><span class="hl opt">();</span>
+    <span class="hl opt">}</span></pre><p data-coord="hw4.umt:138:4">This function is used to insert messages into a page:
+</p><pre>    <span class="hl kwb">const</span> messages <span class="hl opt">= [</span>
+      <span class="hl opt">{</span> id<span class="hl opt">:</span> <span class="hl str">&apos;intro&apos;</span><span class="hl opt">,</span> url<span class="hl opt">:</span> <span class="hl str">&apos;http://ex.com/intro.txt&apos;</span><span class="hl opt">, },</span>
+      <span class="hl opt">{</span> id<span class="hl opt">:</span> <span class="hl str">&apos;descr&apos;</span><span class="hl opt">,</span> url<span class="hl opt">:</span> <span class="hl str">&apos;http://ex.com/desc.txt&apos;</span><span class="hl opt">, },</span>
+      <span class="hl opt">...</span>
+    <span class="hl opt">];</span>
+
+    messages<span class="hl opt">.</span><span class="hl kwd">forEach</span><span class="hl opt">(</span>m <span class="hl opt">=&gt;</span> <span class="hl kwd">insertContent</span><span class="hl opt">(</span>m<span class="hl opt">.</span>id<span class="hl opt">,</span> m<span class="hl opt">.</span>url<span class="hl opt">));</span></pre><p data-coord="hw4.umt:150:4">Since the messages are received asynchronously, they will be inserted
+into the DOM in an arbitrary order.  Describe how you would
+modify the above code so as to insert the messages into the DOM
+in the same order as they are specified in the <samp data-coord="hw4.umt:150:257">messages[]</samp> array.
+<em data-coord="hw4.umt:150:281">10-points</em>
+</p></li><li data-coord="hw4.umt:156:0"><p data-coord="hw4.umt:156:4">Jane, who is a programmer working at a university lab, is learning
+about web services and builds a simple web service running on her
+PC at <samp data-coord="hw4.umt:156:151">http://jane.lab.university.edu/fortune</samp> which returns a
+random <a href="https://en.wikipedia.org/wiki/Fortune_(Unix)" data-coord="hw4.umt:156:267">fortune.</a>
+Jane embeds this service into her personal home page on her PC by
+using the <samp data-coord="hw4.umt:156:360">insertContent()</samp> function from the previous question
+with the following code snippet:
+</p><pre>    <span class="hl kwd">insertContent</span><span class="hl opt">(</span><span class="hl str">&apos;fortune&apos;</span><span class="hl opt">,</span> <span class="hl str">&apos;</span>
+<span class="hl str">                  &apos;</span>http<span class="hl opt">:</span><span class="hl slc">//jane.lab.university.edu/fortune&apos;)</span></pre><p data-coord="hw4.umt:169:4">The lab director is impressed by this web service and instructs
+the lab's intranet programmer to embed the fortune into the lab's
+intranet home page at <samp data-coord="hw4.umt:169:164">https://lab.university.edu</samp> by:
+</p><ol data-coord="hw4.umt:173:0"><li data-coord="hw4.umt:173:0"><p data-coord="hw4.umt:173:9">Adding a suitable <samp data-coord="hw4.umt:173:27">&lt;div id="fortune"&gt;&lt;/div&gt;</samp> to its HTML.
+</p></li><li data-coord="hw4.umt:175:0"><p data-coord="hw4.umt:175:9">Modify its JavaScript to include the <samp data-coord="hw4.umt:175:46">insertContent()</samp>
+function as well Jane's code snippet which calls
+<samp data-coord="hw4.umt:175:131">insertContent()</samp>.
+</p></li></ol><p data-coord="hw4.umt:179:4">This does not work.  Give possible reasons why. <em data-coord="hw4.umt:179:52">10-points</em>
+</p></li><li data-coord="hw4.umt:181:0"><p data-coord="hw4.umt:181:4">Given a reactjs component <samp data-coord="hw4.umt:181:30">Component</samp>:
+</p><pre>    <span class="hl kwc">class</span> Component extends React<span class="hl opt">.</span>Component <span class="hl opt">{</span>
+      <span class="hl kwd">constructor</span><span class="hl opt">(</span>props<span class="hl opt">) {</span>
+        <span class="hl kwd">super</span><span class="hl opt">(</span>props<span class="hl opt">);</span>
+        <span class="hl kwa">this</span><span class="hl opt">.</span>id <span class="hl opt">=</span> props<span class="hl opt">.</span>id<span class="hl opt">;</span>
+        <span class="hl slc">//no redefinition of this.handleChange</span>
+      <span class="hl opt">}</span>
+
+      <span class="hl kwd">handleChange</span><span class="hl opt">() {</span>
+        <span class="hl slc">//references this.id</span>
+        <span class="hl opt">...</span>
+      <span class="hl opt">}</span>
+    <span class="hl opt">}</span></pre><ol data-coord="hw4.umt:198:0"><li data-coord="hw4.umt:198:0"><p data-coord="hw4.umt:198:8">What is wrong with the following <samp data-coord="hw4.umt:198:41">render()</samp> method for
+the above <samp data-coord="hw4.umt:198:81">Component</samp>?
+</p><pre>        <span class="hl kwd">render</span><span class="hl opt">() {</span>
+          <span class="hl kwa">return</span> <span class="hl opt">(</span>
+            <span class="hl opt">&lt;</span>input type<span class="hl opt">=</span><span class="hl str">&quot;text&quot;</span> onChange<span class="hl opt">={</span><span class="hl kwa">this</span><span class="hl opt">.</span><span class="hl kwd">handleChange</span><span class="hl opt">()}/&gt;</span>
+          <span class="hl opt">);</span>
+        <span class="hl opt">}</span></pre></li><li data-coord="hw4.umt:209:0"><p data-coord="hw4.umt:209:8">What is wrong with the following <samp data-coord="hw4.umt:209:41">render()</samp> method for
+the above <samp data-coord="hw4.umt:209:81">Component</samp>?
+</p><pre>        <span class="hl kwd">render</span><span class="hl opt">() {</span>
+          <span class="hl kwa">return</span> <span class="hl opt">(</span>
+            <span class="hl opt">&lt;</span>input type<span class="hl opt">=</span><span class="hl str">&quot;text&quot;</span>
+                   onChange<span class="hl opt">={</span><span class="hl kwd">function</span><span class="hl opt">() {</span><span class="hl kwa">this</span><span class="hl opt">.</span><span class="hl kwd">handleChange</span><span class="hl opt">()}}/&gt;</span>
+          <span class="hl opt">);</span>
+        <span class="hl opt">}</span></pre></li><li data-coord="hw4.umt:221:0"><p data-coord="hw4.umt:221:8">Why will the following closely related <samp data-coord="hw4.umt:221:47">render()</samp> method for
+the above <samp data-coord="hw4.umt:221:87">Component</samp> work?
+</p><pre>        <span class="hl kwd">render</span><span class="hl opt">() {</span>
+          <span class="hl kwa">return</span> <span class="hl opt">(</span>
+            <span class="hl opt">&lt;</span>input type<span class="hl opt">=</span><span class="hl str">&quot;text&quot;</span>
+                   onChange<span class="hl opt">={() =&gt;</span> <span class="hl kwa">this</span><span class="hl opt">.</span><span class="hl kwd">handleChange</span><span class="hl opt">()}/&gt;</span>
+          <span class="hl opt">);</span>
+        <span class="hl opt">}</span></pre></li></ol><p data-coord="hw4.umt:233:4"><em data-coord="hw4.umt:233:4">15-points</em>
+</p></li><li data-coord="hw4.umt:235:0"><p data-coord="hw4.umt:235:4">You need to call two independent remote web services fronted using
+two <samp data-coord="hw4.umt:235:79">async</samp> functions <samp data-coord="hw4.umt:235:97">async function service1()</samp>, and <samp data-coord="hw4.umt:235:130">async
+    function service2()</samp>.  Since these are remote web services, it is
+likely that the calls take appreciable time (milliseconds) which
+is not predicable beforehand.  Your code needs to block until both
+web service calls have completed.  It is trivial to use <samp data-coord="hw4.umt:235:407">await</samp> to
+write code which calls both web services sequentially but that has
+the disadvantage of taking time which is the sum of the times
+taken by each service.  How would you set things up so as to call
+both services but to block only for a time corresponding to the
+slowest service?  <em data-coord="hw4.umt:235:715">10-points</em>
+</p></li><li data-coord="hw4.umt:247:0"><p data-coord="hw4.umt:247:4">You have a working promise chain:
+</p><pre>    <span class="hl kwd">promiseGen</span><span class="hl opt">().</span>
+      <span class="hl kwd">then</span><span class="hl opt">(</span><span class="hl kwd">function</span><span class="hl opt">(</span>v1<span class="hl opt">) { ...</span> <span class="hl kwa">return</span> v2<span class="hl opt">; }).</span>
+      <span class="hl kwd">then</span><span class="hl opt">(</span><span class="hl kwd">function</span><span class="hl opt">(</span>v2<span class="hl opt">) { ...</span> <span class="hl kwa">return</span> v3<span class="hl opt">; }).</span>
+      <span class="hl kwd">then</span><span class="hl opt">(</span><span class="hl kwd">function</span><span class="hl opt">(</span>v3<span class="hl opt">) { ...</span> <span class="hl kwa">return</span> v4<span class="hl opt">; });</span></pre><p data-coord="hw4.umt:256:4">Due to changes in your code, you need to change the <samp data-coord="hw4.umt:256:56">function()</samp>
+in the third <samp data-coord="hw4.umt:256:86">then()</samp> so that its body has access to the value
+<samp data-coord="hw4.umt:256:140">v1</samp> returned to the first <samp data-coord="hw4.umt:256:167">then()</samp> by the promise generator
+<samp data-coord="hw4.umt:256:205">promiseGen()</samp>.  However, <samp data-coord="hw4.umt:256:231">v1</samp> is out-of-scope for the third
+<samp data-coord="hw4.umt:256:270">then()</samp>.  How can you make this happen? <em data-coord="hw4.umt:256:311">15-points</em>
+</p></li></ol></section>
+</div> <!-- #content -->
+</div> <!-- #main -->
+<div id="footer">&nbsp;</div>
+</div> <!-- #page -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../../assets/scripts/nav.js"></script>
+</body>
+</html>

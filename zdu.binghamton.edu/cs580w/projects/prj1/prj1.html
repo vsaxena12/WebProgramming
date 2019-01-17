@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="../../assets/styles/article.css" rel="stylesheet" type="text/css" />
+  <title>Project 1</title>
+<link href="prj1/hl-fine_blue.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="page">
+<span id="opennav"><i class="material-icons">&#xe5d2;</i></span>
+<div id="nav">
+<div id="closenav"><i class="material-icons">&#xe5cd;</i></div>
+<ul>
+<li><a href="../../index.html">Home</a></li>
+<li><a href="../../docs/index.html">Documentation</a></li>
+<li><a href="../../exams-quizzes/index.html">Exams & Quizzes</a></li>
+<li><a href="../../hws/index.html">Homeworks</a></li>
+<li><a href="../../misc/index.html">Miscellaneous</a></li>
+<li><a href="../../projects/index.html">Projects</a></li>
+<li><a href="../../slides/index.html">Slides</a></li>
+
+</ul>
+</div> <!-- #nav -->
+<div id="main">
+  <div id="header">
+<h1>Programming for the Web</h1>
+</div> <!-- #header -->
+<div id="content">
+<section data-coord="prj1.umt:1:0"><h1 data-coord="prj1.umt:1:0">Project 1</h1><p data-coord="prj1.umt:3:0"><strong data-coord="prj1.umt:3:0">Due</strong>: Sep 17 by 11:59p
+</p><p data-coord="prj1.umt:5:0"><strong data-coord="prj1.umt:5:0">Important Reminder</strong>: As per the course <em data-coord="prj1.umt:5:110"><a href="../../misc/academic-honesty-statement/academic-honesty-policy.html" data-coord="prj1.umt:5:110">Academic Honesty Statement</a></em>,
+cheating of any kind will minimally result in receiving an F letter
+grade for the entire course.
+</p><p data-coord="prj1.umt:9:0">This document first provides the aims of this project.  It then lists
+the requirements as explicitly as possible.  This is followed by logs
+which should help you understand the requirements.  Finally, it
+provides some hints as to how those requirements can be met.
+</p><section data-coord="prj1.umt:14:0"><h2 data-coord="prj1.umt:14:0">Aims</h2><p data-coord="prj1.umt:17:0">The aims of this project are as follows:
+</p><ul data-coord="prj1.umt:19:0"><li data-coord="prj1.umt:19:0"><p data-coord="prj1.umt:19:4">To get you to write a simple but non-trivial JavaScript program.
+</p></li><li data-coord="prj1.umt:21:0"><p data-coord="prj1.umt:21:4">To allow you to familiarize yourself with the programming
+environment you will be using in this course.
+</p></li><li data-coord="prj1.umt:24:0"><p data-coord="prj1.umt:24:4">To introduce you to text processing within JavaScript.
+</p></li></ul></section><section data-coord="prj1.umt:27:0"><h2 data-coord="prj1.umt:27:0">Requirements</h2><p data-coord="prj1.umt:30:0">This project requires you to write a crude document searching
+command-line application.  The application will be provided with a
+file giving noise words which should be ignored while searching, as
+well as one-or-more additional files which constitute the documents
+being searched.
+</p><p data-coord="prj1.umt:36:0">The user will specify a search by typing in a line containing search
+terms and the application should respond with the matches found for
+that search.
+</p><p data-coord="prj1.umt:40:0">Both documents and search lines are preprocessed as follows:
+</p><ol data-coord="prj1.umt:42:0"><li data-coord="prj1.umt:42:0"><p data-coord="prj1.umt:42:4">They are split into words where a word is a maximal sequence of
+non-whitespace characters.
+</p></li><li data-coord="prj1.umt:45:0"><p data-coord="prj1.umt:45:4">Each word is normalized:
+</p><ol data-coord="prj1.umt:47:0"><li data-coord="prj1.umt:47:0"><p data-coord="prj1.umt:47:7">The word is converted to lower-case.
+</p></li><li data-coord="prj1.umt:49:0"><p data-coord="prj1.umt:49:7">The word is replaced by its stem.  The only stemming currently
+performed is to delete any <samp data-coord="prj1.umt:49:104">'s</samp> suffix.
+</p></li><li data-coord="prj1.umt:52:0"><p data-coord="prj1.umt:52:7">All non-alphabetic characters (characters other than <samp data-coord="prj1.umt:52:60">a</samp> .. <samp data-coord="prj1.umt:52:68">z</samp>)
+are deleted.
+</p></li></ol></li><li data-coord="prj1.umt:55:0"><p data-coord="prj1.umt:55:4">The normalized word is ignored if it is empty or is a noise word.
+</p></li></ol><p data-coord="prj1.umt:57:0">The words resulting from preprocessing a search line are the search
+terms.  Matching documents are those whose preprocessed contents
+contain one-or-more occurrences of at least one search term.  Note that
+the order of the search terms in a search line do <strong data-coord="prj1.umt:57:255">not</strong> matter; i.e.
+we are searching for each search term independently and not attempting
+any kind of phrase search.
+</p><p data-coord="prj1.umt:64:0">Specifically, you are required to submit a <samp data-coord="prj1.umt:64:43">submit/prj1-sol</samp> directory
+on your <a href="../../misc/gitlab-setup/gitlab-setup.html" data-coord="prj1.umt:64:124">gitlab</a> repository such
+that changing into this directory and running the command <samp data-coord="prj1.umt:64:205">npm
+install</samp> will install all necessary external dependencies for your
+project (there will probably be no external dependencies for this
+project).  It should then be possible to run the <samp data-coord="prj1.umt:64:392">index.js</samp> file in
+that directory with two or more arguments:
+</p><dl data-coord="prj1.umt:72:0"><dt data-coord="prj1.umt:72:2"><strong data-coord="prj1.umt:72:3">NOISE_WORDS</strong></dt><dd data-coord="prj1.umt:73:0"><p data-coord="prj1.umt:73:4">Specifies the name of a file which contains whitespace-separated
+noise words which should be ignored for searches.
+</p></dd><dt data-coord="prj1.umt:76:2"><strong data-coord="prj1.umt:76:3">DOC ...</strong></dt><dd data-coord="prj1.umt:77:0"><p data-coord="prj1.umt:77:4">Specifies one-or-more files each of which constitutes a document
+to be searched.
+</p></dd></dl><p data-coord="prj1.umt:80:0">When the program starts up, it should read the files specified by its
+arguments into memory.  It should then go into an interactive loop:
+</p><ol data-coord="prj1.umt:83:0"><li data-coord="prj1.umt:83:0"><p data-coord="prj1.umt:83:4">Output a <samp data-coord="prj1.umt:83:13">'&gt; '</samp> prompt.
+</p></li><li data-coord="prj1.umt:85:0"><p data-coord="prj1.umt:85:4">Read a line from the user.
+</p></li><li data-coord="prj1.umt:87:0"><p data-coord="prj1.umt:87:4">Search all content documents for occurrences of the
+whitespace-separated search terms in the line read from the user.
+</p></li><li data-coord="prj1.umt:90:0"><p data-coord="prj1.umt:90:4">Output a line summarizing the time take for the search
+in the form <samp data-coord="prj1.umt:90:75">time:</samp> <em data-coord="prj1.umt:90:83">mmm</em> <samp data-coord="prj1.umt:90:89">milliseconds</samp>.
+</p></li><li data-coord="prj1.umt:93:0"><p data-coord="prj1.umt:93:4">If no matching documents are found, output a line <samp data-coord="prj1.umt:93:54">no results</samp>.
+</p></li><li data-coord="prj1.umt:95:0"><p data-coord="prj1.umt:95:4">If matching documents are found, for each document which contains
+one or more of the search terms, output a result formatted as
+follows:
+</p><ol data-coord="prj1.umt:99:0"><li data-coord="prj1.umt:99:0"><p data-coord="prj1.umt:99:8">A single line containing:
+</p><ol data-coord="prj1.umt:101:0"><li data-coord="prj1.umt:101:0"><p data-coord="prj1.umt:101:12">The name of the document. This is derived from its file name by
+removing any directory prefixes and <samp data-coord="prj1.umt:101:124">.txt</samp> extension.  
+</p></li><li data-coord="prj1.umt:104:0"><p data-coord="prj1.umt:104:12">A single space.
+</p></li><li data-coord="prj1.umt:106:0"><p data-coord="prj1.umt:106:5">The <strong data-coord="prj1.umt:106:9">score</strong> for the document.  This is the sum of the
+number of occurrences of each search term in the document.
+</p></li></ol></li><li data-coord="prj1.umt:109:0"><p data-coord="prj1.umt:109:8">One-or-more lines from the document which contain the
+<strong data-coord="prj1.umt:109:70">earliest</strong> occurrence of each matching search term.  These
+lines should occur in the same relative order as in the
+document.  A line should occur only once even if it contains
+multiple search terms.
+</p></li></ol><p data-coord="prj1.umt:115:4">The match results should be ordered in non-ascending order by
+score.  Results with the same score should be ordered in
+lexicographically increasing order by document name.
+</p></li></ol><p data-coord="prj1.umt:119:0">It should be possible for the user to type tab characters to request
+completion of the current search term while typing in a search line.
+The exact dynamic behavior for tab completion is illustrated in a
+<em data-coord="prj1.umt:119:229"><a href="./completion-log.html" data-coord="prj1.umt:119:229">dynamic log</a></em>.
+</p><p data-coord="prj1.umt:124:0">Other miscellaneous requirements:
+</p><ul data-coord="prj1.umt:126:0"><li data-coord="prj1.umt:126:0"><p data-coord="prj1.umt:126:4">A non-functional requirement is that the cost of a search usually
+depends only on the number of search terms and not on the number
+of words in the documents.  This means that it is not possible to
+read all the documents for each search.
+</p></li><li data-coord="prj1.umt:131:0"><p data-coord="prj1.umt:131:4">Your project <strong data-coord="prj1.umt:131:17">must</strong> implement the API documented for the
+<samp data-coord="prj1.umt:131:65">DocFinder</samp> <samp data-coord="prj1.umt:131:77">class</samp> mentioned below.
+</p></li><li data-coord="prj1.umt:134:0"><p data-coord="prj1.umt:134:4">There may be available packages which implement the functionality
+required for this project.  The use such packages is strictly
+forbidden.
+</p></li></ul></section><section data-coord="prj1.umt:139:0"><h2 data-coord="prj1.umt:139:0">Example Logs</h2><p data-coord="prj1.umt:142:0">The behavior of the program is illustrated by the following annotated
+static log:
+</p><pre data-coord="prj1.umt:146:0">prj1-sol&gt; $ DATA=$HOME/cs580w/data #set up data dir
+prj1-sol&gt; $ GBS=$DATA/corpus/gbs   #set up contents dir
+
+prj1-sol&gt; $ ./index.js #show usage message
+usage: index.js NOISE_WORDS DOC...
+
+#start application
+prj1-sol&gt; $ ./index.js $DATA/noise-words.txt $GBS/*.txt
+
+#application outputs a '&gt; ' prompt; user types in a search.
+&gt; superman  #single word search
+time: 2 milliseconds
+man-and-superman: 14
+The Project Gutenberg EBook of Man And Superman, by George Bernard Shaw
+back-to-methuselah: 9
+of Man and Superman. As it was, she knew quite well what he wanted; for
+misalliance: 2
+TARLETON.  Still, you know, the superman may come.  The superman's an
+the-doctors-dilemma: 1
+a Superman; but still, it's an ideal that I strive towards just as any
+
+#search for two words; note ordering of results having the same score.
+&gt; flower girl
+time: 5 milliseconds
+pygmalion: 234
+wrought by Professor Higgins in the flower girl is neither impossible
+mrs-warrens-profession: 26
+Parisian girl in Brieux’s Les Avaries come on the stage and drive into
+back-to-methuselah: 25
+settles again on the flower, and repeats the performance every time the
+HASLAM. Silly girl! Going to marry a village woodman and live in a hovel
+caesar-and-cleopatra: 21
+BELZANOR. Command! A girl of sixteen! Not we. At Memphis ye deem her a
+ladies, all in their gayest attire, are like a flower garden. The facade
+man-and-superman: 21
+she's a wonderfully dutiful girl. Her father's wish would be sacred to
+confection by the apron and feathers of a flower girl, strike all the
+the-devils-disciple: 21
+alone. A girl of sixteen or seventeen has fallen asleep on it. She is a
+misalliance: 18
+because my mother thinks a girl should know what a man is like in the
+you off into the flower bed, and then lighted beside you like a bird.
+heartbreak-house: 11
+girl, slender, fair, and intelligent looking, nicely but not expensively
+the-doctors-dilemma: 9
+been talking to that poor girl. It's her husband; and she thinks it's
+major-barbara: 8
+girl.
+soul like a flower at a street corner; but she bought it for
+getting-married: 7
+every flower and change every hour, as their fancy may dictate, in
+girl's chances by making her a slave to sick or selfish parents, its
+the-philanderer: 6
+her sister--a girl under twenty--spending half their time at such a
+candida: 3
+lake for bathers, flower beds with the flowers arranged carefully in
+at one side, a miniature chair for a boy or girl on the other, a nicely
+how-he-lied-to-her-husband: 2
+sweet enough, is it not? [He takes the flower from the table]. Here are
+the-man-of-destiny: 2
+and eating it uncooked. Nevertheless one girl of bad character, in whom
+
+&gt; prj1-sol&gt; $ #typed Ctrl-D to terminate program
+</pre><p data-coord="prj1.umt:211:0">The completion behavior of the program is illustrated by the following
+<em data-coord="prj1.umt:211:96"><a href="./completion-log.html" data-coord="prj1.umt:211:96">dynamic log</a></em>.
+</p></section><section data-coord="prj1.umt:214:0"><h2 data-coord="prj1.umt:214:0">Provided Files</h2><p data-coord="prj1.umt:217:0">The <a href="./prj1-sol" data-coord="prj1.umt:217:18">prj1-sol</a> directory contains a start for your
+project.  It contains the following files:
+</p><dl data-coord="prj1.umt:220:0"><dt data-coord="prj1.umt:220:4"> <a href="./prj1-sol/doc-finder.js" data-coord="prj1.umt:220:29">doc-finder.js</a></dt><dd data-coord="prj1.umt:221:0"><p data-coord="prj1.umt:221:6">This skeleton file constitutes the guts of your project.
+You will need to flesh out the skeleton, adding code as per
+the documentation.  You should feel free to add any auxiliary
+function or method definitions as required.
+</p></dd><dt data-coord="prj1.umt:226:4"> <a href="./prj1-sol/index.js" data-coord="prj1.umt:226:24">index.js</a></dt><dd data-coord="prj1.umt:228:0"><p data-coord="prj1.umt:228:6">This file provides the complete command-line behavior which is
+required by your program.  It requires
+<a href="./prj1-sol/doc-finder.js" data-coord="prj1.umt:228:148">doc-finder.js.</a>  You <strong data-coord="prj1.umt:228:168">must not</strong>
+modify this file; this ensures that your <samp data-coord="prj1.umt:228:226">DocFinder</samp> meets its
+specifications and facilitates automated testing by testing only
+the <samp data-coord="prj1.umt:228:329">DocFinder</samp> API.
+</p></dd><dt data-coord="prj1.umt:235:4"> <a href="./prj1-sol/README" data-coord="prj1.umt:235:22">README</a></dt><dd data-coord="prj1.umt:236:0"><p data-coord="prj1.umt:236:6">A README file which must be submitted along with your project.
+It contains an initial header which you must complete (replace
+the dummy entries with your name, B-number and email address at
+which you would like to receive project-related email).  After
+the header you may include any content which you would like read
+during the grading of your project.
+</p></dd></dl><p data-coord="prj1.umt:243:0">Additionally, the course <a href="../../data" data-coord="prj1.umt:243:39">data</a> directory contains
+data which can be used for testing your project.  Specifically,
+it contains:
+</p><dl data-coord="prj1.umt:247:0"><dt data-coord="prj1.umt:247:2"> <em data-coord="prj1.umt:247:31"><a href="../../data/noise-words.txt" data-coord="prj1.umt:247:31">Noise Words</a></em> </dt><dd data-coord="prj1.umt:248:0"><p data-coord="prj1.umt:248:4">A file <samp data-coord="prj1.umt:248:11">noise-words.txt</samp> containing noise words.
+</p></dd><dt data-coord="prj1.umt:250:2"> <em data-coord="prj1.umt:250:26"><a href="../../data/corpus/gbs" data-coord="prj1.umt:250:26">"Real" Documents</a></em></dt><dd data-coord="prj1.umt:251:0"><p data-coord="prj1.umt:251:4">Some George Bernard Shaw plays which can be searched.
+</p></dd><dt data-coord="prj1.umt:253:2"> <em data-coord="prj1.umt:253:28"><a href="../../data/corpus/tests" data-coord="prj1.umt:253:28">Test Documents</a></em></dt><dd data-coord="prj1.umt:254:0"><p data-coord="prj1.umt:254:4">Short documents which may be useful during development and testing.
+</p></dd></dl></section><section data-coord="prj1.umt:257:0"><h2 data-coord="prj1.umt:257:0">Hints</h2><p data-coord="prj1.umt:260:0">The following steps are not prescriptive in that you may choose to ignore
+them as long as you meet all project requirements.
+</p><ol data-coord="prj1.umt:263:0"><li data-coord="prj1.umt:263:0"><p data-coord="prj1.umt:263:4">Read the project requirements thoroughly.  Look at the
+sample logs to make sure you understand the necessary behavior.
+</p></li><li data-coord="prj1.umt:266:0"><p data-coord="prj1.umt:266:4">Look into debugging methods for your project.  Possibilities
+include:
+</p><ul data-coord="prj1.umt:269:0"><li data-coord="prj1.umt:269:0"><p data-coord="prj1.umt:269:8">Logging debugging information onto the terminal using
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/log" data-coord="prj1.umt:269:135">console.log()</a> or
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/error" data-coord="prj1.umt:269:220">console.error().</a>
+</p></li><li data-coord="prj1.umt:275:0"><p data-coord="prj1.umt:275:8">Use the chrome debugger as outlined in this
+<a href="https://medium.com/@paul_irish/debugging-node-js-nightlies-with-chrome-devtools-7c4a1b95ae27" data-coord="prj1.umt:275:164">article.</a>
+</p></li></ul></li><li data-coord="prj1.umt:279:0"><p data-coord="prj1.umt:279:4">Consider what kind of indexing structure you will need to
+represent the documents.  For each unique non-noise normalized word 
+in all the documents you will need to track:
+</p><ul data-coord="prj1.umt:283:0"><li data-coord="prj1.umt:283:0"><p data-coord="prj1.umt:283:9">The documents the word occurs in.
+</p></li><li data-coord="prj1.umt:285:0"><p data-coord="prj1.umt:285:9">For each document the word occurs in, track the number
+occurrences of the word in that document.
+</p></li><li data-coord="prj1.umt:288:0"><p data-coord="prj1.umt:288:9">For each document the word occurs in, track the smallest
+offset of the word in that document.  Note that given the
+offset of a word occurrence, you can recover the line for
+that occurrence by simply looking for the last newline before
+the offset and the first newline after the offset (this assumes
+that you have stored the contents of the entire document).
+</p></li></ul><p data-coord="prj1.umt:295:4">When designing your indexing structure, you should think in terms of
+the abstract data structures <strong data-coord="prj1.umt:295:106">Maps</strong> and <strong data-coord="prj1.umt:295:117">Sets</strong>.  Possibilities for
+implementing these data structures in JavaScript
+include:
+</p><ul data-coord="prj1.umt:300:0"><li data-coord="prj1.umt:300:0"><p data-coord="prj1.umt:300:9">For implementing sets, use the new
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set" data-coord="prj1.umt:300:150">Set</a> addition to the standard library.  It would work but has
+the disadvantage that JSON conversion (as may
+be necessary for future projects) requires some work.
+</p></li><li data-coord="prj1.umt:306:0"><p data-coord="prj1.umt:306:9">Adapt JavaScript <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" data-coord="prj1.umt:306:116">Array's</a> to implement sets.  The API may
+not be particularly set-like and you will need to take care to
+avoid duplicates, but JSON conversion is trivial.
+</p></li><li data-coord="prj1.umt:310:0"><p data-coord="prj1.umt:310:9">For implementing maps, use the new
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map" data-coord="prj1.umt:310:150">Map</a> addition to the standard library.  An advantage of this
+approach is that it preserves insertion order.  It may also
+be lighter than the <samp data-coord="prj1.umt:310:308">Object</samp> alternative suggested below.
+Disadvantages include a clumsy API (<samp data-coord="prj1.umt:310:395">get()</samp> and <samp data-coord="prj1.umt:310:407">set()</samp>)
+and non-trivial work required for JSON conversion.
+</p></li><li data-coord="prj1.umt:318:0"><p data-coord="prj1.umt:318:9">Use standard JavaScript objects as maps.  Advantages include
+the ability to using simple <samp data-coord="prj1.umt:318:107">[]</samp>-based access and trivial
+JSON conversion.  Disadvantages include the lack of any
+defined order for property keys and the overhead of all the
+machinery associated with objects like inheritance.
+</p></li></ul></li><li data-coord="prj1.umt:324:0"><p data-coord="prj1.umt:324:4">Start your project by creating a <samp data-coord="prj1.umt:324:37">work/prj1-sol</samp> directory.
+Change into that directory and initialize your project
+by running <samp data-coord="prj1.umt:324:138">npm init -y</samp>.  This will create a <samp data-coord="prj1.umt:324:173">package.json</samp>
+file; this file should be committed to your repository.
+</p></li><li data-coord="prj1.umt:329:0"><p data-coord="prj1.umt:329:4">Copy the provided files into your project directory:
+</p><pre data-coord="prj1.umt:332:0">    $ cp -p $HOME/cs580w/projects/prj1/prj1-sol/* .
+</pre><p data-coord="prj1.umt:335:4">This should copy in the <samp data-coord="prj1.umt:335:28">README</samp> template, the <samp data-coord="prj1.umt:335:51">index.js</samp>
+and the <samp data-coord="prj1.umt:335:74">doc-finder.js</samp> skeleton file into your project
+directory.
+</p></li><li data-coord="prj1.umt:339:0"><p data-coord="prj1.umt:339:4">You should be able to run the project:
+</p><pre data-coord="prj1.umt:342:0">    $ data=$HOME/cs580w/data
+    $ gbs=$data/corpus/gbs
+    $ tst=$data/corpus/tests
+    $ ./index.js #show usage message
+    $ ./index.js $data/noise-words.txt $tst/*.txt
+</pre><p data-coord="prj1.umt:349:4">You should be able to type in search terms but all the searches
+will fail without any results since the code in your <samp data-coord="prj1.umt:349:125">doc-finder.js</samp>
+file is a NOP.
+</p></li><li data-coord="prj1.umt:353:0"><p data-coord="prj1.umt:353:4">Replace the <samp data-coord="prj1.umt:353:16">XXX</samp> entries in the <samp data-coord="prj1.umt:353:37">README</samp> template.
+Commit your project to gitlab:
+</p><pre data-coord="prj1.umt:357:0">    $ git add .
+    $ git commit -a -m 'started prj1'
+</pre></li><li data-coord="prj1.umt:361:0"><p data-coord="prj1.umt:361:4">Open the copy of the <samp data-coord="prj1.umt:361:25">doc-finder.js</samp> file in your project directory.
+It is set up as follows:
+</p><ol data-coord="prj1.umt:364:0"><li data-coord="prj1.umt:364:0"><p data-coord="prj1.umt:364:8">Preliminaries: Importing of a
+<a href="https://nodejs.org/api/util.html#util_util_inspect_object_options" data-coord="prj1.umt:364:123">inspect()</a> function; note the use of the
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment" data-coord="prj1.umt:364:283">destructuring</a> syntax.  A <samp data-coord="prj1.umt:364:308">strict</samp> declaration.
+</p></li><li data-coord="prj1.umt:370:0"><p data-coord="prj1.umt:370:8">A skeleton <samp data-coord="prj1.umt:370:19">DocFinder</samp> <samp data-coord="prj1.umt:370:31">class</samp> definition with <samp data-coord="prj1.umt:370:55">@TODO</samp>
+comments.  Note that the <samp data-coord="prj1.umt:370:96">class</samp> syntax is a recent addition
+to JavaScript and is syntactic sugar around JavaScript's more
+flexible object model.  It was used in this project because
+JavaScript's object model has not yet been covered in the
+course.  Note that even though the use of this <samp data-coord="prj1.umt:370:391">class</samp> syntax
+may make students with a background in class-based OOPL's feel
+more comfortable, there are some differences worth pointing
+out:
+</p><ul data-coord="prj1.umt:380:0"><li data-coord="prj1.umt:380:0"><p data-coord="prj1.umt:380:12">No data members can be defined within the <samp data-coord="prj1.umt:380:54">class</samp> body.
+All "instance variables" must be referenced through the
+<samp data-coord="prj1.umt:380:135">this</samp> pseudo-variable in both <samp data-coord="prj1.umt:380:166">constructor</samp> and
+methods.  For example, if we want to initialize an
+instance variable <samp data-coord="prj1.umt:380:263">indexes</samp> in the <samp data-coord="prj1.umt:380:280">constructor()</samp> we may
+have a statement like:
+</p><pre>            <span class="hl kwa">this</span><span class="hl opt">.</span>indexes <span class="hl opt">=</span> <span class="hl kwa">new</span> <span class="hl kwd">Map</span><span class="hl opt">();</span></pre></li><li data-coord="prj1.umt:391:0"><p data-coord="prj1.umt:391:12">There is no implicit <samp data-coord="prj1.umt:391:33">this</samp>.  If an instance method
+needs to call another instance method of the same object, the
+method <strong data-coord="prj1.umt:391:143">must</strong> be called through <samp data-coord="prj1.umt:391:168">this</samp>.
+</p></li><li data-coord="prj1.umt:395:0"><p data-coord="prj1.umt:395:12">There is no easy way to get private methods or data.
+Instead a convention which is often used is to 
+prefix private names with something like a underscore
+and trust <samp data-coord="prj1.umt:395:192">class</samp> clients to not misuse those names.
+</p></li></ul></li><li data-coord="prj1.umt:400:0"><p data-coord="prj1.umt:400:8">An assignment of the <samp data-coord="prj1.umt:400:29">DocFinder</samp> <samp data-coord="prj1.umt:400:41">class</samp> to <samp data-coord="prj1.umt:400:52">module.exports</samp>.
+This makes <samp data-coord="prj1.umt:400:89">DocFinder</samp> the only declarations available outside
+the <samp data-coord="prj1.umt:400:153">doc-finder.js</samp> file; all other declarations are local to
+the file.
+</p></li><li data-coord="prj1.umt:405:0"><p data-coord="prj1.umt:405:8">Miscellaneous top-level definitions including complete code
+for word normalization and a definition of a <samp data-coord="prj1.umt:405:121">Result</samp> class
+for returning search results.  These definitions
+can be used in the rest of the file, including within
+methods in the <samp data-coord="prj1.umt:405:264">DocFinder</samp> <samp data-coord="prj1.umt:405:276">class</samp>.  Having definitions
+like the <samp data-coord="prj1.umt:405:315">const WORD_REGEX</samp> outside the <samp data-coord="prj1.umt:405:346">class</samp> is necessary since
+the <samp data-coord="prj1.umt:405:378">class</samp> syntactic sugar does not allow such a definition within
+the <samp data-coord="prj1.umt:405:447">class</samp> body.
+</p></li></ol></li><li data-coord="prj1.umt:415:0"><p data-coord="prj1.umt:415:4">Decide on the data members you will need for your <samp data-coord="prj1.umt:415:54">DocFinder</samp> instance
+and initialize them within the <samp data-coord="prj1.umt:415:110">constructor()</samp> through <samp data-coord="prj1.umt:415:134">this</samp>.
+</p></li><li data-coord="prj1.umt:418:0"><p data-coord="prj1.umt:418:4">Start out by thinking about how to implement the <samp data-coord="prj1.umt:418:53">words()</samp> method.
+Some thoughts:
+</p><ul data-coord="prj1.umt:421:0"><li data-coord="prj1.umt:421:0"><p data-coord="prj1.umt:421:8">You need to split <samp data-coord="prj1.umt:421:26">content</samp> on whitespace and normalize
+the words.  So something like
+</p><pre>        content<span class="hl opt">.</span><span class="hl kwd">split</span><span class="hl opt">(/</span>\s<span class="hl opt">+/).</span>
+          <span class="hl kwd">map</span><span class="hl opt">((</span>w<span class="hl opt">) =&gt;</span> <span class="hl kwd">normalize</span><span class="hl opt">(</span>w<span class="hl opt">)).</span>
+          <span class="hl kwd">filter</span><span class="hl opt">((</span>w<span class="hl opt">) =&gt; !</span><span class="hl kwd">is_noise_word</span><span class="hl opt">(</span>w<span class="hl opt">))</span></pre><p data-coord="prj1.umt:430:1">seems to work (the regex <samp data-coord="prj1.umt:430:26">/\s+/</samp> matches one-or-more
+whitespace characters; <samp data-coord="prj1.umt:430:78">is_noise_word()</samp> is pseudo-code).
+</p></li><li data-coord="prj1.umt:433:0"><p data-coord="prj1.umt:433:8">Even though the above meets the specification for the
+<samp data-coord="prj1.umt:433:70">words()</samp> function, a bit more thought reveals that usually
+when we get the words from document content we will also need the
+offset of each word within the content.  So it may be better
+to have another "private" method <samp data-coord="prj1.umt:433:315">_wordsLow()</samp> which returns
+a list of pairs: <samp data-coord="prj1.umt:433:368">[</samp> <em data-coord="prj1.umt:433:372">word</em><samp data-coord="prj1.umt:433:378">,</samp> <em data-coord="prj1.umt:433:382">offset</em> <samp data-coord="prj1.umt:433:391">]</samp> and define
+<samp data-coord="prj1.umt:433:414">words()</samp> as a simple wrapper around <samp data-coord="prj1.umt:433:451">_wordsLow()</samp>; something
+like:
+</p><pre>        <span class="hl kwa">this</span><span class="hl opt">.</span><span class="hl kwd">_wordsLow</span><span class="hl opt">(</span>content<span class="hl opt">).</span><span class="hl kwd">map</span><span class="hl opt">(</span>pair <span class="hl opt">=&gt;</span> pair<span class="hl opt">[</span><span class="hl num">0</span><span class="hl opt">])</span></pre></li><li data-coord="prj1.umt:446:0"><p data-coord="prj1.umt:446:8">When implementing <samp data-coord="prj1.umt:446:26">_wordsLow()</samp>, the <samp data-coord="prj1.umt:446:45">String</samp> <samp data-coord="prj1.umt:446:54">split()</samp> method
+may not be the best choice as obtaining the offsets of words
+will be extremely clumsy.  Instead, a regex match would work
+with code which uses a <em data-coord="prj1.umt:446:336"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec" data-coord="prj1.umt:446:336">regex exec()</a></em>:
+</p><pre>        let match<span class="hl opt">;</span>
+        <span class="hl kwa">while</span> <span class="hl opt">(</span>match <span class="hl opt">=</span> WORD_REGEX<span class="hl opt">.</span><span class="hl kwd">exec</span><span class="hl opt">(</span>content<span class="hl opt">)) {</span>
+          <span class="hl kwb">const</span> <span class="hl opt">[</span>word<span class="hl opt">,</span> offset<span class="hl opt">] = [</span>match<span class="hl opt">[</span><span class="hl num">0</span><span class="hl opt">],</span> match<span class="hl opt">.</span>index<span class="hl opt">];</span>
+          <span class="hl slc">//do stuff with word and offset</span>
+        <span class="hl opt">}</span></pre></li></ul></li><li data-coord="prj1.umt:459:0"><p data-coord="prj1.umt:459:4">Use <samp data-coord="prj1.umt:459:8">words()</samp> to implement <samp data-coord="prj1.umt:459:31">addNoiseWords()</samp>.  A set is an ideal
+data structure for the noise words.  You can simply use
+<samp data-coord="prj1.umt:459:133">forEach()</samp> on <samp data-coord="prj1.umt:459:148">words()</samp> to add each word to a noise words set.
+</p><p data-coord="prj1.umt:463:4">At this point you can test your code by running your program with
+a noise words file and verifying (using  console or chrome debugging)
+that the noise words have been added correctly.
+</p></li><li data-coord="prj1.umt:467:0"><p data-coord="prj1.umt:467:4">Start getting to the guts of your project by implementing the
+<samp data-coord="prj1.umt:467:70">addContent()</samp> method.  You will need to add each of the non-noise
+normalized words in the document content to your indexing structure.
+The actual code will depend on the design of your indexing structure.
+Feel free to define "private" helper methods.
+</p></li><li data-coord="prj1.umt:473:0"><p data-coord="prj1.umt:473:4">Implement the <samp data-coord="prj1.umt:473:18">find()</samp> method.  Again, the details will depend on
+the design of your indexing structure.  At this point, you 
+have implemented the main functionality of the project.
+</p></li><li data-coord="prj1.umt:477:0"><p data-coord="prj1.umt:477:4">Implement the <samp data-coord="prj1.umt:477:18">complete()</samp> method.  Again, you will need some kind
+of indexing structure for all the words in your document
+collection.  You can simply choose to index off the first
+character of each word.  Instead of updating this index structure
+whenever a new word is added, you can do it lazily in a batch mode
+when it is needed (i.e. when there is a call to <samp data-coord="prj1.umt:477:387">complete()</samp>) and
+it is not up-to-date; simply recompute the entire completion
+indexing structure.
+</p></li><li data-coord="prj1.umt:486:0"><p data-coord="prj1.umt:486:4">Iterate until you meet all requirements.  
+</p></li></ol><p data-coord="prj1.umt:488:0">It is a good idea to commit and push your project periodically whenever
+you have made significant changes.  When it is complete please follow
+the procedure given in the
+<em data-coord="prj1.umt:488:214"><a href="../../misc/gitlab-setup/gitlab-setup.html" data-coord="prj1.umt:488:214">gitlab setup directions</a></em> to
+submit your project using the <samp data-coord="prj1.umt:488:273">submit</samp> directory.
+</p></section></section>
+</div> <!-- #content -->
+</div> <!-- #main -->
+<div id="footer">&nbsp;</div>
+</div> <!-- #page -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../../assets/scripts/nav.js"></script>
+</body>
+</html>

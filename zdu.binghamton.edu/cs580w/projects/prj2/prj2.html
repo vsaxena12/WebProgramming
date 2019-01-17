@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="../../assets/styles/article.css" rel="stylesheet" type="text/css" />
+  <title>Project 2</title>
+<link href="prj2/hl-fine_blue.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="page">
+<span id="opennav"><i class="material-icons">&#xe5d2;</i></span>
+<div id="nav">
+<div id="closenav"><i class="material-icons">&#xe5cd;</i></div>
+<ul>
+<li><a href="../../index.html">Home</a></li>
+<li><a href="../../docs/index.html">Documentation</a></li>
+<li><a href="../../exams-quizzes/index.html">Exams & Quizzes</a></li>
+<li><a href="../../hws/index.html">Homeworks</a></li>
+<li><a href="../../misc/index.html">Miscellaneous</a></li>
+<li><a href="../../projects/index.html">Projects</a></li>
+<li><a href="../../slides/index.html">Slides</a></li>
+
+</ul>
+</div> <!-- #nav -->
+<div id="main">
+  <div id="header">
+<h1>Programming for the Web</h1>
+</div> <!-- #header -->
+<div id="content">
+<section data-coord="prj2.umt:1:0"><h1 data-coord="prj2.umt:1:0">Project 2</h1><p data-coord="prj2.umt:3:0"><strong data-coord="prj2.umt:3:0">Due</strong>: Oct 7 by 11:59p
+</p><p data-coord="prj2.umt:5:0"><strong data-coord="prj2.umt:5:0">Important Reminder</strong>: As per the course <em data-coord="prj2.umt:5:110"><a href="../../misc/academic-honesty-statement/academic-honesty-policy.html" data-coord="prj2.umt:5:110">Academic Honesty Statement</a></em>,
+cheating of any kind will minimally result in receiving an F letter
+grade for the entire course.
+</p><p data-coord="prj2.umt:9:0">This document first provides the aims of this project.  It then lists
+the requirements as explicitly as possible.  It then provides some
+background information.  Finally, it provides some hints as to how
+those requirements can be met.
+</p><section data-coord="prj2.umt:14:0"><h2 data-coord="prj2.umt:14:0">Aims</h2><p data-coord="prj2.umt:17:0">The aims of this project are as follows:
+</p><ul data-coord="prj2.umt:19:0"><li data-coord="prj2.umt:19:0"><p data-coord="prj2.umt:19:4">To introduce you to asynchronous JavaScript programming, albeit in
+a cookbook manner.
+</p></li><li data-coord="prj2.umt:22:0"><p data-coord="prj2.umt:22:4">To give you some familiarity with using a nosql database.
+</p></li><li data-coord="prj2.umt:24:0"><p data-coord="prj2.umt:24:4">To make you comfortable using nodejs packages and module system.
+</p></li></ul></section><section data-coord="prj2.umt:27:0"><h2 data-coord="prj2.umt:27:0">Requirements</h2><p data-coord="prj2.umt:30:0">Though the command-line requirements for this project are quite
+different from your <em data-coord="prj2.umt:30:105"><a href="../prj1/prj1.html" data-coord="prj2.umt:30:105">previous project</a></em>, the
+specifications for the <samp data-coord="prj2.umt:30:152">DocFinder</samp> class you are expected to implement
+are quite similar.
+</p><ul data-coord="prj2.umt:35:0"><li data-coord="prj2.umt:35:0"><p data-coord="prj2.umt:35:4">Since you are being provided with an implementation
+of the command-line behavior, this document describes the command-line
+behavior largely by means of a <a href="aux/LOG" data-coord="prj2.umt:35:177">logfile.</a>
+</p></li><li data-coord="prj2.umt:39:0"><p data-coord="prj2.umt:39:4">To prevent
+<a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself" data-coord="prj2.umt:39:76">DRY</a>
+violations, the "formal" specifications for the <samp data-coord="prj2.umt:39:133">DocFinder</samp> class
+are only in the <a href="./prj2-sol/doc-finder.js?colorize=true" data-coord="prj2.umt:39:217">doc-finder.js</a> skeleton file you are being provided with.
+</p></li></ul><p data-coord="prj2.umt:45:0">Hence this section merely gives an overall view of the expected
+project behavior, leaving the actual requirements to above
+<a href="./prj2-sol/doc-finder.js?colorize=true" data-coord="prj2.umt:45:165">doc-finder.js</a> skeleton file.
+</p><p data-coord="prj2.umt:49:0">The main difference from <em data-coord="prj2.umt:49:46"><a href="../prj1/prj1.html" data-coord="prj2.umt:49:46">Project 1</a></em> is
+that your <samp data-coord="prj2.umt:49:71">DocFinder</samp> instances are expected to persist state
+across instantiations.  It should do so using a <a href="https://www.mongodb.com/" data-coord="prj2.umt:49:199">mongo</a> database.  This persistent behavior is illustrated by
+the usage message for the command line interface:
+</p><pre data-coord="prj2.umt:56:0">$ ./index.js
+usage: index.js DB_URL COMMAND [COMMAND_ARGS...]
+  where COMMAND is:
+  add-content CONTENT-FILE...
+  add-noise NOISE-FILE...
+  clear
+  complete SEARCH-TERM...
+  find SEARCH-TERM...
+  get DOC_NAME
+$  
+</pre><p data-coord="prj2.umt:68:0">Note that unlike <em data-coord="prj2.umt:68:38"><a href="../prj1/prj1.html" data-coord="prj2.umt:68:38">Project 1</a></em> where all
+interactions were restricted to a single command-line execution,
+the interactions in the project will require multiple command-line
+executions.  Hence the program needs to retain state between
+executions using a database.
+</p><p data-coord="prj2.umt:74:0">The <a href="./prj2-sol/doc-finder.js?colorize=true" data-coord="prj2.umt:74:46">specifications</a> require
+you to implement methods for each of the above 6 commands, an
+initialization method, 2 auxiliary methods and a constructor, for a
+total of 10 externally callable functions.
+</p><p data-coord="prj2.umt:79:0">You must check in a <samp data-coord="prj2.umt:79:20">submit/prj2-sol</samp> directory in your gitlab
+project such that typing <samp data-coord="prj2.umt:79:88">npm install</samp> within that directory is
+sufficient to run the project using <samp data-coord="prj2.umt:79:163">./index.js</samp>.
+</p></section><section data-coord="prj2.umt:83:0"><h2 data-coord="prj2.umt:83:0">Provided Files</h2><p data-coord="prj2.umt:86:0">The <a href="./prj2-sol" data-coord="prj2.umt:86:18">prj2-sol</a> directory contains a start for your
+project.  It contains the following files:
+</p><dl data-coord="prj2.umt:89:0"><dt data-coord="prj2.umt:89:4"> <a href="./prj2-sol/doc-finder.js?colorize=true" data-coord="prj2.umt:89:43">doc-finder.js</a></dt><dd data-coord="prj2.umt:90:0"><p data-coord="prj2.umt:90:6">This skeleton file constitutes the guts of your project.
+You will need to flesh out the skeleton, adding code as per
+the documentation.  You should feel free to add any auxiliary
+function or method definitions as required.
+</p></dd><dt data-coord="prj2.umt:95:4"> <a href="./prj2-sol/docs-cli.js?colorize=true" data-coord="prj2.umt:95:41">docs-cli.js</a></dt><dd data-coord="prj2.umt:96:0"><p data-coord="prj2.umt:96:6">This file provides the complete command-line behavior which is
+required by your program.  It requires
+<a href="./prj2-sol/doc-finder.js?colorize=true" data-coord="prj2.umt:96:162">doc-finder.js.</a>  You
+<strong data-coord="prj2.umt:96:188">must not</strong> modify this file.
+</p></dd><dt data-coord="prj2.umt:101:4"> <a href="./prj2-sol/index.js?colorize=true" data-coord="prj2.umt:101:38">index.js</a></dt><dd data-coord="prj2.umt:102:0"><p data-coord="prj2.umt:102:6">This is a trivial wrapper which merely calls the above
+<samp data-coord="prj2.umt:102:67">docs-cli</samp> module.  You <strong data-coord="prj2.umt:102:91">must not</strong> modify this file.
+</p></dd><dt data-coord="prj2.umt:105:4"> <a href="./prj2-sol/README" data-coord="prj2.umt:105:22">README</a></dt><dd data-coord="prj2.umt:106:0"><p data-coord="prj2.umt:106:6">A README file which must be submitted along with your project.
+It contains an initial header which you must complete (replace
+the dummy entries with your name, B-number and email address at
+which you would like to receive project-related email).  After
+the header you may include any content which you would like read
+during the grading of your project.
+</p></dd></dl><p data-coord="prj2.umt:113:0">The course <a href="../../data" data-coord="prj2.umt:113:25">data</a> directory containing test
+data for your project has not changed since the previous project.
+</p></section><section data-coord="prj2.umt:117:0"><h2 data-coord="prj2.umt:117:0">Asynchronous Programming in JavaScript</h2><p data-coord="prj2.umt:120:0">Asynchronous programming has not been covered in depth as yet in class.
+Fortunately, because of the recent addition of <samp data-coord="prj2.umt:120:119">async</samp> and <samp data-coord="prj2.umt:120:131">await</samp> to
+JavaScript, it is possible to do serious asynchronous programming in
+JavaScript by following two simple rules:
+</p><ol data-coord="prj2.umt:125:0"><li data-coord="prj2.umt:125:0"><p data-coord="prj2.umt:125:4">An asynchronous function must be declared using the <samp data-coord="prj2.umt:125:56">async</samp> keyword.
+</p></li><li data-coord="prj2.umt:127:0"><p data-coord="prj2.umt:127:4">A call to an asynchronous function must be preceeded by the
+<samp data-coord="prj2.umt:127:68">await</samp> keyword.  The <samp data-coord="prj2.umt:127:90">await</samp> keyword can only occur within a
+function which has been declared <samp data-coord="prj2.umt:127:167">async</samp>.
+</p></li></ol><p data-coord="prj2.umt:131:0">A consequence of these two rules is that <samp data-coord="prj2.umt:131:41">async</samp> propagates up the
+function call chain.
+</p><p data-coord="prj2.umt:134:0">It is worth emphasizing the following points:
+</p><ul data-coord="prj2.umt:136:0"><li data-coord="prj2.umt:136:0"><p data-coord="prj2.umt:136:4">Without exception, all asynchronous functions must be declared
+<samp data-coord="prj2.umt:136:71">async</samp>; this even applies to anonymous functions.
+</p><p data-coord="prj2.umt:139:4">Hence if <samp data-coord="prj2.umt:139:13">f()</samp> is asynchronous, the expression <code>array<span class="hl opt">.</span><span class="hl kwd">map</span><span class="hl opt">(</span>a <span class="hl opt">=&gt;</span>
+    await <span class="hl kwd">f</span><span class="hl opt">(</span>a<span class="hl opt">))</span></code> is wrong; it must be replaced by <code>await
+    array<span class="hl opt">.</span><span class="hl kwd">map</span><span class="hl opt">(</span>async a <span class="hl opt">=&gt;</span> await <span class="hl kwd">f</span><span class="hl opt">(</span>a<span class="hl opt">))</span></code>.
+</p></li><li data-coord="prj2.umt:143:0"><p data-coord="prj2.umt:143:4">The program will not work if the <samp data-coord="prj2.umt:143:37">await</samp> keyword is omitted when
+calling an <samp data-coord="prj2.umt:143:84">async</samp> function.
+</p></li><li data-coord="prj2.umt:146:0"><p data-coord="prj2.umt:146:4">If the documentation for a nodejs asynchronous library function
+requires a callback with an initial error argument of the form
+<code><span class="hl opt">(</span>err<span class="hl opt">,</span> value<span class="hl opt">) =&gt; ...</span></code>, then it cannot be called directly using
+<samp data-coord="prj2.umt:146:207">await</samp>.  Instead, it needs to be
+<a href="https://nodejs.org/dist/latest-v8.x/docs/api/util.html#util_util_promisify_original" data-coord="prj2.umt:146:336">promisified</a> as shown below:
+</p><pre>    <span class="hl slc">//grab nodejs&apos;s filesystem library.</span>
+    <span class="hl slc">//fs.readFile not async/await compatible</span>
+    <span class="hl kwb">const</span> fs <span class="hl opt">=</span> <span class="hl kwd">require</span><span class="hl opt">(</span><span class="hl str">&apos;fs&apos;</span><span class="hl opt">);</span>
+    <span class="hl slc">//destructure export from util library to grab promisify.</span>
+    <span class="hl kwb">const</span> <span class="hl opt">{</span>promisify<span class="hl opt">} =</span> <span class="hl kwd">require</span><span class="hl opt">(</span><span class="hl str">&apos;util&apos;</span><span class="hl opt">);</span>
+
+    <span class="hl kwb">const</span> readFile <span class="hl opt">=</span> <span class="hl kwd">promisify</span><span class="hl opt">(</span>fs<span class="hl opt">.</span>readFile<span class="hl opt">);</span>
+    <span class="hl slc">//readFile() can now be used with await.</span></pre></li><li data-coord="prj2.umt:164:0"><p data-coord="prj2.umt:164:4">There is no way to call the function which is passed to
+<samp data-coord="prj2.umt:164:64">forEach()</samp> asynchronously using an <samp data-coord="prj2.umt:164:100">await</samp>.  Hence some
+other looping construct should be used instead.
+</p></li></ul></section><section data-coord="prj2.umt:169:0"><h2 data-coord="prj2.umt:169:0">MongoDB</h2><p data-coord="prj2.umt:172:0"><a href="https://docs.mongodb.com/manual/" data-coord="prj2.umt:172:36">MongoDB</a> is a popular nosql
+database.  It allows storage of <em data-coord="prj2.umt:172:95">collections</em> of <em data-coord="prj2.umt:172:112">documents</em> to be
+accessed by a primary key named <samp data-coord="prj2.umt:172:162">_id</samp>.  Do not confuse mongodb's use
+of the term <em data-coord="prj2.umt:172:211">document</em> with its different use in this project.
+</p><p data-coord="prj2.umt:177:0">In terms of JavaScript, mongodb documents correspond to arbitrarily
+nested JavaScript <samp data-coord="prj2.umt:177:86">Object</samp>s having a top-level <samp data-coord="prj2.umt:177:115">_id</samp> property which is
+used as a primary key. If an object does not have an <samp data-coord="prj2.umt:177:192">_id</samp> property,
+then one will be created with a unique value assigned by mongodb.
+</p><ul data-coord="prj2.umt:182:0"><li data-coord="prj2.umt:182:0"><p data-coord="prj2.umt:182:4">MongoDB provides a basic repertoire of
+<em data-coord="prj2.umt:182:88"><a href="https://docs.mongodb.com/manual/crud/" data-coord="prj2.umt:182:88">CRUD Operations</a></em>.
+</p></li><li data-coord="prj2.umt:185:0"><p data-coord="prj2.umt:185:4">Many of the crud operations support an
+<a href="https://www.google.com/search?q=upsert" data-coord="prj2.umt:185:89">upsert</a> option which
+makes it possible to combine use of a single operation which
+implements both insert and update/replace functionality.
+</p></li><li data-coord="prj2.umt:190:0"><p data-coord="prj2.umt:190:4">All asynchronous mongo library functions can be called directly using
+<samp data-coord="prj2.umt:190:78">await</samp>.
+</p></li><li data-coord="prj2.umt:193:0"><p data-coord="prj2.umt:193:4">It is important to ensure that all database connections are closed.
+Otherwise your program will not exit gracefully.
+</p></li></ul></section><section data-coord="prj2.umt:197:0"><h2 data-coord="prj2.umt:197:0">Hints</h2><p data-coord="prj2.umt:200:0">The following steps are not prescriptive in that you may choose to ignore
+them as long as you meet all project requirements.
+</p><ol data-coord="prj2.umt:203:0"><li data-coord="prj2.umt:203:0"><p data-coord="prj2.umt:203:4">Read the project requirements thoroughly.  Look at the sample
+<a href="./aux/LOG" data-coord="prj2.umt:203:83">log</a> to make sure you understand the necessary
+behavior.
+</p></li><li data-coord="prj2.umt:207:0"><p data-coord="prj2.umt:207:4">Look into debugging methods for your project.  Possibilities
+include:
+</p><ul data-coord="prj2.umt:210:0"><li data-coord="prj2.umt:210:0"><p data-coord="prj2.umt:210:8">Logging debugging information onto the terminal using
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/log" data-coord="prj2.umt:210:135">console.log()</a> or
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/error" data-coord="prj2.umt:210:220">console.error().</a>
+</p></li><li data-coord="prj2.umt:216:0"><p data-coord="prj2.umt:216:8">Use the chrome debugger as outlined in this
+<a href="https://medium.com/@paul_irish/debugging-node-js-nightlies-with-chrome-devtools-7c4a1b95ae27" data-coord="prj2.umt:216:164">article.</a>
+</p></li></ul></li><li data-coord="prj2.umt:220:0"><p data-coord="prj2.umt:220:4">Consider what kind of indexing structure you will need to
+represent the documents in the database.  For each unique
+non-noise normalized word in all the documents you will need to
+track the following information:
+</p><ul data-coord="prj2.umt:225:0"><li data-coord="prj2.umt:225:0"><p data-coord="prj2.umt:225:9">The documents the word occurs in.
+</p></li><li data-coord="prj2.umt:227:0"><p data-coord="prj2.umt:227:9">For each document the word occurs in, track the number
+occurrences of the word in that document.
+</p></li><li data-coord="prj2.umt:230:0"><p data-coord="prj2.umt:230:9">For each document the word occurs in, track the smallest
+offset of the word in that document.  Note that given the
+offset of a word occurrence and the original document, you
+can recover the line for that occurrence by simply looking
+for the last newline before the offset and the first newline
+after the offset.
+</p></li></ul><p data-coord="prj2.umt:237:4">When designing your indexing structure, you can use MongoDB's
+key-value collections to support the top-level of your index.
+Note that you will probably want to populate the <samp data-coord="prj2.umt:237:185">_id</samp> property
+yourself with values meaningful to your program, rather than using
+mongodb's automatically generated values for it.
+</p><p data-coord="prj2.umt:243:4">When given a normalized search term, it should be possible to use
+the database to directly lookup information for that search term.
+Getting that information should not involve any kind of search.
+</p><p data-coord="prj2.umt:247:4">Note that the mongodb server will be running in a separate process
+from your program, possibly on a different host.  Hence any
+database calls will be many times slower than
+calls local to your program.  This performance penalty is obviated
+somewhat by caching used within the database driver, but it is
+important to minimize the number of calls to the database when
+designing your indexing structure.  One way to do so is to use the
+<samp data-coord="prj2.umt:247:465">*Many()</samp> API (like
+<a href="https://docs.mongodb.com/manual/reference/method/db.collection.insertMany/#db.collection.insertMany" data-coord="prj2.umt:247:596">insertMany()</a>) whenever you can.  Though not always possible,
+strive to make the number of database calls for a single
+<samp data-coord="prj2.umt:247:726">DocFinder</samp> operation independent of the size of the documents
+involved in that operation.
+</p><p data-coord="prj2.umt:261:4">Since opening a connection to a database is an expensive operation,
+it is common to open up a connection at the start of a program and
+hang on to that connection for the duration of the program.  It is
+also important to remember to close the connection before termination
+of the program.
+</p><p data-coord="prj2.umt:267:4">While performing a single command, it is perfectly reasonable to
+keep stuff in memory.  In particular, it may be a good idea to
+optimistically read your noise words into memory when the object
+is first instantiated.
+</p><p data-coord="prj2.umt:272:4">You should use the features of the database to ensure that your
+noise words are maintained as a set; that is, the database
+should keep only a single copy of a word even if it is added multiple
+times.
+</p></li><li data-coord="prj2.umt:277:0"><p data-coord="prj2.umt:277:4">Start your project by creating a <samp data-coord="prj2.umt:277:37">work/prj2-sol</samp> directory.
+Change into that directory and initialize your project
+by running <samp data-coord="prj2.umt:277:138">npm init -y</samp>.  This will create a <samp data-coord="prj2.umt:277:173">package.json</samp>
+file; this file should be committed to your repository.
+</p></li><li data-coord="prj2.umt:282:0"><p data-coord="prj2.umt:282:4">Install the mongodb client library using <samp data-coord="prj2.umt:282:45">npm install mongodb</samp>.
+It will install the library and its dependencies into a
+<samp data-coord="prj2.umt:282:132">node_modules</samp> directory created within your current directory.
+It will also create a <samp data-coord="prj2.umt:282:222">package-lock.json</samp> which must be committed
+into your git repository.
+</p><p data-coord="prj2.umt:288:4">The created <samp data-coord="prj2.umt:288:16">node_modules</samp> directory should <strong data-coord="prj2.umt:288:48">not</strong> be committed to
+git.  You can ensure that it will not be committed by simply
+mentioning it in a <samp data-coord="prj2.umt:288:158">.gitignore</samp> file.  You should have already
+taken care of this if you followed the
+<a href="../../misc/gitlab-setup/gitlab-setup.html" data-coord="prj2.umt:288:294">directions</a> provided
+when setting up gitlab.  If you have not done so, please add a
+line containing simply <samp data-coord="prj2.umt:288:408">node_modules</samp> to a <samp data-coord="prj2.umt:288:428">.gitignore</samp> file at
+the top-level of your <samp data-coord="prj2.umt:288:475">i480w</samp> or <samp data-coord="prj2.umt:288:486">i580w</samp> gitlab project.
+</p></li><li data-coord="prj2.umt:297:0"><p data-coord="prj2.umt:297:4">Copy the provided files into your project directory:
+</p><pre data-coord="prj2.umt:300:0">    $ cp -p $HOME/cs580w/projects/prj2/prj2-sol/* .
+</pre><p data-coord="prj2.umt:303:4">This should copy in the <samp data-coord="prj2.umt:303:28">README</samp> template, the <samp data-coord="prj2.umt:303:51">index.js</samp>,
+<samp data-coord="prj2.umt:303:67">docs-cli.js</samp> command-line programs, and the <samp data-coord="prj2.umt:303:112">doc-finder.js</samp>
+skeleton file into your project directory.
+</p></li><li data-coord="prj2.umt:307:0"><p data-coord="prj2.umt:307:4">You should be able to run the project: 
+</p><pre data-coord="prj2.umt:310:0">    $ ./index.js
+    usage: index.js DB_URL COMMAND [COMMAND_ARGS...]
+      where COMMAND is:
+      add-content CONTENT-FILE...
+      add-noise NOISE-FILE...
+      clear
+      complete SEARCH-TERM...
+      find SEARCH-TERM...
+      get DOC_NAME
+    $ ./index.js mongodb://localhost:27017/docs find betty
+    time 0 milliseconds
+    no results
+    $
+</pre><p data-coord="prj2.umt:325:4">As illustrated by the above log, all commands will fail since
+their corresponding implementations in the <samp data-coord="prj2.umt:325:113">doc-finder.js</samp>
+skeleton files are <samp data-coord="prj2.umt:325:152">NOP</samp>'s.
+</p></li><li data-coord="prj2.umt:329:0"><p data-coord="prj2.umt:329:4">Start by implementing the <samp data-coord="prj2.umt:329:30">constructor()</samp> for <samp data-coord="prj2.umt:329:50">DocFinder</samp>. Note
+that
+<a href="https://stackoverflow.com/questions/47658775/db-createcollection-is-not-a-function" data-coord="prj2.umt:329:171">contrary</a> to some of the
+<a href="https://docs.mongodb.com/manual/reference/method/connect/" data-coord="prj2.umt:329:264">documentation,</a> it is
+<a href="http://mongodb.github.io/node-mongodb-native/3.0/tutorials/connect/" data-coord="prj2.umt:329:364">necessary</a> to separate out the database name from the rest of the
+<samp data-coord="prj2.umt:329:433">dbUrl</samp>.  You can do this using a single line destructuring
+assignment with a capturing regex or <samp data-coord="prj2.umt:329:534">lastIndexOf()</samp>.  Remember
+the separated out values in <samp data-coord="prj2.umt:329:593">this</samp>.
+</p><p data-coord="prj2.umt:341:4">Note that since the constructor is synchronous, you cannot call
+the asynchronous <a href="http://mongodb.github.io/node-mongodb-native/3.0/tutorials/connect/" data-coord="prj2.umt:341:160">connect()</a> method within the constructor.  All asynchronous
+initialization needs to be deferred to the <samp data-coord="prj2.umt:341:266">async init()</samp> method
+you will work on next.
+</p></li><li data-coord="prj2.umt:346:0"><p data-coord="prj2.umt:346:4">Implement the <samp data-coord="prj2.umt:346:18">init()</samp> method to
+<a href="http://mongodb.github.io/node-mongodb-native/3.0/tutorials/connect/" data-coord="prj2.umt:346:116">connect()</a> to the server.  Note that with the availability of
+<samp data-coord="prj2.umt:346:181">async</samp> and <samp data-coord="prj2.umt:346:193">await</samp> you can simply <samp data-coord="prj2.umt:346:216">await</samp> the <samp data-coord="prj2.umt:346:228">client</samp> returned
+by the <samp data-coord="prj2.umt:346:257">connect()</samp> call.  Then use its <samp data-coord="prj2.umt:346:289">db()</samp> method to get a
+handle for your specific database.  Stash these away in <samp data-coord="prj2.umt:346:372">this</samp>.
+</p><p data-coord="prj2.umt:353:4">You can add code into your <samp data-coord="prj2.umt:353:31">init()</samp> method to also stash away
+references to the individual collections required by your
+design. Use the <samp data-coord="prj2.umt:353:148">createCollection()</samp> or <samp data-coord="prj2.umt:353:172">collection()</samp> methods.
+</p></li><li data-coord="prj2.umt:357:0"><p data-coord="prj2.umt:357:4">Implement the <samp data-coord="prj2.umt:357:18">close()</samp> method for <samp data-coord="prj2.umt:357:39">DocFinder</samp>.  You simply need
+to <samp data-coord="prj2.umt:357:76">await</samp> a <samp data-coord="prj2.umt:357:86">close()</samp> on your database <samp data-coord="prj2.umt:357:113">client</samp>.
+</p><p data-coord="prj2.umt:360:4">Test using the command-line program for a command like <samp data-coord="prj2.umt:360:59">find</samp>.
+The program should simply exit, after printing failure results.
+To ensure sanity, it may be a good idea to look at your <samp data-coord="prj2.umt:360:195">client</samp>
+or <samp data-coord="prj2.umt:360:211">db</samp> objects using a debugger or <samp data-coord="prj2.umt:360:244">console.log()</samp>; you should
+see large objects having many properties.
+</p></li><li data-coord="prj2.umt:366:0"><p data-coord="prj2.umt:366:4">The <samp data-coord="prj2.umt:366:8">get</samp> command allows the retrieval of a document stored
+earlier using the <samp data-coord="prj2.umt:366:86">add-content</samp> command.  So your design should
+have some way of storing and retrieving complete documents.  This
+functionality is a good way to get started with mongo's basic
+CRUD functionality:
+</p><ol data-coord="prj2.umt:372:0"><li data-coord="prj2.umt:372:0"><p data-coord="prj2.umt:372:8">Implement <samp data-coord="prj2.umt:372:18">DocFinder</samp>'s <samp data-coord="prj2.umt:372:32">addContent()</samp> method to merely store
+the <samp data-coord="prj2.umt:372:82">contentText</samp> in the database ignoring any indexing.  Use
+the <samp data-coord="prj2.umt:372:152">upsert</samp> option to ensure idempotency in a simple manner.
+</p><p data-coord="prj2.umt:376:1">You can use the <em data-coord="prj2.umt:376:60"><a href="https://docs.mongodb.com/manual/mongo/" data-coord="prj2.umt:376:60">mongo shell</a></em> to verify that your document has been added
+to the database.
+</p></li><li data-coord="prj2.umt:380:0"><p data-coord="prj2.umt:380:8">Implement <samp data-coord="prj2.umt:380:18">DocFinder</samp>'s <samp data-coord="prj2.umt:380:32">docContent()</samp> method to retrieve a
+previously stored document.  Implement the specified error
+handling when the document is not found (note that the
+<samp data-coord="prj2.umt:380:206">message</samp> can be used with the <samp data-coord="prj2.umt:380:237">Error()</samp> constructor, but the
+<samp data-coord="prj2.umt:380:276">code</samp> will need to be added as a property.)
+</p></li></ol><p data-coord="prj2.umt:386:4">You should now have some useful functionality for the <samp data-coord="prj2.umt:386:58">add-content</samp>
+and <samp data-coord="prj2.umt:386:80">get</samp> commands.
+</p></li><li data-coord="prj2.umt:389:0"><p data-coord="prj2.umt:389:4">Implement <samp data-coord="prj2.umt:389:14">DocFinder</samp>'s <samp data-coord="prj2.umt:389:28">addNoiseWords()</samp> method.  Once again, use
+the mongo shell to verify its operation.
+</p></li><li data-coord="prj2.umt:392:0"><p data-coord="prj2.umt:392:4">Add code to load all noise words into memory.  You can set things
+up to optimistically load the noise words into memory whenever a
+<samp data-coord="prj2.umt:392:143">DocFinder</samp> instance is created, or to load them lazily only when
+needed for an operation and not previously loaded.
+</p></li><li data-coord="prj2.umt:398:0"><p data-coord="prj2.umt:398:4">Implement the <samp data-coord="prj2.umt:398:18">words()</samp> method.  As in your previous project, it
+may be a good idea to implement this as a wrapper around a private
+<samp data-coord="prj2.umt:398:144">_wordsLow()</samp> method which also tracks word offsets.
+</p></li><li data-coord="prj2.umt:402:0"><p data-coord="prj2.umt:402:4">Based on your indexing design, add indexing functionality to
+<samp data-coord="prj2.umt:402:69">DocFinder</samp>'s <samp data-coord="prj2.umt:402:83">addContent()</samp> method.
+</p></li><li data-coord="prj2.umt:405:0"><p data-coord="prj2.umt:405:4">Implement <samp data-coord="prj2.umt:405:14">DocFinder</samp>'s <samp data-coord="prj2.umt:405:28">find()</samp> method.  Note that it should use your
+indexing structure to go directly into the database only for
+those words which occur in its search terms.
+</p></li><li data-coord="prj2.umt:409:0"><p data-coord="prj2.umt:409:4">Implement <samp data-coord="prj2.umt:409:14">DocFinder</samp>'s <samp data-coord="prj2.umt:409:28">complete()</samp> method.
+</p></li><li data-coord="prj2.umt:411:0"><p data-coord="prj2.umt:411:4">Iterate until you meet all requirements.  
+</p></li></ol><p data-coord="prj2.umt:413:0">It is a good idea to commit and push your project periodically whenever
+you have made significant changes.  When it is complete, please follow
+the procedure given in the
+<em data-coord="prj2.umt:413:215"><a href="../../misc/gitlab-setup/gitlab-setup.html" data-coord="prj2.umt:413:215">gitlab setup directions</a></em> to
+submit your project using the <samp data-coord="prj2.umt:413:274">submit</samp> directory.
+</p></section></section>
+</div> <!-- #content -->
+</div> <!-- #main -->
+<div id="footer">&nbsp;</div>
+</div> <!-- #page -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../../assets/scripts/nav.js"></script>
+</body>
+</html>

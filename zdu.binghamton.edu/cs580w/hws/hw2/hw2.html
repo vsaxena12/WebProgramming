@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="../../assets/styles/article.css" rel="stylesheet" type="text/css" />
+  <title>Homework 2</title>
+<link href="hw2/hl-fine_blue.css" rel="stylesheet"/><link href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" 
+       rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML" async=""></script>    
+
+</head>
+<body>
+<div id="page">
+<span id="opennav"><i class="material-icons">&#xe5d2;</i></span>
+<div id="nav">
+<div id="closenav"><i class="material-icons">&#xe5cd;</i></div>
+<ul>
+<li><a href="../../index.html">Home</a></li>
+<li><a href="../../docs/index.html">Documentation</a></li>
+<li><a href="../../exams-quizzes/index.html">Exams & Quizzes</a></li>
+<li><a href="../../exercises/index.html">Exercises</a></li>
+<li><a href="../../hws/index.html">Homeworks</a></li>
+<li><a href="../../misc/index.html">Miscellaneous</a></li>
+<li><a href="../../projects/index.html">Projects</a></li>
+<li><a href="../../slides/index.html">Slides</a></li>
+
+</ul>
+</div> <!-- #nav -->
+<div id="main">
+  <div id="header">
+<h1>Programming for the Web</h1>
+</div> <!-- #header -->
+<div id="content">
+<section data-coord="hw2.umt:1:0"><h1 data-coord="hw2.umt:1:0">Homework 2</h1><p data-coord="hw2.umt:3:0"><strong data-coord="hw2.umt:3:0">Due Date</strong>: Oct 15; To be turned in on paper in class.
+</p><p data-coord="hw2.umt:5:0"><strong data-coord="hw2.umt:5:0">No late submissions.</strong>
+</p><p data-coord="hw2.umt:7:0"><strong data-coord="hw2.umt:7:0">Important Reminder</strong>: As per the course <em data-coord="hw2.umt:7:110"><a href="../../misc/academic-honesty-statement/academic-honesty-policy.html" data-coord="hw2.umt:7:110">Academic Honesty Statement</a></em>,
+cheating of any kind will minimally result in receiving an F letter
+grade for the entire course.
+</p><p data-coord="hw2.umt:11:0">Please remember to justify all answers.
+</p><p data-coord="hw2.umt:13:0">Note that some of the questions require you to show code or the output
+resulting from some code.  You may use a JavaScript implementation to
+verify your answers but you should realize that you will not have
+access to an implementation during exams.
+</p><p data-coord="hw2.umt:18:0">You are encouraged to use the web or the library but are required to
+cite any external sources used in your answers.
+</p><ol data-coord="hw2.umt:21:0"><li data-coord="hw2.umt:21:0"><p data-coord="hw2.umt:21:4">The specification for the DocFinder class for
+<em data-coord="hw2.umt:21:119"><a href="https://zdu.binghamton.edu/cs580w/projects/prj2/prj2.html" data-coord="hw2.umt:21:119">Project 2</a></em> splits the construction of a DocFinder instance into a
+synchronous constructor call followed by an asynchronous call to
+the <samp data-coord="hw2.umt:21:263">init()</samp> function.  OTOH, the
+<a href="https://zdu.binghamton.edu/cs580w/slides/user-store/code/user-store/user-store.js?colorize=true" data-coord="hw2.umt:21:400">user-store</a> example discussed in class uses a single static
+asynchronous factory function <code><span class="hl kwd">newUserStore</span><span class="hl opt">()</span></code>.  Discuss the
+tradeoffs between these two approaches. Would one be preferred
+over the other? <em data-coord="hw2.umt:21:612">10-points</em>
+</p></li><li data-coord="hw2.umt:32:0"><p data-coord="hw2.umt:32:4">The documentation for <em data-coord="hw2.umt:32:69"><a href="https://nodejs.org/api/modules.html" data-coord="hw2.umt:32:69">nodejs modules</a></em> mentions that if you want to <samp data-coord="hw2.umt:32:115">export</samp>
+individual  JavaScript entities from a module you can do so
+"by specifying additional properties on the special <samp data-coord="hw2.umt:32:245">exports</samp>
+object".  The documentation gives an example of a <samp data-coord="hw2.umt:32:309">circle</samp>
+module:
+</p><pre>    <span class="hl kwb">const</span> <span class="hl opt">{</span> PI <span class="hl opt">} =</span> Math<span class="hl opt">;</span>
+    exports<span class="hl opt">.</span>area <span class="hl opt">= (</span>r<span class="hl opt">) =&gt;</span> PI <span class="hl opt">*</span> r <span class="hl opt">**</span> <span class="hl num">2</span><span class="hl opt">;</span>
+    exports<span class="hl opt">.</span>circumference <span class="hl opt">= (</span>r<span class="hl opt">) =&gt;</span> <span class="hl num">2</span> <span class="hl opt">*</span> PI <span class="hl opt">*</span> r<span class="hl opt">;</span></pre><p data-coord="hw2.umt:45:4">The documentation subsequently makes clear that if you want
+to package up all your exports, then assigning directly 
+to <samp data-coord="hw2.umt:45:132">exports</samp> as in:
+</p><pre>    <span class="hl kwb">const</span> <span class="hl opt">{</span> PI <span class="hl opt">} =</span> Math<span class="hl opt">;</span>
+    exports <span class="hl opt">= {</span>
+      area<span class="hl opt">: (</span>r<span class="hl opt">) =&gt;</span> PI <span class="hl opt">*</span> r <span class="hl opt">**</span> <span class="hl num">2</span><span class="hl opt">;</span>
+      circumference<span class="hl opt">: (</span>r<span class="hl opt">) =&gt;</span> <span class="hl num">2</span> <span class="hl opt">*</span> PI <span class="hl opt">*</span> r<span class="hl opt">;</span>
+    <span class="hl opt">}</span></pre><p data-coord="hw2.umt:57:4">will not work.  Instead it is necessary to assign to <samp data-coord="hw2.umt:57:57">module.exports</samp>
+as in:
+</p><pre>    <span class="hl kwb">const</span> <span class="hl opt">{</span> PI <span class="hl opt">} =</span> Math<span class="hl opt">;</span>
+    module<span class="hl opt">.</span>exports <span class="hl opt">= {</span>
+      area<span class="hl opt">: (</span>r<span class="hl opt">) =&gt;</span> PI <span class="hl opt">*</span> r <span class="hl opt">**</span> <span class="hl num">2</span><span class="hl opt">;</span>
+      circumference<span class="hl opt">: (</span>r<span class="hl opt">) =&gt;</span> <span class="hl num">2</span> <span class="hl opt">*</span> PI <span class="hl opt">*</span> r<span class="hl opt">;</span>
+    <span class="hl opt">}</span></pre><p data-coord="hw2.umt:68:4">Why is it necessary to assign to <samp data-coord="hw2.umt:68:37">module.exports</samp> and not simply
+to <samp data-coord="hw2.umt:68:76">exports</samp>? <em data-coord="hw2.umt:68:87">5-points</em>
+</p></li><li data-coord="hw2.umt:71:0"><p data-coord="hw2.umt:71:4">Given an <samp data-coord="hw2.umt:71:13">Object</samp> literal:
+</p><pre>    <span class="hl kwb">const</span> NAME_VALUES <span class="hl opt">= {</span>
+      <span class="hl opt">[</span>key1<span class="hl opt">]: [</span> val1<span class="hl opt">,</span> docString1 <span class="hl opt">],</span>
+      <span class="hl opt">[</span>key2<span class="hl opt">]: [</span> val2<span class="hl opt">,</span> docString2 <span class="hl opt">],</span>
+      <span class="hl opt">...</span>
+    <span class="hl opt">}</span></pre><p data-coord="hw2.umt:81:4">for some <samp data-coord="hw2.umt:81:13">key</samp>\(i\), <samp data-coord="hw2.umt:81:28">val</samp>\(i\) and <samp data-coord="hw2.umt:81:46">docString</samp>\(i\), how
+would you write a <strong data-coord="hw2.umt:81:93">single expression</strong> <samp data-coord="hw2.umt:81:113">expr</samp> involving
+<samp data-coord="hw2.umt:81:134">NAME_VALUES</samp>, such that <samp data-coord="hw2.umt:81:159">const nameValues = expr</samp> results in
+<samp data-coord="hw2.umt:81:200">nameValues</samp> having the value:
+</p><pre>    <span class="hl opt">{</span>
+      <span class="hl opt">[</span>key1<span class="hl opt">]:</span> val1<span class="hl opt">,</span>
+      <span class="hl opt">[</span>key2<span class="hl opt">]:</span> val2<span class="hl opt">,</span>
+      <span class="hl opt">...</span>
+    <span class="hl opt">}</span></pre><p data-coord="hw2.umt:94:4">That is, you need to <em data-coord="hw2.umt:94:90"><a href="https://en.wikipedia.org/wiki/Projection_(relational_algebra)" data-coord="hw2.umt:94:90">project out</a></em> only the <samp data-coord="hw2.umt:94:113">key</samp>\(i\), <samp data-coord="hw2.umt:94:128">val</samp>\(i\) pairs.
+</p><p data-coord="hw2.umt:97:4">The only functions which your answer may use are those provided
+by the standard JavaScript libraries.
+</p><p data-coord="hw2.umt:100:4"><strong data-coord="hw2.umt:100:4">Hint</strong>: Consider using <samp data-coord="hw2.umt:100:27">Object.entries()</samp>, <samp data-coord="hw2.umt:100:47">Object.assign()</samp>,
+ destructuring, spread operator. <em data-coord="hw2.umt:100:103">10-points</em>
+</p></li><li data-coord="hw2.umt:103:0"><p data-coord="hw2.umt:103:4">Rewrite the <samp data-coord="hw2.umt:103:16">Shapes</samp> example covered in class <strong data-coord="hw2.umt:103:50">without</strong> using ES6
+classes. Specifically, you need to provide alternate code for
+<samp data-coord="hw2.umt:103:140">Shape</samp>, <samp data-coord="hw2.umt:103:149">Rect</samp> and <samp data-coord="hw2.umt:103:160">Circle</samp> without using the <samp data-coord="hw2.umt:103:187">class</samp> keyword.
+Your modified implementation should still allow the example code
+to run.  <em data-coord="hw2.umt:103:286">10-points</em>
+</p></li><li data-coord="hw2.umt:109:0"><p data-coord="hw2.umt:109:4">JavaScript uses the <samp data-coord="hw2.umt:109:24">prototype</samp> property of a function which is
+used as a constructor to allow accessing the shared prototype of
+any objects it constructs.  Though this design appears strange it,
+or something like it, seems to be the simplest design given that
+objects constructed using the same constructor function should
+inherit the same behavior.  Why does this design appear to be
+the simplest design? <em data-coord="hw2.umt:109:435">10-points</em>
+</p></li><li data-coord="hw2.umt:117:0"><p data-coord="hw2.umt:117:4">Many articles on the web over-complicate the rules for <em data-coord="hw2.umt:117:59">hoisting</em>.
+For example, this
+<a href="https://medium.freecodecamp.org/function-hoisting-hoisting-interview-questions-b6f91dbc2be8" data-coord="hw2.umt:117:196">article</a> gives these rules for function hoisting:
+</p><ul data-coord="hw2.umt:122:0"><li data-coord="hw2.umt:122:0"><p data-coord="hw2.umt:122:9"><em data-coord="hw2.umt:122:9">function declarations hoist the function definitions.</em>
+</p></li><li data-coord="hw2.umt:124:0"><p data-coord="hw2.umt:124:9"><em data-coord="hw2.umt:124:9">Function expressions in JavaScript are not hoisted.</em>
+</p></li></ul><p data-coord="hw2.umt:126:5">Can you give very simple rules which describe the behavior of
+<samp data-coord="hw2.umt:126:72">let</samp>, <samp data-coord="hw2.umt:126:79">var</samp>, function declarations and function expressions
+based on the concepts of
+<strong data-coord="hw2.umt:126:231"><a href="https://en.wikipedia.org/wiki/Scope_(computer_science)" data-coord="hw2.umt:126:231">scope</a></strong>,
+<strong data-coord="hw2.umt:126:318"><a href="https://en.wikipedia.org/wiki/Declaration_(computer_programming)" data-coord="hw2.umt:126:318">declarations and definitions</a></strong>. <em data-coord="hw2.umt:126:350">10-points</em>
+</p></li><li data-coord="hw2.umt:134:0"><p data-coord="hw2.umt:134:4">A set \(B\) of small non-negative integers can be represented on
+computers using a <a href="https://en.wikipedia.org/wiki/Bit_array" data-coord="hw2.umt:134:137">bitset</a> which is a single integer <samp data-coord="hw2.umt:134:170">b</samp>, where integer \(i \in B\) iff
+bit \(i\) in <samp data-coord="hw2.umt:134:220">b</samp> is 1 (we can assume that bits are indexed in
+<em data-coord="hw2.umt:134:317"><a href="https://en.wikipedia.org/wiki/Endianness" data-coord="hw2.umt:134:317">little-endian</a></em> order
+with bit 0 corresponding to the LSB).
+</p><p data-coord="hw2.umt:141:4">With this representation, many set operations can be performed
+using bitwise operations.  For example, assuming that <code>b1</code> and
+<code>b2</code> are the representation of sets \(B_1\) and \(B_2\), the set
+union \(B_1 \cup B_2\) is simply <code>b1 <span class="hl opt">|</span> b2</code> and the set
+intersections \(B_1 \cap B_2\) is simply <code>b1 <span class="hl opt">&amp;</span> b2</code>.
+</p><ol data-coord="hw2.umt:147:0"><li data-coord="hw2.umt:147:0"><p data-coord="hw2.umt:147:8">In JavaScript, what is the value of the largest integer which
+can be stored in a bitset represented using a single integer.
+</p></li><li data-coord="hw2.umt:150:0"><p data-coord="hw2.umt:150:8">Provide a definition for a function <code><span class="hl kwd">toBitSet</span><span class="hl opt">(</span>list<span class="hl opt">)</span></code> which
+when given an array <samp data-coord="hw2.umt:150:96">list</samp> of small non-negative integers,
+returns an integer giving a bitset representation of all the
+integers in <code>list</code>.
+</p><p data-coord="hw2.umt:155:8">For example, <code><span class="hl kwd">toBitSet</span><span class="hl opt">([</span><span class="hl num">1</span><span class="hl opt">,</span> <span class="hl num">5</span><span class="hl opt">,</span> <span class="hl num">3</span><span class="hl opt">])</span></code> should return <code><span class="hl num">42</span></code>.
+</p></li><li data-coord="hw2.umt:157:0"><p data-coord="hw2.umt:157:8">Provide a definition for a function <code><span class="hl kwd">fromBitSet</span><span class="hl opt">(</span>bitset<span class="hl opt">)</span></code>
+which when provided with a <samp data-coord="hw2.umt:157:101">bitset</samp> representation of a set,
+returns an array listing all the integers in <samp data-coord="hw2.umt:157:181">bitset</samp>.
+</p><p data-coord="hw2.umt:161:1">For example, <code><span class="hl kwd">fromBitSet</span><span class="hl opt">(</span><span class="hl num">42</span><span class="hl opt">)</span></code> should return list <code><span class="hl opt">[</span><span class="hl num">1</span><span class="hl opt">,</span> <span class="hl num">3</span><span class="hl opt">,</span> <span class="hl num">5</span><span class="hl opt">]</span></code>
+(any ordering is acceptable in the returned list).
+</p></li></ol><p data-coord="hw2.umt:165:4">The above functions are subject to the same restrictions as the
+functions you wrote in the previous homework; i.e. the body
+can consist of only a single return statement which returns
+an expression which computes the desired value.
+</p><p data-coord="hw2.umt:170:4">Hint: An integer <samp data-coord="hw2.umt:170:21">b</samp> can be converted to its binary representation
+using <samp data-coord="hw2.umt:170:81">b.toString(2)</samp>. <em data-coord="hw2.umt:170:98">15-points</em>
+</p></li><li data-coord="hw2.umt:173:0"><p data-coord="hw2.umt:173:4">Given the following code:
+</p><pre>    <span class="hl kwb">const</span> x <span class="hl opt">=</span> <span class="hl num">1</span><span class="hl opt">;</span>
+
+    function <span class="hl kwd">f</span><span class="hl opt">(</span>a<span class="hl opt">) {</span>
+      let y <span class="hl opt">=</span> x <span class="hl opt">+</span> <span class="hl num">1</span><span class="hl opt">;</span>
+      <span class="hl kwa">if</span> <span class="hl opt">(</span>a<span class="hl opt">) {</span>
+        var x <span class="hl opt">=</span> y <span class="hl opt">+</span> <span class="hl num">1</span><span class="hl opt">;</span>
+        y <span class="hl opt">=</span> x <span class="hl opt">+</span> <span class="hl num">2</span><span class="hl opt">;</span>
+      <span class="hl opt">}</span>
+      <span class="hl kwa">return</span> x <span class="hl opt">+</span> y<span class="hl opt">;</span>
+    <span class="hl opt">}</span>
+
+    console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="hl opt">(</span><span class="hl kwd">f</span><span class="hl opt">(</span><span class="hl num">1</span><span class="hl opt">),</span> x<span class="hl opt">);</span></pre><ol data-coord="hw2.umt:191:0"><li data-coord="hw2.umt:191:0"><p data-coord="hw2.umt:191:8">What will be the output of the above program.  Explain why it is
+so.
+</p></li><li data-coord="hw2.umt:194:0"><p data-coord="hw2.umt:194:8">What will be the output of the above program if the <samp data-coord="hw2.umt:194:60">var x =
+        ...</samp> statement inside the <code><span class="hl kwa">if</span></code> is changed to a <samp data-coord="hw2.umt:194:125">let x = ...</samp>
+statement.  Explain why it is so.
+</p></li></ol><p data-coord="hw2.umt:198:4">Hint: arithmetic on undefined values results in a <samp data-coord="hw2.umt:198:54">NaN</samp>. <em data-coord="hw2.umt:198:61">10-points</em>
+</p></li><li data-coord="hw2.umt:201:0"><p data-coord="hw2.umt:201:4">Assuming no earlier variable declarations, what will be the output
+of the following JavaScript code when run in non-strict mode?
+</p><pre>    x <span class="hl opt">=</span> <span class="hl num">1</span><span class="hl opt">;</span>
+    obj1 <span class="hl opt">= {</span> x<span class="hl opt">:</span> <span class="hl num">2</span><span class="hl opt">,</span> f<span class="hl opt">:</span> <span class="hl kwd">function</span><span class="hl opt">() {</span> <span class="hl kwa">return this</span><span class="hl opt">.</span>x<span class="hl opt">; } }</span>
+    obj2 <span class="hl opt">= {</span> x<span class="hl opt">:</span> <span class="hl num">3</span><span class="hl opt">,</span> f<span class="hl opt">:</span> <span class="hl kwd">function</span><span class="hl opt">() {</span> <span class="hl kwa">return this</span><span class="hl opt">.</span>x<span class="hl opt">; } }</span>
+    f <span class="hl opt">=</span> obj1<span class="hl opt">.</span>f<span class="hl opt">.</span><span class="hl kwd">bind</span><span class="hl opt">(</span>obj2<span class="hl opt">);</span>
+    console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="hl opt">(</span>obj1<span class="hl opt">.</span><span class="hl kwd">f</span><span class="hl opt">() -</span> obj2<span class="hl opt">.</span><span class="hl kwd">f</span><span class="hl opt">() +</span> <span class="hl kwd">f</span><span class="hl opt">());</span></pre><p data-coord="hw2.umt:212:4">Explain why it is so.  <em data-coord="hw2.umt:212:27">10-points</em>
+</p></li><li data-coord="hw2.umt:214:0"><p data-coord="hw2.umt:214:4">Discuss the validity of the following statements. What is more
+important than whether you ultimately classify the statement as
+<strong data-coord="hw2.umt:214:139">true</strong> or <strong data-coord="hw2.umt:214:149">false</strong> is your justification for arriving at your
+conclusion. <em data-coord="hw2.umt:214:216">10-points</em>
+</p><ol data-coord="hw2.umt:219:0"><li data-coord="hw2.umt:219:0"><p data-coord="hw2.umt:219:8">Constructor functions in JavaScript must be declared
+using the <samp data-coord="hw2.umt:219:79">constructor</samp> keyword.
+</p></li><li data-coord="hw2.umt:222:0"><p data-coord="hw2.umt:222:8">Given objects <samp data-coord="hw2.umt:222:22">a</samp> and <samp data-coord="hw2.umt:222:30">b</samp>, <samp data-coord="hw2.umt:222:35">a === b</samp> is true iff the values of
+all the properties of <samp data-coord="hw2.umt:222:101">a</samp> are recursively equal (using <samp data-coord="hw2.umt:222:134">===</samp>)
+to the values of the properties of <samp data-coord="hw2.umt:222:184">b</samp>.
+</p></li><li data-coord="hw2.umt:226:0"><p data-coord="hw2.umt:226:8">The prototype of an object can be changed after it has been
+created.
+</p></li><li data-coord="hw2.umt:229:0"><p data-coord="hw2.umt:229:8"><samp data-coord="hw2.umt:229:8">this</samp> for a fat-arrow function can be changed using <samp data-coord="hw2.umt:229:61">bind()</samp>.
+</p></li><li data-coord="hw2.umt:231:0"><p data-coord="hw2.umt:231:8">It is possible to set things up so that assigning to
+a single object property changes multiple properties.
+</p></li></ol></li></ol></section>
+</div> <!-- #content -->
+</div> <!-- #main -->
+<div id="footer">&nbsp;</div>
+</div> <!-- #page -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../../assets/scripts/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="../../assets/styles/article.css" rel="stylesheet" type="text/css" />
+  <title>GitLab Setup</title>
+
+</head>
+<body>
+<div id="page">
+<span id="opennav"><i class="material-icons">&#xe5d2;</i></span>
+<div id="nav">
+<div id="closenav"><i class="material-icons">&#xe5cd;</i></div>
+<ul>
+<li><a href="../../index.html">Home</a></li>
+<li><a href="../../docs/index.html">Documentation</a></li>
+<li><a href="../../exams-quizzes/index.html">Exams & Quizzes</a></li>
+<li><a href="../../hws/index.html">Homeworks</a></li>
+<li><a href="../../misc/index.html">Miscellaneous</a></li>
+<li><a href="../../projects/index.html">Projects</a></li>
+<li><a href="../../slides/index.html">Slides</a></li>
+
+</ul>
+</div> <!-- #nav -->
+<div id="main">
+  <div id="header">
+<h1>Programming for the Web</h1>
+</div> <!-- #header -->
+<div id="content">
+<section data-coord="gitlab-setup.umt:1:0"><h1 data-coord="gitlab-setup.umt:1:0">GitLab Setup</h1><p data-coord="gitlab-setup.umt:3:0">We will be using <a href="https://git-scm.com/doc" data-coord="gitlab-setup.umt:3:44">git</a> for project submissions:
+</p><ul data-coord="gitlab-setup.umt:5:0"><li data-coord="gitlab-setup.umt:5:0"><p data-coord="gitlab-setup.umt:5:4">You will be submitting your course projects using a private
+git repository on <a href="https://gitlab.com" data-coord="gitlab-setup.umt:5:108">gitlab.com.</a>
+</p></li><li data-coord="gitlab-setup.umt:8:0"><p data-coord="gitlab-setup.umt:8:4">Project submission will be done from a clone of your gitlab
+repository on your course VM.
+</p></li></ul><p data-coord="gitlab-setup.umt:11:0">You should obtain basic familiarity with <samp data-coord="gitlab-setup.umt:11:41">git</samp> by looking at the
+copious documentation and tutorials available on the web.
+</p><section data-coord="gitlab-setup.umt:15:0"><h2 data-coord="gitlab-setup.umt:15:0">Quick Start</h2><p data-coord="gitlab-setup.umt:18:0">If you know what you are doing, this <samp data-coord="gitlab-setup.umt:18:37">tl;dr</samp> section should largely suffice:
+</p><ol data-coord="gitlab-setup.umt:20:0"><li data-coord="gitlab-setup.umt:20:0"><p data-coord="gitlab-setup.umt:20:4">Set up a personal gitlab account and create a <samp data-coord="gitlab-setup.umt:20:50">i480w</samp> or <samp data-coord="gitlab-setup.umt:20:61">i580w</samp>
+git project, depending on the course you are registered for.  Set up
+two gitlab users to share your project with assigned role <samp data-coord="gitlab-setup.umt:20:204">Reporter</samp>:
+</p><ol data-coord="gitlab-setup.umt:24:0"><li data-coord="gitlab-setup.umt:24:0"><p data-coord="gitlab-setup.umt:24:8"><samp data-coord="gitlab-setup.umt:24:8">@umrigar</samp>.
+</p></li><li data-coord="gitlab-setup.umt:26:0"><p data-coord="gitlab-setup.umt:26:8"><strong data-coord="gitlab-setup.umt:26:8">One of</strong> <samp data-coord="gitlab-setup.umt:26:17">@mjohns54</samp> (for CS 480W), <samp data-coord="gitlab-setup.umt:26:44">@vkudalk1</samp> (for CS
+580W-01), <samp data-coord="gitlab-setup.umt:26:82">@nraverk1</samp> (for CS 580W-02).
+</p></li></ol><p data-coord="gitlab-setup.umt:29:4">As there are many similar names and some people may have multiple
+accounts, <strong data-coord="gitlab-setup.umt:29:84">make 100% sure that you have the correct gitlab
+    accounts</strong> (the <samp data-coord="gitlab-setup.umt:29:152">@</samp><em data-coord="gitlab-setup.umt:29:155">ID</em>'s must match).
+</p></li><li data-coord="gitlab-setup.umt:33:0"><p data-coord="gitlab-setup.umt:33:4">Clone your gitlab project into the <samp data-coord="gitlab-setup.umt:33:39">~/git-repos</samp> directory on your
+VM.
+</p></li><li data-coord="gitlab-setup.umt:36:0"><p data-coord="gitlab-setup.umt:36:4">Create a top-level <samp data-coord="gitlab-setup.umt:36:23">.gitignore</samp> file in your git project to
+ignore <samp data-coord="gitlab-setup.umt:36:75">node_modules</samp> and <samp data-coord="gitlab-setup.umt:36:94">*~</samp>.
+</p></li><li data-coord="gitlab-setup.umt:39:0"><p data-coord="gitlab-setup.umt:39:4">Within the cloned directory, use a <samp data-coord="gitlab-setup.umt:39:39">work</samp> subdirectory for
+working on projects and a <samp data-coord="gitlab-setup.umt:39:93">submit</samp> subdirectory for submitting
+projects.  If submitting late, email the grader assigned to your
+course.
+</p></li></ol><p data-coord="gitlab-setup.umt:46:0">The following sections explain each of the above steps in detail.
+</p></section><section data-coord="gitlab-setup.umt:49:0"><h2 data-coord="gitlab-setup.umt:49:0">Setting Up A Git Lab Repository</h2><p data-coord="gitlab-setup.umt:52:0">Each student needs to set up a <strong data-coord="gitlab-setup.umt:52:31">private</strong> git project called <samp data-coord="gitlab-setup.umt:52:60">i480w</samp> or
+<samp data-coord="gitlab-setup.umt:52:71">i580w</samp> (depending on the course you are registered for) on gitlab.
+It will be referred to as <em data-coord="gitlab-setup.umt:52:165">iXXX</em> in the sequel.  This repository will
+be shared with the instructor and course grader and will be used for
+submitting projects for grading.
+</p><ol data-coord="gitlab-setup.umt:58:0"><li data-coord="gitlab-setup.umt:58:0"><p data-coord="gitlab-setup.umt:58:4">Go to <a href="https://gitlab.com" data-coord="gitlab-setup.umt:58:32">gitlab.com.</a>
+</p></li><li data-coord="gitlab-setup.umt:60:0"><p data-coord="gitlab-setup.umt:60:4">Click on <samp data-coord="gitlab-setup.umt:60:13">Sign In/Register</samp>, select the <strong data-coord="gitlab-setup.umt:60:44">Register</strong> tab and
+complete the form.  You may choose any appropriate <strong data-coord="gitlab-setup.umt:60:118">Username</strong>, but
+it is strongly recommended that you use the user-name associated
+with your <samp data-coord="gitlab-setup.umt:60:217">binghamton.edu</samp> email id (if it is available).
+</p><p data-coord="gitlab-setup.umt:65:4">Please ensure that you provide your <samp data-coord="gitlab-setup.umt:65:40">binghamton.edu</samp> email address
+in the <strong data-coord="gitlab-setup.umt:65:82">Email</strong> field.  This may make it slightly easier for the
+grader to associate your gitlab account with your BU id.
+</p></li><li data-coord="gitlab-setup.umt:69:0"><p data-coord="gitlab-setup.umt:69:4">Once you have submitted your form, you will need to complete your
+registration by clicking on the link provided in an email which
+will be sent to the email address you provided during
+registration.
+</p></li><li data-coord="gitlab-setup.umt:74:0"><p data-coord="gitlab-setup.umt:74:4">Set up your account appropriately.  Upload the generated <strong data-coord="gitlab-setup.umt:74:61">public</strong>
+ssh-key from your VM (default <samp data-coord="gitlab-setup.umt:74:104">~/.ssh/id_rsa.pub</samp>) to gitlab by
+copying-and-pasting it into your
+<a href="https://gitlab.com/profile/keys" data-coord="gitlab-setup.umt:74:214">profile.</a>
+</p></li><li data-coord="gitlab-setup.umt:79:0"><p data-coord="gitlab-setup.umt:79:4">To set up a project for the course, click on the green <strong data-coord="gitlab-setup.umt:79:59">New
+    Project</strong> button on your <em data-coord="gitlab-setup.umt:79:114"><a href="https://gitlab.com" data-coord="gitlab-setup.umt:79:114">gitlab home page</a></em>.
+</p></li><li data-coord="gitlab-setup.umt:82:0"><p data-coord="gitlab-setup.umt:82:4">Fill in the project name as <samp data-coord="gitlab-setup.umt:82:32">i480w</samp> or <samp data-coord="gitlab-setup.umt:82:43">i580w</samp> depending on which
+course you are registered for (this is absolutely essential).
+Make sure that you set up your project as <strong data-coord="gitlab-setup.umt:82:182">Private</strong>.  Provide a
+suitable description for the project.  Make sure to select
+<samp data-coord="gitlab-setup.umt:82:271">Initialize repository with a README</samp>. Hit the <strong data-coord="gitlab-setup.umt:82:318">Create project</strong>
+button.
+</p></li><li data-coord="gitlab-setup.umt:89:0"><p data-coord="gitlab-setup.umt:89:4">Go to your project using the link you will now find on your gitlab
+homepage. Go to <samp data-coord="gitlab-setup.umt:89:91">Settings-&gt;Members</samp> from the left-hand side
+navigation.  Go to the <strong data-coord="gitlab-setup.umt:89:162">Add member</strong> tab and add in the course
+grader and instructor as project members with <strong data-coord="gitlab-setup.umt:89:251">Reporter</strong> roles.
+</p><p data-coord="gitlab-setup.umt:94:4">You can get to the gitlab user id by searching on the person's name.
+</p><ol data-coord="gitlab-setup.umt:96:0"><li data-coord="gitlab-setup.umt:96:0"><p data-coord="gitlab-setup.umt:96:8">Add in your grader with role <samp data-coord="gitlab-setup.umt:96:37">Reporter</samp>:
+</p><ul data-coord="gitlab-setup.umt:98:0"><li data-coord="gitlab-setup.umt:98:0"><p data-coord="gitlab-setup.umt:98:12">If registered for CS 480W (meeting MWF 3:30-4:30p), add
+Mr. Maryson Johnson having gitlab id <samp data-coord="gitlab-setup.umt:98:117">@mjohns54</samp> as your grader. 
+</p></li><li data-coord="gitlab-setup.umt:101:0"><p data-coord="gitlab-setup.umt:101:12">If registered for CS 580W-01 (meeting MW 6:15-7:40p), add
+Ms. Vidisha Kudalkar having gitlab id <samp data-coord="gitlab-setup.umt:101:120">@vkudalk1</samp> as your
+grader.
+</p></li><li data-coord="gitlab-setup.umt:105:0"><p data-coord="gitlab-setup.umt:105:12">If registered for CS 580W-02 (meeting MW 12:30-2:00p), add
+Mr. Nikhil Raverkar having gitlab id <samp data-coord="gitlab-setup.umt:105:120">@nraverk1</samp> as your
+grader.
+</p></li></ul><p data-coord="gitlab-setup.umt:109:8"><strong data-coord="gitlab-setup.umt:109:8">Since multiple accounts will show up in the search results,
+        please ensure that you choose the correct account with the
+        matching @ID</strong>.
+</p></li><li data-coord="gitlab-setup.umt:113:0"><p data-coord="gitlab-setup.umt:113:8">Add in the member with gitlab id <samp data-coord="gitlab-setup.umt:113:41">@umrigar</samp> with role
+<strong data-coord="gitlab-setup.umt:113:70">Reporter</strong>.  You can get to the gitlab id by doing a search for
+<samp data-coord="gitlab-setup.umt:113:142">umrigar</samp>
+</p><p data-coord="gitlab-setup.umt:117:8"><strong data-coord="gitlab-setup.umt:117:8">Since multiple accounts will show up in the search results
+        for "umrigar", please ensure that you choose the correct
+        account @umrigar.</strong>
+</p></li></ol><p data-coord="gitlab-setup.umt:121:4">Make sure to specify the <strong data-coord="gitlab-setup.umt:121:29">Reporter</strong> role for both new members.
+</p></li></ol></section><section data-coord="gitlab-setup.umt:123:0"><h2 data-coord="gitlab-setup.umt:123:0">Initializing Your Repository on your VM</h2><p data-coord="gitlab-setup.umt:126:0">Clone your gitlab repository into your <samp data-coord="gitlab-setup.umt:126:39">~/git-repos</samp> directory:
+</p><p data-coord="gitlab-setup.umt:128:2"><samp data-coord="gitlab-setup.umt:128:2">$ cd ~/git-repos</samp> <br data-coord="gitlab-setup.umt:128:21"/>
+<samp data-coord="gitlab-setup.umt:128:26">$ git clone</samp> <em data-coord="gitlab-setup.umt:128:40">YOUR_GITLAB_PROJECT_URL</em> <br data-coord="gitlab-setup.umt:128:66"/>
+</p><p data-coord="gitlab-setup.umt:131:0">You can copy and paste your gitlab project URL from your project
+page.  If you get an error when doing so, recheck your ssh keys.
+</p><p data-coord="gitlab-setup.umt:134:0">Set up a <samp data-coord="gitlab-setup.umt:134:9">.gitignore</samp> (note the leading <samp data-coord="gitlab-setup.umt:134:40">.</samp>) at the top-level of
+your git project to contain at least the following two lines:
+</p><pre data-coord="gitlab-setup.umt:138:0">node_modules
+*~
+</pre><p data-coord="gitlab-setup.umt:142:0">and commit:
+</p><pre data-coord="gitlab-setup.umt:145:0">    git add .gitignore
+    git commit -m 'ignore node_modules dir &amp; emacs backups'
+</pre></section><section data-coord="gitlab-setup.umt:150:0"><h2 data-coord="gitlab-setup.umt:150:0">Working On and Submitting Projects</h2><p data-coord="gitlab-setup.umt:153:0">To work on and submit projects, you must create <samp data-coord="gitlab-setup.umt:153:48">work</samp> and <samp data-coord="gitlab-setup.umt:153:59">submit</samp>
+directories within your <em data-coord="gitlab-setup.umt:153:92">iXXX</em> directory where <em data-coord="gitlab-setup.umt:153:115">iXXX</em> is the directory
+containing the clone of your gitlab project:
+</p><p data-coord="gitlab-setup.umt:157:3"><samp data-coord="gitlab-setup.umt:157:3">$ cd ~/git-repos/</samp><em data-coord="gitlab-setup.umt:157:26">iXXX</em> <br data-coord="gitlab-setup.umt:157:33"/>
+<samp data-coord="gitlab-setup.umt:157:39">$ mkdir work submit</samp>
+</p><p data-coord="gitlab-setup.umt:161:0">Create your project solution directories <samp data-coord="gitlab-setup.umt:161:41">prj</samp><em data-coord="gitlab-setup.umt:161:46">i</em><samp data-coord="gitlab-setup.umt:161:49">-sol</samp> within your
+<samp data-coord="gitlab-setup.umt:161:68">work</samp> directory.  As you work on your project, keep committing and
+pushing your changes.  This ensures that you do not accidentally loose
+your work.
+</p><p data-coord="gitlab-setup.umt:166:0">When ready to submit your project, you must move it over to your <samp data-coord="gitlab-setup.umt:166:65">submit</samp>
+directory.  Assuming that you are in your <em data-coord="gitlab-setup.umt:166:116">iXXX</em> directory:
+</p><p data-coord="gitlab-setup.umt:169:4"><samp data-coord="gitlab-setup.umt:169:4">$ git mv work/prj</samp><em data-coord="gitlab-setup.umt:169:23">i</em><samp data-coord="gitlab-setup.umt:169:26">-sol</samp> <samp data-coord="gitlab-setup.umt:169:33">submit</samp> <br data-coord="gitlab-setup.umt:169:42"/>
+<samp data-coord="gitlab-setup.umt:169:49">$ git commit -m 'submitted project</samp> <em data-coord="gitlab-setup.umt:169:86">i</em><samp data-coord="gitlab-setup.umt:169:93">'</samp> <br data-coord="gitlab-setup.umt:169:97"/>
+<samp data-coord="gitlab-setup.umt:169:104">$ git push</samp>
+</p><p data-coord="gitlab-setup.umt:173:0">If you find a problem with your submission, you may directly update
+your project in the <samp data-coord="gitlab-setup.umt:173:88">submit</samp> directory.  The timestamp of the latest
+commit and push within the <samp data-coord="gitlab-setup.umt:173:164">submit</samp> directory will count as the
+submission time for your project.
+</p><p data-coord="gitlab-setup.umt:178:0">Do not confuse the gitlab project with the course projects you will be
+submitting.  You will only have a single gitlab <em data-coord="gitlab-setup.umt:178:119">iXXX</em> project, but
+will have multiple course projects (typically 5) under your gitab project.
+So by the end of the semester your <samp data-coord="gitlab-setup.umt:178:249">i580w</samp> gitlab project may look like:
+</p><pre data-coord="gitlab-setup.umt:184:0">i580w/---+-submit/---+-prj1-sol/
+         |           |
+         |           +-prj2-sol/
+         ...         ...
+         |           |
+         |           +-prj5-sol/
+         |
+         +-work/-----+-prj1-sol/
+                     |
+                     +-prj2-sol/
+                     ...
+                     |
+                     +-prj5-sol/
+</pre><p data-coord="gitlab-setup.umt:199:0">You should feel free to create any other subdirectories within your
+<em data-coord="gitlab-setup.umt:199:68">iXXX</em> directory.  The only directory which will be monitored for
+submitted projects is the <samp data-coord="gitlab-setup.umt:199:160">submit</samp> directory.
+</p><p data-coord="gitlab-setup.umt:203:0">If the submission is late, please email the grader assigned to your course:
+</p><dl data-coord="gitlab-setup.umt:205:0"><dt data-coord="gitlab-setup.umt:205:2"><strong data-coord="gitlab-setup.umt:205:3">CS 480W</strong> (meeting MWF 3:30-4:30p)</dt><dd data-coord="gitlab-setup.umt:206:0"><p data-coord="gitlab-setup.umt:206:5">Maryson Johnson <a href="mailto:mjohns54@binghamton.edu" data-coord="gitlab-setup.umt:206:55">mjohns54@binghamton.edu</a> <br data-coord="gitlab-setup.umt:206:79"/>
+</p></dd><dt data-coord="gitlab-setup.umt:208:2"><strong data-coord="gitlab-setup.umt:208:3">CS 580W-01</strong> (meeting MW 6:15-7:40p)</dt><dd data-coord="gitlab-setup.umt:209:0"><p data-coord="gitlab-setup.umt:209:5">Vidisha P Kudalkar <a href="mailto:vkudalk1@binghamton.edu" data-coord="gitlab-setup.umt:209:58">vkudalk1@binghamton.edu</a> <br data-coord="gitlab-setup.umt:209:82"/>
+</p></dd><dt data-coord="gitlab-setup.umt:210:2"><strong data-coord="gitlab-setup.umt:210:3">CS 580W-02</strong> (meeting MW 12:30-2:00p)</dt><dd data-coord="gitlab-setup.umt:211:0"><p data-coord="gitlab-setup.umt:211:4">Nikhil C Raverkar <a href="mailto:nraverk1@binghamton.edu" data-coord="gitlab-setup.umt:211:56">nraverk1@binghamton.edu</a> <br data-coord="gitlab-setup.umt:211:80"/>
+</p></dd></dl></section></section>
+</div> <!-- #content -->
+</div> <!-- #main -->
+<div id="footer">&nbsp;</div>
+</div> <!-- #page -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../../assets/scripts/nav.js"></script>
+</body>
+</html>

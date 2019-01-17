@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="../../assets/styles/article.css" rel="stylesheet" type="text/css" />
+  <title>CS 480W/580W Final Solution</title>
+<link href="final-sol/hl-fine_blue.css" rel="stylesheet"/><link href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" 
+       rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML" async=""></script>    
+
+</head>
+<body>
+<div id="page">
+<span id="opennav"><i class="material-icons">&#xe5d2;</i></span>
+<div id="nav">
+<div id="closenav"><i class="material-icons">&#xe5cd;</i></div>
+<ul>
+<li><a href="../../index.html">Home</a></li>
+<li><a href="../../docs/index.html">Documentation</a></li>
+<li><a href="../../exams-quizzes/index.html">Exams & Quizzes</a></li>
+<li><a href="../../exercises/index.html">Exercises</a></li>
+<li><a href="../../hws/index.html">Homeworks</a></li>
+<li><a href="../../misc/index.html">Miscellaneous</a></li>
+<li><a href="../../projects/index.html">Projects</a></li>
+<li><a href="../../slides/index.html">Slides</a></li>
+
+</ul>
+</div> <!-- #nav -->
+<div id="main">
+  <div id="header">
+<h1>Programming for the Web</h1>
+</div> <!-- #header -->
+<div id="content">
+<section data-coord="final-sol.umt:1:0"><h1 data-coord="final-sol.umt:1:0">CS 480W/580W Final Solution</h1><p data-coord="final-sol.umt:3:0"><strong data-coord="final-sol.umt:3:0">Date</strong>: Dec 14, 2018                                         <strong data-coord="final-sol.umt:3:61">Max Points</strong>: 100 <br data-coord="final-sol.umt:3:79"/>
+<strong data-coord="final-sol.umt:3:82">Time</strong>: 120 minutes. <br data-coord="final-sol.umt:3:103"/>
+Open-book, open notes; <strong data-coord="final-sol.umt:3:129">no electronic devices</strong>
+</p><p data-coord="final-sol.umt:8:0"><strong data-coord="final-sol.umt:8:0">Important Reminder</strong> As per the course Academic Honesty
+Statement, cheating of any kind will minimally result in receiving an
+F letter grade for the entire course.
+</p><p data-coord="final-sol.umt:12:0"><strong data-coord="final-sol.umt:12:0">Background</strong>:
+</p><ol data-coord="final-sol.umt:14:0"><li data-coord="final-sol.umt:14:0"><p data-coord="final-sol.umt:14:4">A student needed to extract the body of a HTTP request.  The
+student observed that the HTTP headers in a sample request
+contained 271 characters and proceeded to use the following code
+to extract the body of a <samp data-coord="final-sol.umt:14:226">request</samp>:
+</p><pre>    <span class="hl kwb">const</span> requestBody <span class="hl opt">=</span> request<span class="hl opt">.</span><span class="hl kwd">slice</span><span class="hl opt">(</span><span class="hl num">271</span><span class="hl opt">);</span></pre><p data-coord="final-sol.umt:23:4">What is wrong with this approach?  How would you fix the problems?
+(Actual code is not necessary, it is sufficient to clearly describe
+the problem and the suggested fix). <em data-coord="final-sol.umt:23:183">10-points</em>
+</p><p data-coord="final-sol.umt:27:4">The problems are the following:
+</p><ol data-coord="final-sol.umt:29:0"><li data-coord="final-sol.umt:29:0"><p data-coord="final-sol.umt:29:8">Strange magic numbers like 271 within code are <strong data-coord="final-sol.umt:29:55">always</strong> a bad
+idea as a reader looking at the above code segment would have
+absolutely no idea of what is going on.  If the code was
+changed to something like:
+</p><pre>        <span class="hl kwb">const</span> HEADERS_LENGTH <span class="hl opt">=</span> <span class="hl num">271</span><span class="hl opt">;</span>
+        <span class="hl kwb">const</span> requestBody <span class="hl opt">=</span> request<span class="hl opt">.</span><span class="hl kwd">slice</span><span class="hl opt">(</span>HEADERS_LENGTH<span class="hl opt">);</span></pre><p data-coord="final-sol.umt:39:8">the name of the constant at least provides some idea of the
+programmer's intentions.
+</p></li><li data-coord="final-sol.umt:42:0"><p data-coord="final-sol.umt:42:8">The major problem with this approach is that it is completely
+broken.  The headers may happen to be 271 characters for one
+particular request from a particular version of a browser
+running on a specific OS; it will likely be a completely
+different number for a different browser.
+</p></li></ol><p data-coord="final-sol.umt:48:4">An approach which would work is to follow the HTTP standards which
+document that an empty line separates the HTTP headers from the
+body. So the code should look for that empty line in order
+to determine the start of the body.
+</p><p data-coord="final-sol.umt:53:4">[Some form of the above statements are sufficient to get full credit
+for this question.]
+</p><p data-coord="final-sol.umt:56:4">The standard documents that lines be terminated by <samp data-coord="final-sol.umt:56:55">CRLF</samp> <em data-coord="final-sol.umt:56:62">\r\n</em>.
+However, applying Postel's principle, we would look for the
+empty line using a regex like <samp data-coord="final-sol.umt:56:168">/\n\r?\n/</samp> and obtain its
+offset.  So something like:
+</p><pre>    <span class="hl kwb">const</span> match <span class="hl opt">=</span> request<span class="hl opt">.</span><span class="hl kwd">match</span><span class="hl opt">(/</span><span class="hl esc">\n\r</span><span class="hl opt">?</span><span class="hl esc">\n</span><span class="hl opt">/);</span>
+    <span class="hl kwa">if</span> <span class="hl opt">(!</span>match<span class="hl opt">) {</span>
+      <span class="hl slc">//error handling</span>
+    <span class="hl opt">}</span>
+    <span class="hl kwa">else</span> <span class="hl opt">{</span>
+      <span class="hl kwb">const</span> bodyIndex <span class="hl opt">=</span> match<span class="hl opt">.</span>index <span class="hl opt">+</span> match<span class="hl opt">[</span><span class="hl num">0</span><span class="hl opt">].</span>length<span class="hl opt">;</span>
+      <span class="hl kwb">const</span> requestBody <span class="hl opt">=</span> request<span class="hl opt">.</span><span class="hl kwd">slice</span><span class="hl opt">(</span>bodyIndex<span class="hl opt">);</span>
+      <span class="hl opt">...</span>
+    <span class="hl opt">}</span></pre></li><li data-coord="final-sol.umt:73:0"><p data-coord="final-sol.umt:73:4">A web service is called using <code><span class="hl kwd">doService</span><span class="hl opt">(</span>url<span class="hl opt">,</span> succ<span class="hl opt">,</span> err<span class="hl opt">)</span></code>
+where:
+</p><dl data-coord="final-sol.umt:76:0"><dt data-coord="final-sol.umt:76:6"> url </dt><dd data-coord="final-sol.umt:77:0"><p data-coord="final-sol.umt:77:8">Specifies the URL for the web service.
+</p></dd><dt data-coord="final-sol.umt:79:6"> succ </dt><dd data-coord="final-sol.umt:80:0"><p data-coord="final-sol.umt:80:8">This is a callback function of one argument which is called
+with the result of the web service when the service succeeds.
+</p></dd><dt data-coord="final-sol.umt:83:6"> err </dt><dd data-coord="final-sol.umt:84:0"><p data-coord="final-sol.umt:84:8">This is a callback function of one argument which is called
+with an error object when the service fails.
+</p></dd></dl><p data-coord="final-sol.umt:87:4">Write a wrapper function <code><span class="hl kwd">wrappedService</span><span class="hl opt">(</span>url<span class="hl opt">)</span></code> which wraps the
+above <code><span class="hl kwd">doService</span><span class="hl opt">()</span></code> so that the wrapper can be called as follows:
+</p><pre>      <span class="hl kwa">try</span> <span class="hl opt">{</span>
+        <span class="hl kwb">const</span> result <span class="hl opt">=</span> await <span class="hl kwd">wrappedService</span><span class="hl opt">(</span>url<span class="hl opt">);</span>
+        <span class="hl slc">//code to handle result</span>
+      <span class="hl opt">}</span>
+      <span class="hl kwa">catch</span> <span class="hl opt">(</span>err<span class="hl opt">) {</span>
+        <span class="hl slc">//code to handle web service error</span>
+      <span class="hl opt">}</span></pre><p data-coord="final-sol.umt:100:4">Provide the code for <code><span class="hl kwd">wrappedService</span><span class="hl opt">()</span></code>.  <em data-coord="final-sol.umt:100:47">15-points</em>
+</p><p data-coord="final-sol.umt:102:4">Have the wrapper return a promise with the web service callbacks
+delegating to the arguments to the executor function:
+</p><pre>    async function <span class="hl kwd">wrappedService</span><span class="hl opt">(</span>url<span class="hl opt">) {</span>
+      <span class="hl kwa">return new</span> <span class="hl kwd">Promise</span><span class="hl opt">((</span>resolve<span class="hl opt">,</span> reject<span class="hl opt">) =&gt; {</span>
+        <span class="hl kwd">doService</span><span class="hl opt">(</span>url<span class="hl opt">,</span>
+                  <span class="hl opt">(</span>result<span class="hl opt">) =&gt;</span> <span class="hl kwd">resolve</span><span class="hl opt">(</span>result<span class="hl opt">),</span>
+                  <span class="hl opt">(</span>err<span class="hl opt">) =&gt;</span> <span class="hl kwd">reject</span><span class="hl opt">(</span>err<span class="hl opt">));</span>
+      <span class="hl opt">});</span>
+    <span class="hl opt">}</span></pre></li><li data-coord="final-sol.umt:115:0"><p data-coord="final-sol.umt:115:4">Given the following attempt at a <samp data-coord="final-sol.umt:115:37">react.js</samp> component for a
+Binghamton University <strong data-coord="final-sol.umt:115:90">B-Number</strong>:
+</p><pre>    <span class="hl num">01</span>    <span class="hl kwc">class</span> BNumber <span class="hl opt">{</span>
+    <span class="hl num">02</span>      <span class="hl kwd">constructor</span><span class="hl opt">(</span>props<span class="hl opt">) {</span>
+    <span class="hl num">03</span>        <span class="hl kwa">this</span><span class="hl opt">.</span>state <span class="hl opt">= {</span>
+    <span class="hl num">04</span>          input<span class="hl opt">:</span> <span class="hl str">&apos;&apos;</span><span class="hl opt">,</span>
+    <span class="hl num">05</span>          error<span class="hl opt">:</span> <span class="hl str">&apos;&apos;</span><span class="hl opt">,</span>
+    <span class="hl num">06</span>        <span class="hl opt">};</span>
+    <span class="hl num">07</span>      <span class="hl opt">}</span>
+    <span class="hl num">08</span>
+    <span class="hl num">09</span>      <span class="hl kwd">onBlurHandler</span><span class="hl opt">(</span>event<span class="hl opt">) {</span>
+    <span class="hl num">10</span>        <span class="hl kwb">const</span> input <span class="hl opt">=</span> <span class="hl kwa">this</span><span class="hl opt">.</span>state<span class="hl opt">.</span>input<span class="hl opt">;</span>
+    <span class="hl num">11</span>        <span class="hl kwa">if</span> <span class="hl opt">(!</span>input<span class="hl opt">.</span><span class="hl kwd">match</span><span class="hl opt">(/^</span>B\d<span class="hl opt">+/)) {</span> <span class="hl slc">//validate</span>
+    <span class="hl num">12</span>          <span class="hl kwa">this</span><span class="hl opt">.</span>state<span class="hl opt">.</span>error <span class="hl opt">=</span> <span class="hl str">&apos;invalid B-number&apos;</span>
+    <span class="hl num">13</span>        <span class="hl opt">}</span>
+    <span class="hl num">14</span>      <span class="hl opt">}</span>
+    <span class="hl num">15</span>
+    <span class="hl num">16</span>      <span class="hl kwd">render</span><span class="hl opt">() {</span>
+    <span class="hl num">17</span>        <span class="hl kwa">return</span> <span class="hl opt">(</span>
+    <span class="hl num">18</span>          B<span class="hl opt">-</span>Number<span class="hl opt">:</span>
+    <span class="hl num">19</span>          <span class="hl opt">&lt;</span>input onBlur<span class="hl opt">={</span><span class="hl kwa">this</span><span class="hl opt">.</span>onBlurHandler<span class="hl opt">}&gt;</span>
+    <span class="hl num">20</span>          <span class="hl opt">&lt;</span>br<span class="hl opt">&gt;</span>
+    <span class="hl num">21</span>          <span class="hl opt">&lt;</span>span <span class="hl kwc">class</span><span class="hl opt">=</span><span class="hl str">&quot;error&quot;</span><span class="hl opt">&gt;{</span><span class="hl kwa">this</span><span class="hl opt">.</span>state<span class="hl opt">.</span>error<span class="hl opt">}&lt;/</span>span<span class="hl opt">&gt;</span>
+    <span class="hl num">22</span>        <span class="hl opt">);</span>
+    <span class="hl num">23</span>      <span class="hl opt">}</span>
+    <span class="hl num">24</span>
+    <span class="hl num">25</span>    <span class="hl opt">}</span></pre><p data-coord="final-sol.umt:146:4">You may assume that all necessary libraries have been included.
+</p><p data-coord="final-sol.umt:148:4">Identify bugs and inadequacies in the above implementation of
+<samp data-coord="final-sol.umt:148:70">BNumber</samp>.  <em data-coord="final-sol.umt:148:82">15-points</em> 
+</p><p data-coord="final-sol.umt:151:4">Outright bugs:
+</p><ul data-coord="final-sol.umt:153:0"><li data-coord="final-sol.umt:153:0"><p data-coord="final-sol.umt:153:8">Line <samp data-coord="final-sol.umt:153:13">01</samp>: When an ES6 class is used to implement a <samp data-coord="final-sol.umt:153:60">react.js</samp>
+component, the class should extend <samp data-coord="final-sol.umt:153:114">React.Component</samp>.
+</p></li><li data-coord="final-sol.umt:156:0"><p data-coord="final-sol.umt:156:8">Line <samp data-coord="final-sol.umt:156:13">03</samp>: The constructor should call <samp data-coord="final-sol.umt:156:47">super(props)</samp>.
+</p></li><li data-coord="final-sol.umt:158:0"><p data-coord="final-sol.umt:158:8">Line <samp data-coord="final-sol.umt:158:13">10</samp>: The blur handler refers to <samp data-coord="final-sol.umt:158:46">this</samp>, but when called
+by the DOM, <samp data-coord="final-sol.umt:158:90">this</samp> will be set to the HTML widget on which the
+handler was registered.  However, we need to have <samp data-coord="final-sol.umt:158:199">this</samp> set
+to point to the react component.
+</p><p data-coord="final-sol.umt:163:8">This can be achieved by adding the line
+</p><pre>        <span class="hl kwa">this</span><span class="hl opt">.</span>onBlurHandler <span class="hl opt">=</span> <span class="hl kwa">this</span><span class="hl opt">.</span>onBlurHandler<span class="hl opt">.</span><span class="hl kwd">bind</span><span class="hl opt">(</span><span class="hl kwa">this</span><span class="hl opt">);</span></pre><p data-coord="final-sol.umt:169:8">to the constructor.
+</p></li><li data-coord="final-sol.umt:171:0"><p data-coord="final-sol.umt:171:8">Line <samp data-coord="final-sol.umt:171:13">10</samp>: <samp data-coord="final-sol.umt:171:19">state.input</samp> is never updated, so it will always be
+empty.
+</p><p data-coord="final-sol.umt:174:8">One fix would be to remove it from the <samp data-coord="final-sol.umt:174:47">state</samp> and have its
+value accessed directly using <samp data-coord="final-sol.umt:174:106">event.target.value</samp> (the
+<samp data-coord="final-sol.umt:174:140">event</samp> will need to be added as an argument to the handler).
+However, this would violate the <em data-coord="final-sol.umt:174:242">single source of truth</em> react
+principle: some portions of the state would be maintained
+within the component and other portions maintained in the DOM.
+</p><p data-coord="final-sol.umt:181:8">A better fix would be to add a handler for <samp data-coord="final-sol.umt:181:51">onChange</samp> and have
+that handler update <samp data-coord="final-sol.umt:181:99">state.input</samp>, maintaining all state
+within the component.
+</p></li><li data-coord="final-sol.umt:185:0"><p data-coord="final-sol.umt:185:8">Line 12`: The component state should never be set directly; it
+should only be set using <samp data-coord="final-sol.umt:185:104">setState()</samp>.
+</p></li><li data-coord="final-sol.umt:188:0"><p data-coord="final-sol.umt:188:8">Lines <samp data-coord="final-sol.umt:188:14">19</samp> and <samp data-coord="final-sol.umt:188:23">20</samp>: JSX expressions consist of well-formed
+XML.  Hence the <samp data-coord="final-sol.umt:188:92">&lt;input...&gt;</samp> element should be <samp data-coord="final-sol.umt:188:123">&lt;input.../&gt;</samp>
+and the empty <samp data-coord="final-sol.umt:188:159">&lt;br&gt;</samp> element should be written as <samp data-coord="final-sol.umt:188:195">&lt;br/&gt;</samp>.
+</p></li><li data-coord="final-sol.umt:192:0"><p data-coord="final-sol.umt:192:8">Line <samp data-coord="final-sol.umt:192:13">18</samp>: React only allows a single JSX element embedded
+within JavaScript, not a sequence of adjacent elements.  Hence
+those expressions should be wrapped within a top-level element
+like a <samp data-coord="final-sol.umt:192:224">&lt;div&gt;</samp>.
+</p></li></ul><p data-coord="final-sol.umt:197:4">Inadequacies include the following:
+</p><ul data-coord="final-sol.umt:199:0"><li data-coord="final-sol.umt:199:0"><p data-coord="final-sol.umt:199:8">For better accessibility, the <samp data-coord="final-sol.umt:199:38">B-Number:</samp> text should be
+associated with the <samp data-coord="final-sol.umt:199:93">&lt;input&gt;</samp> widget.  This can be done
+by wrapping both within a <samp data-coord="final-sol.umt:199:163">&lt;label&gt;</samp> element.
+</p></li><li data-coord="final-sol.umt:203:0"><p data-coord="final-sol.umt:203:8">The validation regex checks for start of the string using
+<samp data-coord="final-sol.umt:203:74">^</samp> but does not check for the end of the string allowing
+garbage after a correct B-number; this can be fixed by
+adding a <samp data-coord="final-sol.umt:203:212">$</samp> at the end of the regex.
+</p></li><li data-coord="final-sol.umt:208:0"><p data-coord="final-sol.umt:208:8">The validation would fail if there were leading whitespace
+characters or (with the above fix) trailing whitespace
+characters.  This can be avoided by using <samp data-coord="final-sol.umt:208:180">trim()</samp> on the
+value before matching it with the validation regex.
+</p></li><li data-coord="final-sol.umt:213:0"><p data-coord="final-sol.umt:213:8">The error message could be more specific by specifying the
+entered value for which the validation failed.
+</p></li></ul><p data-coord="final-sol.umt:216:4">Identifying around 5 of these problems should be sufficient to
+get full credit for this question.                  
+</p></li><li data-coord="final-sol.umt:220:0"><p data-coord="final-sol.umt:220:4">During a code review, a colleague flags some lines from your code
+for a react.js component as constituting a major security flaw:
+</p><pre>      <span class="hl opt">...</span>
+      <span class="hl kwd">validate</span><span class="hl opt">() {</span>
+        <span class="hl opt">...</span>
+        <span class="hl kwa">if</span> <span class="hl opt">(!</span>input<span class="hl opt">.</span><span class="hl kwd">match</span><span class="hl opt">(...)) {</span> <span class="hl slc">//validate user input</span>
+          <span class="hl kwa">this</span><span class="hl opt">.</span><span class="hl kwd">setState</span><span class="hl opt">({</span>error<span class="hl opt">:</span> `bad input $<span class="hl opt">{</span>input<span class="hl opt">}</span>`<span class="hl opt">});</span>
+        <span class="hl opt">}</span>
+        <span class="hl opt">...</span>
+      <span class="hl opt">}</span>
+
+      <span class="hl kwd">render</span><span class="hl opt">() {</span>
+        <span class="hl kwa">return</span> <span class="hl opt">(</span>
+          <span class="hl opt">...</span>
+          <span class="hl opt">{</span><span class="hl kwa">this</span><span class="hl opt">.</span>state<span class="hl opt">.</span>error<span class="hl opt">}</span>
+          <span class="hl opt">...</span>
+        <span class="hl opt">);</span>
+      <span class="hl opt">}</span></pre><p data-coord="final-sol.umt:244:4">Your colleague claims that because you are permitting unvalidated,
+unescaped user input to be added via the error message to the HTML
+page, a cracker can craft an input which allows execution of
+arbitrary JavaScript on your web page.  Explain why your colleague
+is wrong. <em data-coord="final-sol.umt:244:292">10-points</em>
+</p><p data-coord="final-sol.umt:250:4">Your colleage is correct in having her security antennae twitching
+when she thinks she sees user input being rendered unchanged on
+the HTML page.  However, where she is wrong is in claiming that
+the user input is being rendered unescaped: all HTML
+metacharacters within JavaScript strings in JSX are always
+escaped.  Hence it is safe for you to simply render the
+unvalidated user input in the error message without explicit
+escaping.
+</p><p data-coord="final-sol.umt:259:4">[The default escaping behavior of react and other frameworks
+helps prevent XSS attacks.  The flip side is that it makes it harder to
+produce dynamic HTML, as when highlighting search terms within
+search results in Project 5.]
+</p></li><li data-coord="final-sol.umt:264:0"><p data-coord="final-sol.umt:264:4">You are given a JavaScript list <samp data-coord="final-sol.umt:264:36">gameScores</samp> of combined scores of
+NBA games where each element of the list has keys <samp data-coord="final-sol.umt:264:125">teams</samp>, <samp data-coord="final-sol.umt:264:134">date</samp>
+and <samp data-coord="final-sol.umt:264:149">score</samp> and is of the form:
+</p><pre>    <span class="hl opt">{</span>
+      teams<span class="hl opt">:</span> Teams<span class="hl opt">,</span> <span class="hl slc">//string of form WinningTeam-LoosingTeam</span>
+      date<span class="hl opt">:</span> Date<span class="hl opt">,</span>   <span class="hl slc">//string of form YYYY-MM-DD</span>
+      score<span class="hl opt">:</span> Score<span class="hl opt">,</span> <span class="hl slc">//integer giving sum of both team scores</span>
+    <span class="hl opt">}</span></pre><p data-coord="final-sol.umt:276:4">Example data:
+</p><pre>    <span class="hl kwb">const</span> GAME_SCORES <span class="hl opt">= [</span>
+      <span class="hl opt">{</span> teams<span class="hl opt">:</span> <span class="hl str">&apos;Pistons-Nuggets&apos;</span><span class="hl opt">,</span>
+        date<span class="hl opt">:</span> <span class="hl str">&apos;1983-12-13&apos;</span><span class="hl opt">,</span>
+        score<span class="hl opt">:</span> <span class="hl num">370</span>
+      <span class="hl opt">},</span>
+      <span class="hl opt">{</span> teams<span class="hl opt">:</span> <span class="hl str">&apos;Pistons-Lakers&apos;</span><span class="hl opt">,</span>
+        date<span class="hl opt">:</span> <span class="hl str">&apos;1950-11-22&apos;</span><span class="hl opt">,</span>
+        score<span class="hl opt">:</span> <span class="hl num">37</span>
+      <span class="hl opt">},</span>
+      <span class="hl opt">{</span> teams<span class="hl opt">:</span> <span class="hl str">&apos;Mavericks-Blazers&apos;</span><span class="hl opt">,</span>
+        date<span class="hl opt">:</span> <span class="hl str">&apos;2018-12-04&apos;</span><span class="hl opt">,</span>
+        score<span class="hl opt">:</span> <span class="hl num">213</span>
+      <span class="hl opt">}</span>
+    <span class="hl opt">];</span></pre><ol data-coord="final-sol.umt:296:0"><li data-coord="final-sol.umt:296:0"><p data-coord="final-sol.umt:296:8">Critique the above data representation.
+</p></li><li data-coord="final-sol.umt:298:0"><p data-coord="final-sol.umt:298:8">Write a function <samp data-coord="final-sol.umt:298:25">renderScores(gameScores)</samp> which uses
+<samp data-coord="final-sol.umt:298:71">mustache.js</samp> to render <samp data-coord="final-sol.umt:298:95">gameScores</samp> into a HTML table, such
+that:
+</p><ul data-coord="final-sol.umt:302:0"><li data-coord="final-sol.umt:302:0"><p data-coord="final-sol.umt:302:12">The return value of the function should be a string
+containing the rendered HTML with top-level element
+<samp data-coord="final-sol.umt:302:140">&lt;table&gt;</samp>.
+</p></li><li data-coord="final-sol.umt:306:0"><p data-coord="final-sol.umt:306:12">The table should have a 3-column heading row with the
+columns labelled <strong data-coord="final-sol.umt:306:95">Teams</strong>, <strong data-coord="final-sol.umt:306:104">Date</strong> and <strong data-coord="final-sol.umt:306:115">Score</strong> respectively.
+</p></li><li data-coord="final-sol.umt:309:0"><p data-coord="final-sol.umt:309:12">The heading row must be followed by data rows, one
+for each item in <samp data-coord="final-sol.umt:309:92">gameScores</samp> with its <samp data-coord="final-sol.umt:309:114">Teams</samp>, <samp data-coord="final-sol.umt:309:123">Date</samp> and
+<samp data-coord="final-sol.umt:309:146">Score</samp> in the appropriate column.
+</p></li><li data-coord="final-sol.umt:313:0"><p data-coord="final-sol.umt:313:12">The table must have a CSS class of <samp data-coord="final-sol.umt:313:47">gameScores</samp>.
+</p></li><li data-coord="final-sol.umt:315:0"><p data-coord="final-sol.umt:315:12">if <samp data-coord="final-sol.umt:315:15">Score &lt; 150</samp>, then the data row should have its CSS class
+set to <samp data-coord="final-sol.umt:315:93">low</samp>.
+</p></li><li data-coord="final-sol.umt:318:0"><p data-coord="final-sol.umt:318:12">if <samp data-coord="final-sol.umt:318:15">150 &lt;= Score &lt; 250</samp>, then the data row should have its CSS
+class set to <samp data-coord="final-sol.umt:318:100">mid</samp>.
+</p></li><li data-coord="final-sol.umt:321:0"><p data-coord="final-sol.umt:321:12">if <samp data-coord="final-sol.umt:321:15">Score &gt;= 250</samp>, then the data row should have its CSS class
+set to <samp data-coord="final-sol.umt:321:94">high</samp>.
+</p></li></ul><p data-coord="final-sol.umt:324:8">For example, given the above example data, the call
+<code><span class="hl kwd">renderGameScores</span><span class="hl opt">(</span>GAME_SCORES<span class="hl opt">)</span></code> should return:
+</p><pre data-coord="final-sol.umt:329:0">        &lt;table class="gameScores"&gt;
+          &lt;tr&gt;&lt;th&gt;Teams&lt;/th&gt;&lt;th&gt;Date&lt;/th&gt;&lt;th&gt;Score&lt;/th&gt;&lt;/tr&gt;
+          &lt;tr class="high"&gt;
+            &lt;td&gt;Pistons-Nuggets&lt;/td&gt;
+            &lt;td&gt;1983-12-13&lt;/td&gt;
+            &lt;td&gt;370&lt;/td&gt;
+          &lt;/tr&gt;
+          &lt;tr class="low"&gt;
+            &lt;td&gt;Pistons-Lakers&lt;/td&gt;
+            &lt;td&gt;1950-11-22&lt;/td&gt;
+            &lt;td&gt;37&lt;/td&gt;
+          &lt;/tr&gt;
+          &lt;tr class="mid"&gt;
+            &lt;td&gt;Mavericks-Blazers&lt;/td&gt;
+            &lt;td&gt;2018-12-04&lt;/td&gt;
+            &lt;td&gt;213&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/table&gt;
+</pre><p data-coord="final-sol.umt:349:8">modulo whitespace.
+</p><p data-coord="final-sol.umt:351:8">You may assume that the <samp data-coord="final-sol.umt:351:32">mustache</samp> module has been <samp data-coord="final-sol.umt:351:59">require</samp>'d
+and is available using identifier <samp data-coord="final-sol.umt:351:113">mustache</samp>. <em data-coord="final-sol.umt:351:125">20-points</em>
+</p></li></ol><p data-coord="final-sol.umt:354:4">During the exam it was announced that <samp data-coord="final-sol.umt:354:42">renderScores</samp> \(\equiv\)
+<samp data-coord="final-sol.umt:354:71">renderGameScores</samp>.
+</p><ol data-coord="final-sol.umt:357:0"><li data-coord="final-sol.umt:357:0"><p data-coord="final-sol.umt:357:8">The problem with the representation is that valuable information
+is encoded into strings and it will be necessary to parse
+strings in order to extract the information.
+</p><ul data-coord="final-sol.umt:361:0"><li data-coord="final-sol.umt:361:0"><p data-coord="final-sol.umt:361:12">To extract the name of the winning and loosing teams it
+will be necessary to do something like <code>teams<span class="hl opt">.</span><span class="hl kwd">split</span><span class="hl opt">(</span><span class="hl str">&apos;-&apos;</span><span class="hl opt">)</span></code>.
+This would be problematic if a team name contains a hyphen.
+It would be better to have a separate field for each team.
+</p></li><li data-coord="final-sol.umt:366:0"><p data-coord="final-sol.umt:366:12">The year, month and day of the game-date are buried within
+a string.  It would be better to use a JavaScript <samp data-coord="final-sol.umt:366:133">Date</samp>
+object.
+</p></li></ul></li><li data-coord="final-sol.umt:370:0"><p data-coord="final-sol.umt:370:8">Since mustache is logic-less, it is necessary to perform the
+<samp data-coord="final-sol.umt:370:77">low-mid-high</samp> computations outside the template.  So the
+function could look like:
+</p><pre>        <span class="hl kwb">const</span> LO <span class="hl opt">=</span> <span class="hl num">150</span><span class="hl opt">,</span> MID <span class="hl opt">=</span> <span class="hl num">250</span><span class="hl opt">;</span>
+
+        <span class="hl kwb">const</span> TEMPLATE <span class="hl opt">=</span> `
+          <span class="hl opt">&lt;</span>table <span class="hl kwc">class</span><span class="hl opt">=</span><span class="hl str">&quot;gameScores&quot;</span><span class="hl opt">&gt;</span>
+            <span class="hl opt">&lt;</span>tr<span class="hl opt">&gt;&lt;</span>th<span class="hl opt">&gt;</span>Teams<span class="hl opt">&lt;/</span>th<span class="hl opt">&gt;&lt;</span>th<span class="hl opt">&gt;</span>Date<span class="hl opt">&lt;/</span>th<span class="hl opt">&gt;&lt;</span>th<span class="hl opt">&gt;</span>Score<span class="hl opt">&lt;/</span>th<span class="hl opt">&gt;&lt;/</span>tr<span class="hl opt">&gt;</span>
+            <span class="hl opt">{{</span><span class="hl ppc">#gameScores}}</span>
+              <span class="hl opt">&lt;</span>tr <span class="hl kwc">class</span><span class="hl opt">=</span><span class="hl str">&quot;{{klass}}&quot;</span><span class="hl opt">&gt;</span>
+                <span class="hl opt">&lt;</span>td<span class="hl opt">&gt;{{</span>teams<span class="hl opt">}}&lt;/</span>td<span class="hl opt">&gt;&lt;</span>td<span class="hl opt">&gt;{{</span>date<span class="hl opt">}}&lt;/</span>td<span class="hl opt">&gt;&lt;</span>td<span class="hl opt">&gt;{{</span>score<span class="hl opt">}}&lt;/</span>td<span class="hl opt">&gt;</span>
+              <span class="hl opt">&lt;/</span>tr<span class="hl opt">&gt;</span>
+            <span class="hl opt">{{/</span>gameScores<span class="hl opt">}}</span>
+          <span class="hl opt">&lt;/</span>table<span class="hl opt">&gt;</span>
+        `<span class="hl opt">;</span>
+     
+        function <span class="hl kwd">renderGameScores</span><span class="hl opt">(</span>gameScores<span class="hl opt">) {</span>
+          <span class="hl kwb">const</span> augmentedGameScores <span class="hl opt">=</span>
+            gameScores<span class="hl opt">.</span><span class="hl kwd">map</span><span class="hl opt">(</span><span class="hl kwd">function</span><span class="hl opt">(</span>gameScore<span class="hl opt">) {</span>
+              <span class="hl kwb">const</span> <span class="hl opt">{</span>score<span class="hl opt">} =</span> gameScore<span class="hl opt">;</span>
+              <span class="hl kwb">const</span> klass <span class="hl opt">=</span>
+                score <span class="hl opt">&lt;</span> LO <span class="hl opt">?</span> <span class="hl str">&apos;low&apos;</span>
+                <span class="hl opt">:</span> score <span class="hl opt">&lt;</span> MID <span class="hl opt">?</span> <span class="hl str">&apos;mid&apos;</span> <span class="hl opt">:</span> <span class="hl str">&apos;high&apos;</span><span class="hl opt">;</span>
+              <span class="hl kwa">return</span> <span class="hl opt">{ ...</span>gameScore<span class="hl opt">,</span> klass<span class="hl opt">:</span> klass <span class="hl opt">};</span>
+            <span class="hl opt">});</span>
+          <span class="hl kwb">const</span> view <span class="hl opt">= {</span>
+            gameScores<span class="hl opt">:</span> augmentedItemScores
+          <span class="hl opt">};</span>
+          <span class="hl kwa">return</span> mustache<span class="hl opt">.</span><span class="hl kwd">render</span><span class="hl opt">(</span>TEMPLATE<span class="hl opt">,</span> view<span class="hl opt">);</span>
+        <span class="hl opt">}</span></pre><p data-coord="final-sol.umt:405:8">Runnable <a href="code/render-game-scores.js" data-coord="final-sol.umt:405:47">code;</a> requires mustache
+(obviously not required for submitted exams).
+</p></li></ol></li><li data-coord="final-sol.umt:408:0"><p data-coord="final-sol.umt:408:4">Assuming that a HTML page contains zero-or-more tables formatted
+as per the previous question:
+</p><ol data-coord="final-sol.umt:411:0"><li data-coord="final-sol.umt:411:0"><p data-coord="final-sol.umt:411:8">Write a jQuery selector to return a jQuery collection which
+contains all the <samp data-coord="final-sol.umt:411:93">&lt;td&gt;</samp> elements containing <samp data-coord="final-sol.umt:411:120">high</samp>-level scores
+from all such tables on the page.
+</p></li><li data-coord="final-sol.umt:415:0"><p data-coord="final-sol.umt:415:8">Write a JavaScript function <samp data-coord="final-sol.umt:415:36">highScoreAverage()</samp> whic uses
+jQuery to average all the <samp data-coord="final-sol.umt:415:101">high</samp>-level scores on the page.
+You may assume that <samp data-coord="final-sol.umt:415:162">jQuery</samp> is accessible as usual in the
+shortcut <samp data-coord="final-sol.umt:415:218">$</samp> variable.
+</p><p data-coord="final-sol.umt:420:8"><strong data-coord="final-sol.umt:420:8">Hint</strong>: A jQuery collection <samp data-coord="final-sol.umt:420:36">$list</samp> of jQuery objects can be
+converted to a JavaScript array of DOM objects using
+<samp data-coord="final-sol.umt:420:138">$list.toArray()</samp> and the HTML content of a DOM object <samp data-coord="final-sol.umt:420:193">dom</samp>
+can be extracted using the property
+<samp data-coord="final-sol.umt:420:251">dom.innerHTML</samp>. <em data-coord="final-sol.umt:420:268">15-points</em>
+</p></li></ol><p data-coord="final-sol.umt:426:4">The answers follow:
+</p><ol data-coord="final-sol.umt:428:0"><li data-coord="final-sol.umt:428:0"><p data-coord="final-sol.umt:428:8">We would first select the table using its class <samp data-coord="final-sol.umt:428:56">gameScores</samp>,
+then select all descendent rows having class <samp data-coord="final-sol.umt:428:123">high</samp> and then
+select the 3rd <samp data-coord="final-sol.umt:428:162">td</samp> child of all matching rows.  The selector
+would be:
+</p><pre data-coord="final-sol.umt:434:0">        "table.gameScores tr.high :nth-child(3)" 
+</pre></li><li data-coord="final-sol.umt:437:0"><p data-coord="final-sol.umt:437:8">Using the above selector we can write <samp data-coord="final-sol.umt:437:46">highScoreAverage()</samp>:
+</p><pre>        function <span class="hl kwd">highScoreAverage</span><span class="hl opt">() {</span>
+          <span class="hl kwb">const</span> scores <span class="hl opt">=</span>
+            $<span class="hl opt">(</span><span class="hl str">&quot;table.gameScores tr.high :nth-child(3)&quot;</span><span class="hl opt">).</span>
+            <span class="hl kwd">toArray</span><span class="hl opt">();</span>
+          <span class="hl kwb">const</span> sum <span class="hl opt">=</span>
+            scores<span class="hl opt">.</span>
+            <span class="hl kwd">reduce</span><span class="hl opt">((</span>acc<span class="hl opt">,</span> v<span class="hl opt">) =&gt;</span>
+                      acc <span class="hl opt">+</span> <span class="hl kwd">Number</span><span class="hl opt">(</span>v<span class="hl opt">.</span>innerHTML<span class="hl opt">),</span> <span class="hl num">0</span><span class="hl opt">);</span>
+          <span class="hl kwa">return</span> <span class="hl opt">(</span>scores<span class="hl opt">.</span>length <span class="hl opt">===</span> <span class="hl num">0</span><span class="hl opt">) ?</span> <span class="hl num">0</span> <span class="hl opt">:</span> sum<span class="hl opt">/</span>scores<span class="hl opt">.</span>length<span class="hl opt">;</span>
+        <span class="hl opt">}</span></pre><p data-coord="final-sol.umt:452:8">Runnable <a href="code/high-score-average.html" data-coord="final-sol.umt:452:49">code;</a> 
+(obviously not required for submitted exams).
+</p></li></ol></li><li data-coord="final-sol.umt:456:0"><p data-coord="final-sol.umt:456:4">Discuss the validity of the following statements. What is more
+important than whether you ultimately classify the statement as
+<strong data-coord="final-sol.umt:456:139">true</strong> or <strong data-coord="final-sol.umt:456:149">false</strong> is your justification for arriving at your
+conclusion. <em data-coord="final-sol.umt:456:216">15-points</em>
+</p><ol data-coord="final-sol.umt:461:0"><li data-coord="final-sol.umt:461:0"><p data-coord="final-sol.umt:461:8">Mustache will always escape any HTML characters in rendered
+strings.
+</p></li><li data-coord="final-sol.umt:464:0"><p data-coord="final-sol.umt:464:8">The cache time specified for images should be the same
+as that for their containing HTML page.
+</p></li><li data-coord="final-sol.umt:467:0"><p data-coord="final-sol.umt:467:8">It is ok for a client to attempt to <samp data-coord="final-sol.umt:467:44">DELETE</samp> the same
+resource multiple times.
+</p></li><li data-coord="final-sol.umt:470:0"><p data-coord="final-sol.umt:470:8">If the propagation of a DOM event is stopped in its bubble
+phase, the event will never enter its capture phase.
+</p></li><li data-coord="final-sol.umt:473:0"><p data-coord="final-sol.umt:473:8">If a promise is rejected before a <samp data-coord="final-sol.umt:473:42">catch</samp> handler is
+attached to the promise, then the <samp data-coord="final-sol.umt:473:103">catch</samp> handler will
+not be run.
+</p></li></ol><p data-coord="final-sol.umt:477:4">The answers follow:
+</p><ol data-coord="final-sol.umt:479:0"><li data-coord="final-sol.umt:479:0"><p data-coord="final-sol.umt:479:8">Mustache will escape HTML characters in rendered strings
+if those strings are rendered within double-braces but
+not within triple-braces.  Hence the statement is <strong data-coord="final-sol.umt:479:186">false</strong>
+in general.
+</p></li><li data-coord="final-sol.umt:484:0"><p data-coord="final-sol.umt:484:8">In general, an image may be referenced by multiple HTML
+pages with different cache times.  So this would not
+be possible in general.
+</p><p data-coord="final-sol.umt:488:8">Usually, the following pattern is used to maximize the caching
+of static assets like images: each version of an image is
+specified using a distinct URL having an "infinite" cache
+time.  When an image is changed, the containing HTML pages are
+changed to refer to the URL corresponding to the new version.
+</p><p data-coord="final-sol.umt:494:8">Hence the statement is <strong data-coord="final-sol.umt:494:31">false</strong>.
+</p></li><li data-coord="final-sol.umt:496:0"><p data-coord="final-sol.umt:496:8">Since <samp data-coord="final-sol.umt:496:14">DELETE</samp> is idempotent, the statement is <strong data-coord="final-sol.umt:496:55">true</strong>.
+</p></li><li data-coord="final-sol.umt:498:0"><p data-coord="final-sol.umt:498:8">Since the capture phase precedes the bubble phase,
+the capture phase will have run before the event
+propagation is stopped in its bubble phase.  Hence the
+statement is <strong data-coord="final-sol.umt:498:200">false</strong>.
+</p></li><li data-coord="final-sol.umt:503:0"><p data-coord="final-sol.umt:503:8">The promise captures the settlement of the promise;
+specifically, when the promise is rejected, it captures
+the corresponding error object.  Hence <samp data-coord="final-sol.umt:503:171">catch()</samp> handlers
+for a rejected promise will always be run, irrespective of
+whether those handlers are attached before or after the
+rejection.  Hence the statement is <strong data-coord="final-sol.umt:503:364">false</strong>.
+</p></li></ol></li></ol></section>
+</div> <!-- #content -->
+</div> <!-- #main -->
+<div id="footer">&nbsp;</div>
+</div> <!-- #page -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../../assets/scripts/nav.js"></script>
+</body>
+</html>

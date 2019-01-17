@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="../../assets/styles/article.css" rel="stylesheet" type="text/css" />
+  <title>Homework 2 Solution</title>
+<link href="hw2-sol/hl-fine_blue.css" rel="stylesheet"/><link href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" 
+       rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML" async=""></script>    
+
+</head>
+<body>
+<div id="page">
+<span id="opennav"><i class="material-icons">&#xe5d2;</i></span>
+<div id="nav">
+<div id="closenav"><i class="material-icons">&#xe5cd;</i></div>
+<ul>
+<li><a href="../../index.html">Home</a></li>
+<li><a href="../../docs/index.html">Documentation</a></li>
+<li><a href="../../exams-quizzes/index.html">Exams & Quizzes</a></li>
+<li><a href="../../exercises/index.html">Exercises</a></li>
+<li><a href="../../hws/index.html">Homeworks</a></li>
+<li><a href="../../misc/index.html">Miscellaneous</a></li>
+<li><a href="../../projects/index.html">Projects</a></li>
+<li><a href="../../slides/index.html">Slides</a></li>
+
+</ul>
+</div> <!-- #nav -->
+<div id="main">
+  <div id="header">
+<h1>Programming for the Web</h1>
+</div> <!-- #header -->
+<div id="content">
+<section data-coord="hw2-sol.umt:1:0"><h1 data-coord="hw2-sol.umt:1:0">Homework 2 Solution</h1><p data-coord="hw2-sol.umt:3:0"><strong data-coord="hw2-sol.umt:3:0">Due Date</strong>: Oct 15; To be turned in on paper in class.
+</p><p data-coord="hw2-sol.umt:5:0"><strong data-coord="hw2-sol.umt:5:0">No late submissions.</strong>
+</p><p data-coord="hw2-sol.umt:7:0"><strong data-coord="hw2-sol.umt:7:0">Important Reminder</strong>: As per the course <em data-coord="hw2-sol.umt:7:110"><a href="../../misc/academic-honesty-statement/academic-honesty-policy.html" data-coord="hw2-sol.umt:7:110">Academic Honesty Statement</a></em>,
+cheating of any kind will minimally result in receiving an F letter
+grade for the entire course.
+</p><p data-coord="hw2-sol.umt:11:0">Please remember to justify all answers.
+</p><p data-coord="hw2-sol.umt:13:0">Note that some of the questions require you to show code or the output
+resulting from some code.  You may use a JavaScript implementation to
+verify your answers but you should realize that you will not have
+access to an implementation during exams.
+</p><p data-coord="hw2-sol.umt:18:0">You are encouraged to use the web or the library but are required to
+cite any external sources used in your answers.
+</p><ol data-coord="hw2-sol.umt:21:0"><li data-coord="hw2-sol.umt:21:0"><p data-coord="hw2-sol.umt:21:4">The specification for the DocFinder class for
+<em data-coord="hw2-sol.umt:21:119"><a href="https://zdu.binghamton.edu/cs580w/projects/prj2/prj2.html" data-coord="hw2-sol.umt:21:119">Project 2</a></em> splits the construction of a DocFinder instance into a
+synchronous constructor call followed by an asynchronous call to
+the <samp data-coord="hw2-sol.umt:21:263">init()</samp> function.  OTOH, the
+<a href="https://zdu.binghamton.edu/cs580w/slides/user-store/code/user-store/user-store.js?colorize=true" data-coord="hw2-sol.umt:21:400">user-store</a> example discussed in class uses a single static
+asynchronous factory function <code><span class="hl kwd">newUserStore</span><span class="hl opt">()</span></code>.  Discuss the
+tradeoffs between these two approaches. Would one be preferred
+over the other? <em data-coord="hw2-sol.umt:21:612">10-points</em>
+</p><p data-coord="hw2-sol.umt:32:4">There is a major problem with requiring a separate constructor
+call followed by a call to <samp data-coord="hw2-sol.umt:32:98">init()</samp>: namely having to document the
+fact and then trust that the client programmer and generations of
+subsequent maintenance programmers will comply.  It is much better
+to have an API without dependencies between its separate parts.
+</p><p data-coord="hw2-sol.umt:38:4">The static factory method requires only a single call to construct
+an instance.  If a module system wraps the class, then it is
+possible to export the static factory method without exporting the
+constructor, thus making it impossible to construct a instance
+without using the factory method.  So the static factory method
+wins hands down.
+</p></li><li data-coord="hw2-sol.umt:46:0"><p data-coord="hw2-sol.umt:46:4">The documentation for <em data-coord="hw2-sol.umt:46:69"><a href="https://nodejs.org/api/modules.html" data-coord="hw2-sol.umt:46:69">nodejs modules</a></em> mentions that if you want to <samp data-coord="hw2-sol.umt:46:115">export</samp>
+individual  JavaScript entities from a module you can do so
+"by specifying additional properties on the special <samp data-coord="hw2-sol.umt:46:245">exports</samp>
+object".  The documentation gives an example of a <samp data-coord="hw2-sol.umt:46:309">circle</samp>
+module:
+</p><pre>    <span class="hl kwb">const</span> <span class="hl opt">{</span> PI <span class="hl opt">} =</span> Math<span class="hl opt">;</span>
+    exports<span class="hl opt">.</span>area <span class="hl opt">= (</span>r<span class="hl opt">) =&gt;</span> PI <span class="hl opt">*</span> r <span class="hl opt">**</span> <span class="hl num">2</span><span class="hl opt">;</span>
+    exports<span class="hl opt">.</span>circumference <span class="hl opt">= (</span>r<span class="hl opt">) =&gt;</span> <span class="hl num">2</span> <span class="hl opt">*</span> PI <span class="hl opt">*</span> r<span class="hl opt">;</span></pre><p data-coord="hw2-sol.umt:59:4">The documentation subsequently makes clear that if you want
+to package up all your exports, then assigning directly 
+to <samp data-coord="hw2-sol.umt:59:132">exports</samp> as in:
+</p><pre>    <span class="hl kwb">const</span> <span class="hl opt">{</span> PI <span class="hl opt">} =</span> Math<span class="hl opt">;</span>
+    exports <span class="hl opt">= {</span>
+      area<span class="hl opt">: (</span>r<span class="hl opt">) =&gt;</span> PI <span class="hl opt">*</span> r <span class="hl opt">**</span> <span class="hl num">2</span><span class="hl opt">;</span>
+      circumference<span class="hl opt">: (</span>r<span class="hl opt">) =&gt;</span> <span class="hl num">2</span> <span class="hl opt">*</span> PI <span class="hl opt">*</span> r<span class="hl opt">;</span>
+    <span class="hl opt">}</span></pre><p data-coord="hw2-sol.umt:71:4">will not work.  Instead it is necessary to assign to <samp data-coord="hw2-sol.umt:71:57">module.exports</samp>
+as in:
+</p><pre>    <span class="hl kwb">const</span> <span class="hl opt">{</span> PI <span class="hl opt">} =</span> Math<span class="hl opt">;</span>
+    module<span class="hl opt">.</span>exports <span class="hl opt">= {</span>
+      area<span class="hl opt">: (</span>r<span class="hl opt">) =&gt;</span> PI <span class="hl opt">*</span> r <span class="hl opt">**</span> <span class="hl num">2</span><span class="hl opt">;</span>
+      circumference<span class="hl opt">: (</span>r<span class="hl opt">) =&gt;</span> <span class="hl num">2</span> <span class="hl opt">*</span> PI <span class="hl opt">*</span> r<span class="hl opt">;</span>
+    <span class="hl opt">}</span></pre><p data-coord="hw2-sol.umt:82:4">Why is it necessary to assign to <samp data-coord="hw2-sol.umt:82:37">module.exports</samp> and not simply
+to <samp data-coord="hw2-sol.umt:82:76">exports</samp>? <em data-coord="hw2-sol.umt:82:87">5-points</em>
+</p><p data-coord="hw2-sol.umt:85:4">The "variable" <samp data-coord="hw2-sol.umt:85:20">exports</samp> is really a property of the <samp data-coord="hw2-sol.umt:85:58">module</samp> object
+and nodejs will access the exports using the property <samp data-coord="hw2-sol.umt:85:132">module.exports</samp>.
+Since assigning directly to <samp data-coord="hw2-sol.umt:85:182">exports</samp> will not affect <samp data-coord="hw2-sol.umt:85:208">module.exports</samp>,
+it is necessary to assign to <samp data-coord="hw2-sol.umt:85:259">module.exports</samp>.    
+</p></li><li data-coord="hw2-sol.umt:90:0"><p data-coord="hw2-sol.umt:90:4">Given an <samp data-coord="hw2-sol.umt:90:13">Object</samp> literal:
+</p><pre>    <span class="hl kwb">const</span> NAME_VALUES <span class="hl opt">= {</span>
+      <span class="hl opt">[</span>key1<span class="hl opt">]: [</span> val1<span class="hl opt">,</span> docString1 <span class="hl opt">],</span>
+      <span class="hl opt">[</span>key2<span class="hl opt">]: [</span> val2<span class="hl opt">,</span> docString2 <span class="hl opt">],</span>
+      <span class="hl opt">...</span>
+    <span class="hl opt">}</span></pre><p data-coord="hw2-sol.umt:100:4">for some <samp data-coord="hw2-sol.umt:100:13">key</samp>\(i\), <samp data-coord="hw2-sol.umt:100:28">val</samp>\(i\) and <samp data-coord="hw2-sol.umt:100:46">docString</samp>\(i\), how
+would you write a <strong data-coord="hw2-sol.umt:100:93">single expression</strong> <samp data-coord="hw2-sol.umt:100:113">expr</samp> involving
+<samp data-coord="hw2-sol.umt:100:134">NAME_VALUES</samp>, such that <samp data-coord="hw2-sol.umt:100:159">const nameValues = expr</samp> results in
+<samp data-coord="hw2-sol.umt:100:200">nameValues</samp> having the value:
+</p><pre>    <span class="hl opt">{</span>
+      <span class="hl opt">[</span>key1<span class="hl opt">]:</span> val1<span class="hl opt">,</span>
+      <span class="hl opt">[</span>key2<span class="hl opt">]:</span> val2<span class="hl opt">,</span>
+      <span class="hl opt">...</span>
+    <span class="hl opt">}</span></pre><p data-coord="hw2-sol.umt:113:4">That is, you need to <em data-coord="hw2-sol.umt:113:90"><a href="https://en.wikipedia.org/wiki/Projection_(relational_algebra)" data-coord="hw2-sol.umt:113:90">project out</a></em> only the <samp data-coord="hw2-sol.umt:113:113">key</samp>\(i\), <samp data-coord="hw2-sol.umt:113:128">val</samp>\(i\) pairs.
+</p><p data-coord="hw2-sol.umt:116:4">The only functions which your answer may use are those provided
+by the standard JavaScript libraries.
+</p><p data-coord="hw2-sol.umt:119:4"><strong data-coord="hw2-sol.umt:119:4">Hint</strong>: Consider using <samp data-coord="hw2-sol.umt:119:27">Object.entries()</samp>, <samp data-coord="hw2-sol.umt:119:47">Object.assign()</samp>,
+ destructuring, spread operator. <em data-coord="hw2-sol.umt:119:103">10-points</em>
+</p><pre>    <span class="hl kwb">const</span> nameValues <span class="hl opt">=</span>
+      Object<span class="hl opt">.</span><span class="hl kwd">assign</span><span class="hl opt">({}, ...</span> Object<span class="hl opt">.</span><span class="hl kwd">entries</span><span class="hl opt">(</span>NAME_VALUES<span class="hl opt">).</span>
+                            <span class="hl kwd">map</span><span class="hl opt">(([</span>k<span class="hl opt">,</span> v<span class="hl opt">]) =&gt; ({</span>k<span class="hl opt">:</span> v<span class="hl opt">[</span><span class="hl num">0</span><span class="hl opt">]})));</span></pre><p data-coord="hw2-sol.umt:128:4"><samp data-coord="hw2-sol.umt:128:4">Object.entries(NAME_VALUES)</samp> will return a list of pairs: <samp data-coord="hw2-sol.umt:128:63">[ key</samp>\(i\), <samp data-coord="hw2-sol.umt:128:84">[ val</samp>\(i\), <samp data-coord="hw2-sol.umt:128:101">docString</samp>\(i\) <samp data-coord="hw2-sol.umt:128:121">] ]</samp> where the 2nd
+element is itself a pair.  The <samp data-coord="hw2-sol.umt:128:176">map()</samp> operation returns a list of
+single-property objects <samp data-coord="hw2-sol.umt:128:240">{ key</samp>\(i\): <samp data-coord="hw2-sol.umt:128:257">[ val</samp>\(i\) <samp data-coord="hw2-sol.umt:128:273">}</samp>.
+These are then spread into <samp data-coord="hw2-sol.umt:128:309">Object.assign()</samp> to accumulate in
+a newly created object <samp data-coord="hw2-sol.umt:128:371">{}</samp>.
+</p></li><li data-coord="hw2-sol.umt:135:0"><p data-coord="hw2-sol.umt:135:4">Rewrite the <samp data-coord="hw2-sol.umt:135:16">Shapes</samp> example covered in class <strong data-coord="hw2-sol.umt:135:50">without</strong> using ES6
+classes. Specifically, you need to provide alternate code for
+<samp data-coord="hw2-sol.umt:135:140">Shape</samp>, <samp data-coord="hw2-sol.umt:135:149">Rect</samp> and <samp data-coord="hw2-sol.umt:135:160">Circle</samp> without using the <samp data-coord="hw2-sol.umt:135:187">class</samp> keyword.
+Your modified implementation should still allow the example code
+to run.  <em data-coord="hw2-sol.umt:135:286">10-points</em>
+</p><pre>    function <span class="hl kwd">Shape</span><span class="hl opt">(</span>x<span class="hl opt">,</span> y<span class="hl opt">) {</span> <span class="hl slc">//constructor</span>
+      <span class="hl kwa">this</span><span class="hl opt">.</span>x <span class="hl opt">=</span> x<span class="hl opt">;</span> <span class="hl kwa">this</span><span class="hl opt">.</span>y <span class="hl opt">=</span> y<span class="hl opt">;</span>
+    <span class="hl opt">}</span>
+
+    Shape<span class="hl opt">.</span>distance <span class="hl opt">=</span> <span class="hl kwd">function</span><span class="hl opt">(</span>s1<span class="hl opt">,</span> s2<span class="hl opt">) {</span>
+      <span class="hl kwb">const</span> xDiff <span class="hl opt">=</span> s1<span class="hl opt">.</span>x <span class="hl opt">-</span> s2<span class="hl opt">.</span>x<span class="hl opt">;</span>
+      <span class="hl kwb">const</span> yDiff <span class="hl opt">=</span> s1<span class="hl opt">.</span>y <span class="hl opt">-</span> s2<span class="hl opt">.</span>y<span class="hl opt">;</span>
+      <span class="hl kwa">return</span> Math<span class="hl opt">.</span><span class="hl kwd">sqrt</span><span class="hl opt">(</span>xDiff<span class="hl opt">*</span>xDiff <span class="hl opt">+</span> yDiff<span class="hl opt">*</span>yDiff<span class="hl opt">);</span>
+    <span class="hl opt">};</span>
+
+    function <span class="hl kwd">Rect</span><span class="hl opt">(</span>x<span class="hl opt">,</span> y<span class="hl opt">,</span> w<span class="hl opt">,</span> h<span class="hl opt">) {</span> <span class="hl slc">//Rect constructor</span>
+      Shape<span class="hl opt">.</span><span class="hl kwd">call</span><span class="hl opt">(</span><span class="hl kwa">this</span><span class="hl opt">,</span> x<span class="hl opt">,</span> y<span class="hl opt">);</span> <span class="hl slc">//call as non-constructor</span>
+      <span class="hl kwa">this</span><span class="hl opt">.</span>width <span class="hl opt">=</span> w<span class="hl opt">;</span> <span class="hl kwa">this</span><span class="hl opt">.</span>height <span class="hl opt">=</span> h<span class="hl opt">;</span>
+    <span class="hl opt">}</span>
+
+    Rect<span class="hl opt">.</span>prototype <span class="hl opt">=</span> <span class="hl kwa">new</span> <span class="hl kwd">Shape</span><span class="hl opt">();</span>
+    Rect<span class="hl opt">.</span>prototype<span class="hl opt">.</span>area <span class="hl opt">=</span> <span class="hl kwd">function</span><span class="hl opt">() {</span>
+      <span class="hl kwa">return this</span><span class="hl opt">.</span>width<span class="hl opt">*</span><span class="hl kwa">this</span><span class="hl opt">.</span>height<span class="hl opt">;</span>
+    <span class="hl opt">}</span>
+
+    function <span class="hl kwd">Circle</span><span class="hl opt">(</span>x<span class="hl opt">,</span> y<span class="hl opt">,</span> r<span class="hl opt">) {</span> <span class="hl slc">//Rect constructor</span>
+      Shape<span class="hl opt">.</span><span class="hl kwd">call</span><span class="hl opt">(</span><span class="hl kwa">this</span><span class="hl opt">,</span> x<span class="hl opt">,</span> y<span class="hl opt">);</span> <span class="hl slc">//call as non-constructor</span>
+      <span class="hl kwa">this</span><span class="hl opt">.</span>radius <span class="hl opt">=</span> r<span class="hl opt">;</span>
+    <span class="hl opt">}</span>
+
+    Circle<span class="hl opt">.</span>prototype <span class="hl opt">=</span> <span class="hl kwa">new</span> <span class="hl kwd">Shape</span><span class="hl opt">();</span>
+    Circle<span class="hl opt">.</span>prototype<span class="hl opt">.</span>area <span class="hl opt">=</span> <span class="hl kwd">function</span><span class="hl opt">() {</span>
+      <span class="hl kwa">return</span> Math<span class="hl opt">.</span>PI<span class="hl opt">*</span><span class="hl kwa">this</span><span class="hl opt">.</span>radius<span class="hl opt">*</span><span class="hl kwa">this</span><span class="hl opt">.</span>radius<span class="hl opt">;</span>
+    <span class="hl opt">}</span>
+
+    <span class="hl slc">//code for exercising shapes remains unchanged</span>
+    <span class="hl kwb">const</span> shapes <span class="hl opt">= [</span>
+      <span class="hl kwa">new</span> <span class="hl kwd">Rect</span><span class="hl opt">(</span><span class="hl num">3</span><span class="hl opt">,</span> <span class="hl num">4</span><span class="hl opt">,</span> <span class="hl num">5</span><span class="hl opt">,</span> <span class="hl num">6</span><span class="hl opt">),</span>
+      <span class="hl kwa">new</span> <span class="hl kwd">Circle</span><span class="hl opt">(</span><span class="hl num">0</span><span class="hl opt">,</span> <span class="hl num">0</span><span class="hl opt">,</span> <span class="hl num">1</span><span class="hl opt">),</span>
+    <span class="hl opt">];</span>
+
+    shapes<span class="hl opt">.</span><span class="hl kwd">forEach</span><span class="hl opt">((</span>s<span class="hl opt">) =&gt;</span> console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="hl opt">(</span>s<span class="hl opt">.</span>x<span class="hl opt">,</span> s<span class="hl opt">.</span>y<span class="hl opt">,</span> s<span class="hl opt">.</span><span class="hl kwd">area</span><span class="hl opt">()));</span>
+
+    console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="hl opt">(</span>Shape<span class="hl opt">.</span><span class="hl kwd">distance</span><span class="hl opt">(</span>shapes<span class="hl opt">[</span><span class="hl num">0</span><span class="hl opt">],</span> shapes<span class="hl opt">[</span><span class="hl num">1</span><span class="hl opt">]));</span></pre></li><li data-coord="hw2-sol.umt:183:0"><p data-coord="hw2-sol.umt:183:4">JavaScript uses the <samp data-coord="hw2-sol.umt:183:24">prototype</samp> property of a function which is
+used as a constructor to allow accessing the shared prototype of
+any objects it constructs.  Though this design appears strange it,
+or something like it, seems to be the simplest design given that
+objects constructed using the same constructor function should
+inherit the same behavior.  Why does this design appear to be
+the simplest design? <em data-coord="hw2-sol.umt:183:435">10-points</em>
+</p><p data-coord="hw2-sol.umt:191:4">In a class-based language, there are two static things associated
+with a class (where <strong data-coord="hw2-sol.umt:191:94">static</strong> means independent of a <samp data-coord="hw2-sol.umt:191:126">class</samp>
+instance):
+</p><ol data-coord="hw2-sol.umt:195:0"><li data-coord="hw2-sol.umt:195:0"><p data-coord="hw2-sol.umt:195:9">The class.
+</p></li><li data-coord="hw2-sol.umt:197:0"><p data-coord="hw2-sol.umt:197:9">A constructor for instance objects.  This is basically a
+static method of the class.
+</p></li></ol><p data-coord="hw2-sol.umt:200:4">The shared behavior for instance objects is defined by methods
+in the class.
+</p><p data-coord="hw2-sol.umt:203:4">JavaScript does not have any classes.  So it makes sense to make
+the constructor the single known thing about the class and be able
+to access the shared behavior via the constructor; specifically.
+via its <samp data-coord="hw2-sol.umt:203:221">prototype</samp> property.  So by hanging the object prototype
+on the constructor function, the constructor function provides a
+single point-of-access for all static class functionality.
+</p><p data-coord="hw2-sol.umt:210:4">In JavaScript, every function has this <samp data-coord="hw2-sol.umt:210:43">prototype</samp> property which
+will be initialized with a <samp data-coord="hw2-sol.umt:210:101">constructor</samp> property referencing the
+function.  When a function is called using the <samp data-coord="hw2-sol.umt:210:191">new</samp> operator,
+<samp data-coord="hw2-sol.umt:210:211">this</samp> is set to reference a newly created object whose prototype
+points to the same object as the constructor's <samp data-coord="hw2-sol.umt:210:328">prototype</samp>
+property.  Hence shared behavior can be defined in this shared
+prototype object referenced through the constructor.
+</p></li><li data-coord="hw2-sol.umt:218:0"><p data-coord="hw2-sol.umt:218:4">Many articles on the web over-complicate the rules for <em data-coord="hw2-sol.umt:218:59">hoisting</em>.
+For example, this
+<a href="https://medium.freecodecamp.org/function-hoisting-hoisting-interview-questions-b6f91dbc2be8" data-coord="hw2-sol.umt:218:196">article</a> gives these rules for function hoisting:
+</p><ul data-coord="hw2-sol.umt:223:0"><li data-coord="hw2-sol.umt:223:0"><p data-coord="hw2-sol.umt:223:9"><em data-coord="hw2-sol.umt:223:9">function declarations hoist the function definitions.</em>
+</p></li><li data-coord="hw2-sol.umt:225:0"><p data-coord="hw2-sol.umt:225:9"><em data-coord="hw2-sol.umt:225:9">Function expressions in JavaScript are not hoisted.</em>
+</p></li></ul><p data-coord="hw2-sol.umt:227:5">Can you give very simple rules which describe the behavior of
+<samp data-coord="hw2-sol.umt:227:72">let</samp>, <samp data-coord="hw2-sol.umt:227:79">var</samp>, function declarations and function expressions
+based on the concepts of
+<strong data-coord="hw2-sol.umt:227:231"><a href="https://en.wikipedia.org/wiki/Scope_(computer_science)" data-coord="hw2-sol.umt:227:231">scope</a></strong>,
+<strong data-coord="hw2-sol.umt:227:318"><a href="https://en.wikipedia.org/wiki/Declaration_(computer_programming)" data-coord="hw2-sol.umt:227:318">declarations and definitions</a></strong>. <em data-coord="hw2-sol.umt:227:350">10-points</em>
+</p><p data-coord="hw2-sol.umt:235:4">[Unfortunately, this question did not quite work out the way it
+was intended; there is a single simple rule which explains <samp data-coord="hw2-sol.umt:235:131">var</samp>,
+<samp data-coord="hw2-sol.umt:235:142">let</samp> and <samp data-coord="hw2-sol.umt:235:152">const</samp> declarations; this rule also explains function
+definitions the way they are normally used, but it does not have a
+simple explanation for function definitions which are made in
+dynamic execution contexts (something which should not usually be
+done).]
+</p><p data-coord="hw2-sol.umt:243:4">First we need to make sure that the distinction between a
+declaration and definition is clear.  A declaration merely states
+the existence of an entity; a definition gives it a value.  (Note
+that languages like C allow an entity like a function to be
+declared multiple times as long as all the declarations are
+consistent, but there can only be a single definition.)
+</p><p data-coord="hw2-sol.umt:250:4">So in a program fragment like:
+</p><pre>    var x <span class="hl opt">=</span> <span class="hl num">42</span><span class="hl opt">;</span>
+    let y <span class="hl opt">=</span> <span class="hl num">22</span><span class="hl opt">;</span></pre><p data-coord="hw2-sol.umt:257:4"><samp data-coord="hw2-sol.umt:257:4">var x</samp> and <samp data-coord="hw2-sol.umt:257:16">let y</samp> are the declarations, whereas the part following
+the <samp data-coord="hw2-sol.umt:257:81">=</samp> is an initializer which gives a definition for the variable.
+</p><p data-coord="hw2-sol.umt:260:5">[JavaScript distinguishes between reading an <strong data-coord="hw2-sol.umt:260:50">undeclared</strong>
+variable versus reading an <strong data-coord="hw2-sol.umt:260:95">unassigned</strong> variable; the former
+causes an error, whereas the latter simple results in the
+<samp data-coord="hw2-sol.umt:260:197">undefined</samp> value.]
+</p><p data-coord="hw2-sol.umt:265:4">A function definition like <samp data-coord="hw2-sol.umt:265:31">function f() { ... }</samp> constitutes both
+a declaration and definition of <samp data-coord="hw2-sol.umt:265:107">f()</samp>.  OTOH, <samp data-coord="hw2-sol.umt:265:121">var f = function()
+    { ...}</samp> is just a <samp data-coord="hw2-sol.umt:265:163">var</samp> declaration followed by an initializer
+which is a <samp data-coord="hw2-sol.umt:265:223">function</samp> expression.
+</p><p data-coord="hw2-sol.umt:270:4">The behavior of (almost all) JavaScript declarations and
+definitions can be explained by one simple rule:
+</p><p data-coord="hw2-sol.umt:273:6"><em data-coord="hw2-sol.umt:273:6">The scope of any JavaScript declaration begins at the start of
+       of the syntactic construct associated with that declaration</em>.
+</p><p data-coord="hw2-sol.umt:276:4">Then we simply need to specify which syntactic construct is associated
+with each type of declaration:
+</p><ul data-coord="hw2-sol.umt:279:0"><li data-coord="hw2-sol.umt:279:0"><p data-coord="hw2-sol.umt:279:10"><samp data-coord="hw2-sol.umt:279:10">var</samp> declarations and function definitions have function
+scope; i.e. they come into scope at the start of the
+enclosing function.
+</p></li><li data-coord="hw2-sol.umt:283:0"><p data-coord="hw2-sol.umt:283:10"><samp data-coord="hw2-sol.umt:283:10">let</samp> and <samp data-coord="hw2-sol.umt:283:20">const</samp> have block scope; i.e. their scope starts
+at the beginning of the associated syntactic block (there
+is a separate scope associated with each loop).
+</p></li></ul><p data-coord="hw2-sol.umt:287:4">The initializer associated with a <samp data-coord="hw2-sol.umt:287:38">var</samp>, <samp data-coord="hw2-sol.umt:287:45">const</samp> or <samp data-coord="hw2-sol.umt:287:56">let</samp> declaration
+remains at the point of the declaration.  That explains the fact that
+the use of a variable declared <samp data-coord="hw2-sol.umt:287:183">var</samp> before the point of declaration
+results in <samp data-coord="hw2-sol.umt:287:236">undefined</samp> and the use of a <samp data-coord="hw2-sol.umt:287:265">const</samp> or <samp data-coord="hw2-sol.umt:287:276">let</samp> results in
+a <em data-coord="hw2-sol.umt:287:299">temporal dead-zone</em> error.
+</p><p data-coord="hw2-sol.umt:293:4">OTOH, function definitions <strong data-coord="hw2-sol.umt:293:31">usually</strong> act as though the actual
+function body is moved to the start of the enclosing function
+scope.
+</p><p data-coord="hw2-sol.umt:297:4">(The rest of this answer explores the situations where the simple
+rule breaks down for function definitions).
+</p><p data-coord="hw2-sol.umt:300:4">The reason for the <em data-coord="hw2-sol.umt:300:23">usually</em> qualifier is that it is possible for
+the function to be defined within some dynamic context: if the
+function is defined conditionally or in the presence of
+exceptions, there does not seem to be any simple way of describing
+how a function definition works.
+</p><p data-coord="hw2-sol.umt:306:4">Note that it is usually a bad idea to define a function inside a
+syntactic construct like a if-then-else, or a loop and then use it
+outside that construct, but we will look at some examples to
+explore these complexities:
+</p><pre>    <span class="hl opt">&gt;</span> function <span class="hl kwd">f</span><span class="hl opt">(</span>a<span class="hl opt">) {</span>
+        <span class="hl kwa">if</span> <span class="hl opt">(</span>a<span class="hl opt">) {</span>
+          function <span class="hl kwd">g</span><span class="hl opt">() {</span> <span class="hl kwa">return</span> <span class="hl num">42</span><span class="hl opt">; }</span>
+        <span class="hl opt">}</span>
+        <span class="hl kwa">return</span> g<span class="hl opt">;</span>
+      <span class="hl opt">}</span>
+    undefined
+    <span class="hl opt">&gt;</span> x <span class="hl opt">=</span> <span class="hl kwd">f</span><span class="hl opt">(</span><span class="hl num">1</span><span class="hl opt">)</span>
+    <span class="hl opt">[</span>Function<span class="hl opt">:</span> g<span class="hl opt">]</span>
+    <span class="hl opt">&gt;</span> <span class="hl kwd">x</span><span class="hl opt">()</span>
+    <span class="hl num">42</span>
+    <span class="hl opt">&gt;</span> x <span class="hl opt">=</span> <span class="hl kwd">f</span><span class="hl opt">(</span><span class="hl num">0</span><span class="hl opt">)</span>
+    undefined
+    <span class="hl opt">&gt;</span> <span class="hl kwd">x</span><span class="hl opt">()</span>
+    TypeError<span class="hl opt">:</span> x is <span class="hl kwa">not</span> a function</pre><p data-coord="hw2-sol.umt:329:4">The above example shows that even though <samp data-coord="hw2-sol.umt:329:45">g()</samp> is defined within a
+<samp data-coord="hw2-sol.umt:329:75">if</samp>-condition, it has function scope.  Note that when the
+condition is true <samp data-coord="hw2-sol.umt:329:156">g()</samp> is both declared and defined; when the
+condition is false, it is declared but not defined (its value is
+<samp data-coord="hw2-sol.umt:329:274">undefined</samp>).
+</p><p data-coord="hw2-sol.umt:335:4">Note the different behavior if we return a <samp data-coord="hw2-sol.umt:335:47">g1</samp> rather than the
+function <samp data-coord="hw2-sol.umt:335:81">g()</samp> defined within a false condition:
+</p><pre>    <span class="hl opt">&gt;</span> function <span class="hl kwd">f</span><span class="hl opt">(</span>a<span class="hl opt">) {</span>
+        <span class="hl kwa">if</span> <span class="hl opt">(</span>a<span class="hl opt">) {</span>
+          function <span class="hl kwd">g</span><span class="hl opt">() {</span> <span class="hl kwa">return</span> <span class="hl num">42</span><span class="hl opt">; }</span>
+        <span class="hl opt">}</span>
+        <span class="hl kwa">return</span> g1<span class="hl opt">;</span>
+      <span class="hl opt">}</span>
+    undefined
+    <span class="hl opt">&gt;</span> x <span class="hl opt">=</span> <span class="hl kwd">f</span><span class="hl opt">(</span><span class="hl num">0</span><span class="hl opt">)</span>
+    ReferenceError<span class="hl opt">:</span> g1 is <span class="hl kwa">not</span> defined</pre><p data-coord="hw2-sol.umt:350:4">In this example since g1 is undeclared, a reference to it causes
+an error.  The very similar earlier example for <samp data-coord="hw2-sol.umt:350:121">f(0)</samp> showed that
+<samp data-coord="hw2-sol.umt:350:144">g</samp> was declared but not defined.
+</p><p data-coord="hw2-sol.umt:354:4">Note that we can even define a function within a loop; because the
+definition has function scope, the definition outside the loop will
+capture the definition on the last execution of the loop.
+</p><pre>    <span class="hl opt">&gt;</span> function <span class="hl kwd">f</span><span class="hl opt">(</span>n<span class="hl opt">) {</span>
+        <span class="hl kwa">for</span> <span class="hl opt">(</span>let i <span class="hl opt">=</span> <span class="hl num">0</span><span class="hl opt">;</span> i <span class="hl opt">&lt;</span> n<span class="hl opt">;</span> i<span class="hl opt">++) {</span>
+          function <span class="hl kwd">g</span><span class="hl opt">() {</span> <span class="hl kwa">return</span> <span class="hl num">2</span><span class="hl opt">*</span>i<span class="hl opt">; }</span>
+        <span class="hl opt">}</span>
+        <span class="hl kwa">return</span> g<span class="hl opt">;</span>
+      <span class="hl opt">}</span>
+    undefined
+    <span class="hl opt">&gt;</span> x <span class="hl opt">=</span> <span class="hl kwd">f</span><span class="hl opt">(</span><span class="hl num">3</span><span class="hl opt">)</span>
+    <span class="hl opt">[</span>Function<span class="hl opt">:</span> g<span class="hl opt">]</span>
+    <span class="hl opt">&gt;</span> <span class="hl kwd">x</span><span class="hl opt">()</span>
+    <span class="hl num">4</span>
+    <span class="hl opt">&gt;</span></pre><p data-coord="hw2-sol.umt:373:4">Up till these examples, the function declaration has been acting
+exactly like a <samp data-coord="hw2-sol.umt:373:88">var</samp> declaration.  However, the initializer for a
+<samp data-coord="hw2-sol.umt:373:143">var</samp> declaration remains at the point of declaration, but the
+entire body of the function definition is moved up to the start of
+the containing function as illustrated by the following example:
+</p><pre>    <span class="hl opt">&gt;</span> function <span class="hl kwd">f</span><span class="hl opt">() {</span>
+        console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="hl opt">(</span><span class="hl num">22</span><span class="hl opt">,</span> <span class="hl kwd">g</span><span class="hl opt">());</span>
+        function <span class="hl kwd">g</span><span class="hl opt">() {</span> <span class="hl kwa">return</span> <span class="hl num">42</span><span class="hl opt">; }</span>
+        <span class="hl kwa">return</span> g<span class="hl opt">;</span>
+      <span class="hl opt">}</span>
+    undefined
+    <span class="hl opt">&gt;</span> <span class="hl kwd">f</span><span class="hl opt">()</span>
+    <span class="hl num">22 42</span>
+    <span class="hl opt">[</span>Function<span class="hl opt">:</span> g<span class="hl opt">]</span>
+    <span class="hl opt">&gt;</span></pre><p data-coord="hw2-sol.umt:392:4">Note that we refer to <samp data-coord="hw2-sol.umt:392:26">g</samp> before it's point of definition and can
+still access its definition; we cannot do so for a <samp data-coord="hw2-sol.umt:392:125">var</samp>:
+</p><pre>    <span class="hl opt">&gt;</span> function <span class="hl kwd">f</span><span class="hl opt">() {</span>
+        console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="hl opt">(</span><span class="hl num">22</span><span class="hl opt">,</span> g<span class="hl opt">);</span>
+        var g <span class="hl opt">=</span> <span class="hl num">42</span><span class="hl opt">;</span>
+        <span class="hl kwa">return</span> g<span class="hl opt">;</span>
+      <span class="hl opt">}</span>
+    undefined
+    <span class="hl opt">&gt;</span> <span class="hl kwd">f</span><span class="hl opt">()</span>
+    <span class="hl num">22</span> undefined
+    <span class="hl num">42</span></pre><p data-coord="hw2-sol.umt:407:4">Things get weird in the presence of exceptions:
+</p><pre>    <span class="hl opt">&gt;</span> function <span class="hl kwd">f</span><span class="hl opt">() {</span>
+        <span class="hl kwa">try</span> <span class="hl opt">{</span>
+          console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="hl opt">(</span><span class="hl num">22</span><span class="hl opt">,</span> <span class="hl kwd">g</span><span class="hl opt">());</span>
+          <span class="hl kwa">throw</span> <span class="hl str">&apos;err&apos;</span><span class="hl opt">;</span>
+          function <span class="hl kwd">g</span><span class="hl opt">() {</span> <span class="hl kwa">return</span> <span class="hl num">42</span><span class="hl opt">; }</span>
+        <span class="hl opt">}</span>
+        <span class="hl kwa">catch</span> <span class="hl opt">(</span>e<span class="hl opt">) {</span>
+        <span class="hl opt">};</span>
+        <span class="hl kwa">return</span> g<span class="hl opt">;</span>
+      <span class="hl opt">}</span>
+    undefined
+    <span class="hl opt">&gt;</span> x <span class="hl opt">=</span> <span class="hl kwd">f</span><span class="hl opt">()</span>
+    <span class="hl num">22 42</span>
+    undefined
+    <span class="hl opt">&gt;</span> <span class="hl kwd">x</span><span class="hl opt">()</span>
+    TypeError<span class="hl opt">:</span> x is <span class="hl kwa">not</span> a function</pre><p data-coord="hw2-sol.umt:428:4">So <samp data-coord="hw2-sol.umt:428:7">g</samp> is defined before the <samp data-coord="hw2-sol.umt:428:33">throw</samp> but is not defined at the
+time the function <samp data-coord="hw2-sol.umt:428:89">f()</samp> returns.
+</p><p data-coord="hw2-sol.umt:431:4">So there does not appear to be any simple rule for these function
+definitions within dynamic contexts.
+</p></li><li data-coord="hw2-sol.umt:434:0"><p data-coord="hw2-sol.umt:434:4">A set \(B\) of small non-negative integers can be represented on
+computers using a <a href="https://en.wikipedia.org/wiki/Bit_array" data-coord="hw2-sol.umt:434:137">bitset</a> which is a single integer <samp data-coord="hw2-sol.umt:434:170">b</samp>, where integer \(i \in B\) iff
+bit \(i\) in <samp data-coord="hw2-sol.umt:434:220">b</samp> is 1 (we can assume that bits are indexed in
+<em data-coord="hw2-sol.umt:434:317"><a href="https://en.wikipedia.org/wiki/Endianness" data-coord="hw2-sol.umt:434:317">little-endian</a></em> order
+with bit 0 corresponding to the LSB).
+</p><p data-coord="hw2-sol.umt:441:4">With this representation, many set operations can be performed
+using bitwise operations.  For example, assuming that <code>b1</code> and
+<code>b2</code> are the representation of sets \(B_1\) and \(B_2\), the set
+union \(B_1 \cup B_2\) is simply <code>b1 <span class="hl opt">|</span> b2</code> and the set
+intersections \(B_1 \cap B_2\) is simply <code>b1 <span class="hl opt">&amp;</span> b2</code>.
+</p><ol data-coord="hw2-sol.umt:447:0"><li data-coord="hw2-sol.umt:447:0"><p data-coord="hw2-sol.umt:447:8">In JavaScript, what is the value of the largest integer which
+can be stored in a bitset represented using a single integer.
+</p></li><li data-coord="hw2-sol.umt:450:0"><p data-coord="hw2-sol.umt:450:8">Provide a definition for a function <code><span class="hl kwd">toBitSet</span><span class="hl opt">(</span>list<span class="hl opt">)</span></code> which
+when given an array <samp data-coord="hw2-sol.umt:450:96">list</samp> of small non-negative integers,
+returns an integer giving a bitset representation of all the
+integers in <code>list</code>.
+</p><p data-coord="hw2-sol.umt:455:8">For example, <code><span class="hl kwd">toBitSet</span><span class="hl opt">([</span><span class="hl num">1</span><span class="hl opt">,</span> <span class="hl num">5</span><span class="hl opt">,</span> <span class="hl num">3</span><span class="hl opt">])</span></code> should return <code><span class="hl num">42</span></code>.
+</p></li><li data-coord="hw2-sol.umt:457:0"><p data-coord="hw2-sol.umt:457:8">Provide a definition for a function <code><span class="hl kwd">fromBitSet</span><span class="hl opt">(</span>bitset<span class="hl opt">)</span></code>
+which when provided with a <samp data-coord="hw2-sol.umt:457:101">bitset</samp> representation of a set,
+returns an array listing all the integers in <samp data-coord="hw2-sol.umt:457:181">bitset</samp>.
+</p><p data-coord="hw2-sol.umt:461:1">For example, <code><span class="hl kwd">fromBitSet</span><span class="hl opt">(</span><span class="hl num">42</span><span class="hl opt">)</span></code> should return list <code><span class="hl opt">[</span><span class="hl num">1</span><span class="hl opt">,</span> <span class="hl num">3</span><span class="hl opt">,</span> <span class="hl num">5</span><span class="hl opt">]</span></code>
+(any ordering is acceptable in the returned list).
+</p></li></ol><p data-coord="hw2-sol.umt:465:4">The above functions are subject to the same restrictions as the
+functions you wrote in the previous homework; i.e. the body
+can consist of only a single return statement which returns
+an expression which computes the desired value.
+</p><p data-coord="hw2-sol.umt:470:4">Hint: An integer <samp data-coord="hw2-sol.umt:470:21">b</samp> can be converted to its binary representation
+using <samp data-coord="hw2-sol.umt:470:81">b.toString(2)</samp>. <em data-coord="hw2-sol.umt:470:98">15-points</em>
+</p><ol data-coord="hw2-sol.umt:473:0"><li data-coord="hw2-sol.umt:473:0"><p data-coord="hw2-sol.umt:473:8">JavaScript performs bit-operations on 32-bit integers; hence
+the largest natural number representable using JavaScript
+integers will be 31.
+</p></li><li data-coord="hw2-sol.umt:477:0"><p data-coord="hw2-sol.umt:477:8">All we need to do is set the bit corresponding to each array
+element.  We can do so by reducing the array:
+</p><pre>        function <span class="hl kwd">toBitSet</span><span class="hl opt">(</span>list<span class="hl opt">) {</span>
+          <span class="hl kwa">return</span> list<span class="hl opt">.</span><span class="hl kwd">reduce</span><span class="hl opt">((</span>acc<span class="hl opt">,</span> e<span class="hl opt">) =&gt;</span> acc <span class="hl opt">| (</span><span class="hl num">1</span> <span class="hl opt">&lt;&lt;</span> e<span class="hl opt">),</span> <span class="hl num">0</span><span class="hl opt">);</span>
+        <span class="hl opt">}</span></pre><p data-coord="hw2-sol.umt:486:8">We start out with an accumulator <samp data-coord="hw2-sol.umt:486:41">acc</samp> of 0, for each element
+of the array we update the accumulator with the bit corresponding
+to that element.
+</p></li><li data-coord="hw2-sol.umt:490:0"><p data-coord="hw2-sol.umt:490:8">We get the bits of an integer using <samp data-coord="hw2-sol.umt:490:44">toString(2)</samp> and split
+those into an array.  We then reduce the reverse of this array
+using the array index to concatenate the appropriate natural
+number into an accumulator (initialized to <samp data-coord="hw2-sol.umt:490:259">[]</samp>) when the bit
+is a 1.
+</p><pre>        function <span class="hl kwd">fromBitSet</span><span class="hl opt">(</span>bitset<span class="hl opt">) {</span> <span class="hl slc">//comments show when bitset === 42</span>
+          <span class="hl kwa">return</span> bitset<span class="hl opt">.</span>  <span class="hl slc">//42</span>
+            <span class="hl kwd">toString</span><span class="hl opt">(</span><span class="hl num">2</span><span class="hl opt">).</span>  <span class="hl slc">//&apos;101010&apos;</span>
+            <span class="hl kwd">split</span><span class="hl opt">(</span><span class="hl str">&apos;&apos;</span><span class="hl opt">).</span>    <span class="hl slc">//[ &apos;1&apos;, &apos;0&apos;, &apos;1&apos;, &apos;0&apos;, &apos;1&apos;, &apos;0&apos; ]        </span>
+            <span class="hl kwd">reverse</span><span class="hl opt">().</span>    <span class="hl slc">//[ &apos;0&apos;, &apos;1&apos;, &apos;0&apos;, &apos;1&apos;, &apos;0&apos;, &apos;1&apos; ]</span>
+            <span class="hl kwd">reduce</span><span class="hl opt">((</span>acc<span class="hl opt">,</span> e<span class="hl opt">,</span> i<span class="hl opt">) =&gt;</span>
+                      e <span class="hl opt">===</span> <span class="hl str">&apos;0&apos;</span> <span class="hl opt">?</span> acc <span class="hl opt">:</span> acc<span class="hl opt">.</span><span class="hl kwd">concat</span><span class="hl opt">([</span>i<span class="hl opt">]),</span>
+                   <span class="hl opt">[]);</span>   <span class="hl slc">// [ 1, 3, 5 ]</span>
+        <span class="hl opt">}</span></pre></li></ol></li><li data-coord="hw2-sol.umt:508:0"><p data-coord="hw2-sol.umt:508:4">Given the following code:
+</p><pre>    <span class="hl kwb">const</span> x <span class="hl opt">=</span> <span class="hl num">1</span><span class="hl opt">;</span>
+
+    function <span class="hl kwd">f</span><span class="hl opt">(</span>a<span class="hl opt">) {</span>
+      let y <span class="hl opt">=</span> x <span class="hl opt">+</span> <span class="hl num">1</span><span class="hl opt">;</span>
+      <span class="hl kwa">if</span> <span class="hl opt">(</span>a<span class="hl opt">) {</span>
+        var x <span class="hl opt">=</span> y <span class="hl opt">+</span> <span class="hl num">1</span><span class="hl opt">;</span>
+        y <span class="hl opt">=</span> x <span class="hl opt">+</span> <span class="hl num">2</span><span class="hl opt">;</span>
+      <span class="hl opt">}</span>
+      <span class="hl kwa">return</span> x <span class="hl opt">+</span> y<span class="hl opt">;</span>
+    <span class="hl opt">}</span>
+
+    console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="hl opt">(</span><span class="hl kwd">f</span><span class="hl opt">(</span><span class="hl num">1</span><span class="hl opt">),</span> x<span class="hl opt">);</span></pre><ol data-coord="hw2-sol.umt:526:0"><li data-coord="hw2-sol.umt:526:0"><p data-coord="hw2-sol.umt:526:8">What will be the output of the above program.  Explain why it is
+so.
+</p></li><li data-coord="hw2-sol.umt:529:0"><p data-coord="hw2-sol.umt:529:8">What will be the output of the above program if the <samp data-coord="hw2-sol.umt:529:60">var x =
+        ...</samp> statement inside the <code><span class="hl kwa">if</span></code> is changed to a <samp data-coord="hw2-sol.umt:529:125">let x = ...</samp>
+statement.  Explain why it is so.
+</p></li></ol><p data-coord="hw2-sol.umt:533:4">Hint: arithmetic on undefined values results in a <samp data-coord="hw2-sol.umt:533:54">NaN</samp>. <em data-coord="hw2-sol.umt:533:61">10-points</em>
+</p><ol data-coord="hw2-sol.umt:536:0"><li data-coord="hw2-sol.umt:536:0"><p data-coord="hw2-sol.umt:536:8">The <samp data-coord="hw2-sol.umt:536:12">var</samp> declaration (not the initializer) is hoisted to
+the start of the function; so the code is equivalent to the
+following:
+</p><pre>        <span class="hl kwb">const</span> x <span class="hl opt">=</span> <span class="hl num">1</span><span class="hl opt">;</span>
+
+        function <span class="hl kwd">f</span><span class="hl opt">(</span>a<span class="hl opt">) {</span>
+          var x<span class="hl opt">;</span>
+          let y <span class="hl opt">=</span> x <span class="hl opt">+</span> <span class="hl num">1</span><span class="hl opt">;</span>
+          <span class="hl kwa">if</span> <span class="hl opt">(</span>a<span class="hl opt">) {</span>
+            x <span class="hl opt">=</span> y <span class="hl opt">+</span> <span class="hl num">1</span><span class="hl opt">;</span>
+            y <span class="hl opt">=</span> x <span class="hl opt">+</span> <span class="hl num">2</span><span class="hl opt">;</span>
+          <span class="hl opt">}</span>
+          <span class="hl kwa">return</span> x <span class="hl opt">+</span> y<span class="hl opt">;</span>
+        <span class="hl opt">}</span>
+
+        console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="hl opt">(</span><span class="hl kwd">f</span><span class="hl opt">(</span><span class="hl num">1</span><span class="hl opt">),</span> x<span class="hl opt">);</span></pre><p data-coord="hw2-sol.umt:556:8">So the <samp data-coord="hw2-sol.umt:556:15">x</samp> in <samp data-coord="hw2-sol.umt:556:22">let y = x + 1</samp> will be <samp data-coord="hw2-sol.umt:556:46">undefined</samp>.  Since arithmetic
+on an <samp data-coord="hw2-sol.umt:556:84">undefined</samp> value results in a <samp data-coord="hw2-sol.umt:556:115">NaN</samp>, <samp data-coord="hw2-sol.umt:556:122">y</samp> will be a <samp data-coord="hw2-sol.umt:556:136">NaN</samp>
+and the return value of the call to <samp data-coord="hw2-sol.umt:556:179">f(1)</samp> will be a <samp data-coord="hw2-sol.umt:556:196">NaN</samp>.  The
+global <samp data-coord="hw2-sol.umt:556:216">x</samp> will be unaffected by the call to <samp data-coord="hw2-sol.umt:556:254">f()</samp>.  Hence
+the output will be <samp data-coord="hw2-sol.umt:556:288">NaN 1</samp>.
+</p></li><li data-coord="hw2-sol.umt:562:0"><p data-coord="hw2-sol.umt:562:8">If the <samp data-coord="hw2-sol.umt:562:15">var</samp> is changed to a <samp data-coord="hw2-sol.umt:562:37">let</samp>, the code will be:
+</p><pre>        <span class="hl kwb">const</span> x <span class="hl opt">=</span> <span class="hl num">1</span><span class="hl opt">;</span>
+
+        function <span class="hl kwd">f</span><span class="hl opt">(</span>a<span class="hl opt">) {</span>
+          let y <span class="hl opt">=</span> x <span class="hl opt">+</span> <span class="hl num">1</span><span class="hl opt">;</span>
+          <span class="hl kwa">if</span> <span class="hl opt">(</span>a<span class="hl opt">) {</span>
+            let x <span class="hl opt">=</span> y <span class="hl opt">+</span> <span class="hl num">1</span><span class="hl opt">;</span>
+            y <span class="hl opt">=</span> x <span class="hl opt">+</span> <span class="hl num">2</span><span class="hl opt">;</span>
+          <span class="hl opt">}</span>
+          <span class="hl kwa">return</span> x <span class="hl opt">+</span> y<span class="hl opt">;</span>
+        <span class="hl opt">}</span>
+
+        console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="hl opt">(</span><span class="hl kwd">f</span><span class="hl opt">(</span><span class="hl num">1</span><span class="hl opt">),</span> x<span class="hl opt">);</span></pre><p data-coord="hw2-sol.umt:579:1">The scope of the <samp data-coord="hw2-sol.umt:579:18">let x</samp> will simply be the <samp data-coord="hw2-sol.umt:579:45">if</samp>-block, so the
+<samp data-coord="hw2-sol.umt:579:65">x</samp> in the declaration for <samp data-coord="hw2-sol.umt:579:92">let y = x + 1</samp> will refer to the
+global <samp data-coord="hw2-sol.umt:579:134">x</samp> giving <samp data-coord="hw2-sol.umt:579:145">y</samp> the value 2; when the if-block executes
+(since <samp data-coord="hw2-sol.umt:579:197">a === 1</samp> is truthy), <samp data-coord="hw2-sol.umt:579:219">x</samp> will get the value 3 and <samp data-coord="hw2-sol.umt:579:248">y</samp>
+will be assigned 5.  The <samp data-coord="hw2-sol.umt:579:278">x</samp> in the return value will refer to
+the global <samp data-coord="hw2-sol.umt:579:328">x</samp> which will remain unchanged at 1.  Hence the
+function call <samp data-coord="hw2-sol.umt:579:392">f(1)</samp> will return 6 and the output of the
+<samp data-coord="hw2-sol.umt:579:436">console.log()</samp> will be <samp data-coord="hw2-sol.umt:579:460">6 1</samp>.
+</p></li></ol></li><li data-coord="hw2-sol.umt:589:0"><p data-coord="hw2-sol.umt:589:4">Assuming no earlier variable declarations, what will be the output
+of the following JavaScript code when run in non-strict mode?
+</p><pre>    x <span class="hl opt">=</span> <span class="hl num">1</span><span class="hl opt">;</span>
+    obj1 <span class="hl opt">= {</span> x<span class="hl opt">:</span> <span class="hl num">2</span><span class="hl opt">,</span> f<span class="hl opt">:</span> <span class="hl kwd">function</span><span class="hl opt">() {</span> <span class="hl kwa">return this</span><span class="hl opt">.</span>x<span class="hl opt">; } }</span>
+    obj2 <span class="hl opt">= {</span> x<span class="hl opt">:</span> <span class="hl num">3</span><span class="hl opt">,</span> f<span class="hl opt">:</span> <span class="hl kwd">function</span><span class="hl opt">() {</span> <span class="hl kwa">return this</span><span class="hl opt">.</span>x<span class="hl opt">; } }</span>
+    f <span class="hl opt">=</span> obj1<span class="hl opt">.</span>f<span class="hl opt">.</span><span class="hl kwd">bind</span><span class="hl opt">(</span>obj2<span class="hl opt">);</span>
+    console<span class="hl opt">.</span><span class="hl kwd">log</span><span class="hl opt">(</span>obj1<span class="hl opt">.</span><span class="hl kwd">f</span><span class="hl opt">() -</span> obj2<span class="hl opt">.</span><span class="hl kwd">f</span><span class="hl opt">() +</span> <span class="hl kwd">f</span><span class="hl opt">());</span></pre><p data-coord="hw2-sol.umt:600:4">Explain why it is so.  <em data-coord="hw2-sol.umt:600:27">10-points</em>
+</p><p data-coord="hw2-sol.umt:602:4">The call to <samp data-coord="hw2-sol.umt:602:16">obj1.f()</samp> has <samp data-coord="hw2-sol.umt:602:31">this</samp> set to <samp data-coord="hw2-sol.umt:602:45">obj1</samp>; hence it will
+return <samp data-coord="hw2-sol.umt:602:78">obj1.x</samp> which is 2. The call to obj2.f() has <samp data-coord="hw2-sol.umt:602:124">this</samp> set
+to <samp data-coord="hw2-sol.umt:602:142">obj2</samp>; hence it will return <samp data-coord="hw2-sol.umt:602:171">obj2.x</samp> which is 3.  Finally,
+the <samp data-coord="hw2-sol.umt:602:210">f()</samp> call has <samp data-coord="hw2-sol.umt:602:225">this</samp> bound to <samp data-coord="hw2-sol.umt:602:241">obj2</samp>, so it will return
+<samp data-coord="hw2-sol.umt:602:271">obj2.x</samp> which is 3.  Hence the value printed will be <samp data-coord="hw2-sol.umt:602:325">2 - 3 + 3</samp>
+which is <samp data-coord="hw2-sol.umt:602:350">2</samp>.
+</p></li><li data-coord="hw2-sol.umt:609:0"><p data-coord="hw2-sol.umt:609:4">Discuss the validity of the following statements. What is more
+important than whether you ultimately classify the statement as
+<strong data-coord="hw2-sol.umt:609:139">true</strong> or <strong data-coord="hw2-sol.umt:609:149">false</strong> is your justification for arriving at your
+conclusion. <em data-coord="hw2-sol.umt:609:216">10-points</em>
+</p><ol data-coord="hw2-sol.umt:614:0"><li data-coord="hw2-sol.umt:614:0"><p data-coord="hw2-sol.umt:614:8">Constructor functions in JavaScript must be declared
+using the <samp data-coord="hw2-sol.umt:614:79">constructor</samp> keyword.
+</p></li><li data-coord="hw2-sol.umt:617:0"><p data-coord="hw2-sol.umt:617:8">Given objects <samp data-coord="hw2-sol.umt:617:22">a</samp> and <samp data-coord="hw2-sol.umt:617:30">b</samp>, <samp data-coord="hw2-sol.umt:617:35">a === b</samp> is true iff the values of
+all the properties of <samp data-coord="hw2-sol.umt:617:101">a</samp> are recursively equal (using <samp data-coord="hw2-sol.umt:617:134">===</samp>)
+to the values of the properties of <samp data-coord="hw2-sol.umt:617:184">b</samp>.
+</p></li><li data-coord="hw2-sol.umt:621:0"><p data-coord="hw2-sol.umt:621:8">The prototype of an object can be changed after it has been
+created.
+</p></li><li data-coord="hw2-sol.umt:624:0"><p data-coord="hw2-sol.umt:624:8"><samp data-coord="hw2-sol.umt:624:8">this</samp> for a fat-arrow function can be changed using <samp data-coord="hw2-sol.umt:624:61">bind()</samp>.
+</p></li><li data-coord="hw2-sol.umt:626:0"><p data-coord="hw2-sol.umt:626:8">It is possible to set things up so that assigning to
+a single object property changes multiple properties.
+</p></li></ol><p data-coord="hw2-sol.umt:629:4">The answers follow:
+</p><ol data-coord="hw2-sol.umt:631:0"><li data-coord="hw2-sol.umt:631:0"><p data-coord="hw2-sol.umt:631:8">The answer is that it depends on whether the constructor
+is declared within an ES6 <samp data-coord="hw2-sol.umt:631:99">class</samp> or not.  If declared within
+an ES6 <samp data-coord="hw2-sol.umt:631:143">class</samp>, then the <samp data-coord="hw2-sol.umt:631:161">constructor</samp> keyword must be used
+(and the constructor is not given any name).  OTOH, if the
+constructor is not for an ES6 <samp data-coord="hw2-sol.umt:631:287">class</samp>, then the <samp data-coord="hw2-sol.umt:631:305">constructor</samp>
+keyword should not be used and it should be declared as a
+regular <samp data-coord="hw2-sol.umt:631:387">function</samp> with having a name.
+</p></li><li data-coord="hw2-sol.umt:639:0"><p data-coord="hw2-sol.umt:639:8">Objects are compared for equality using reference equality; i.e.
+two objects compare equal iff they are the same object.  Hence
+no recursive equality checking is done and the statement is <strong data-coord="hw2-sol.umt:639:205">false</strong>.
+</p></li><li data-coord="hw2-sol.umt:643:0"><p data-coord="hw2-sol.umt:643:8">It is definitely possible to change the prototype of an object
+after it has been created using <samp data-coord="hw2-sol.umt:643:111">Object.setPrototypeOf()</samp>. For
+example, consider the following:
+</p><pre>        <span class="hl opt">&gt;</span> function <span class="hl kwd">F</span><span class="hl opt">() {}</span>
+        undefined
+        <span class="hl opt">&gt;</span> function <span class="hl kwd">G</span><span class="hl opt">() {}</span>
+        undefined
+        <span class="hl opt">&gt;</span> G<span class="hl opt">.</span>prototype<span class="hl opt">.</span>f <span class="hl opt">=</span> <span class="hl kwd">function</span><span class="hl opt">() {</span> <span class="hl kwa">return</span> <span class="hl num">13</span><span class="hl opt">; }</span>
+        <span class="hl opt">[</span>Function<span class="hl opt">]</span>
+        <span class="hl opt">&gt;</span> x <span class="hl opt">=</span> <span class="hl kwa">new</span> <span class="hl kwd">F</span><span class="hl opt">()</span>
+        F <span class="hl opt">{}</span>
+        <span class="hl opt">&gt;</span> x<span class="hl opt">.</span><span class="hl kwd">f</span><span class="hl opt">()</span>
+        TypeError<span class="hl opt">:</span> x<span class="hl opt">.</span>f is <span class="hl kwa">not</span> a function
+        <span class="hl opt">&gt;</span> Object<span class="hl opt">.</span><span class="hl kwd">setPrototypeOf</span><span class="hl opt">(</span>x<span class="hl opt">,</span> G<span class="hl opt">.</span>prototype<span class="hl opt">)</span>
+        G <span class="hl opt">{}</span>
+        <span class="hl opt">&gt;</span> x<span class="hl opt">.</span><span class="hl kwd">f</span><span class="hl opt">()</span>
+        <span class="hl num">13</span></pre><p data-coord="hw2-sol.umt:664:1">So the prototype of <samp data-coord="hw2-sol.umt:664:21">x</samp> was changed from <samp data-coord="hw2-sol.umt:664:42">F.prototype</samp> to <samp data-coord="hw2-sol.umt:664:59">G.prototype</samp>
+after it was created.  Hence the statement is <strong data-coord="hw2-sol.umt:664:120">true</strong>.
+</p></li><li data-coord="hw2-sol.umt:667:0"><p data-coord="hw2-sol.umt:667:8">For a fat-arrow function, <samp data-coord="hw2-sol.umt:667:34">this</samp> is always the value which was
+captured lexically within the scope in which the fat-arrow function
+was defined and it is not possible to change it using <samp data-coord="hw2-sol.umt:667:202">bind()</samp>.
+</p><pre>        <span class="hl opt">&gt;</span> x <span class="hl opt">=</span> <span class="hl num">11</span>
+        <span class="hl num">11</span>
+        <span class="hl slc">//in this.x below, this refers to global context</span>
+        <span class="hl opt">&gt;</span> obj1 <span class="hl opt">= {</span> x<span class="hl opt">:</span> <span class="hl num">22</span><span class="hl opt">,</span> f<span class="hl opt">: () =&gt; () =&gt;</span> <span class="hl kwa">this</span><span class="hl opt">.</span>x <span class="hl opt">}</span>
+        <span class="hl opt">{</span> x<span class="hl opt">:</span> <span class="hl num">22</span><span class="hl opt">,</span> f<span class="hl opt">: [</span>Function<span class="hl opt">:</span> f<span class="hl opt">] }</span>
+        <span class="hl opt">&gt;</span> g <span class="hl opt">=</span> obj1<span class="hl opt">.</span><span class="hl kwd">f</span><span class="hl opt">()</span> <span class="hl slc">//g is returned fat-arrow function</span>
+        <span class="hl opt">[</span>Function<span class="hl opt">]</span>
+        <span class="hl opt">&gt;</span> <span class="hl kwd">g</span><span class="hl opt">()</span> <span class="hl slc">//calling it returns global x</span>
+        <span class="hl num">11</span>
+        <span class="hl opt">&gt;</span> obj2 <span class="hl opt">= {</span> x<span class="hl opt">:</span> <span class="hl num">5</span> <span class="hl opt">}</span> <span class="hl slc">//create another object</span>
+        <span class="hl opt">{</span> x<span class="hl opt">:</span> <span class="hl num">5</span> <span class="hl opt">}</span>
+        <span class="hl opt">&gt;</span> h <span class="hl opt">=</span> g<span class="hl opt">.</span><span class="hl kwd">bind</span><span class="hl opt">(</span>obj2<span class="hl opt">)</span> <span class="hl slc">//bind g to obj2</span>
+        <span class="hl opt">[</span>Function<span class="hl opt">:</span> bound <span class="hl opt">]</span>
+        <span class="hl opt">&gt;</span> <span class="hl kwd">h</span><span class="hl opt">()</span> <span class="hl slc">//still refers to global x</span>
+        <span class="hl num">11</span>
+        <span class="hl opt">&gt;</span></pre><p data-coord="hw2-sol.umt:690:1">So the statement is <strong data-coord="hw2-sol.umt:690:21">false</strong>.
+</p></li><li data-coord="hw2-sol.umt:692:0"><p data-coord="hw2-sol.umt:692:8">It is possible to change multiple object properties by
+assigning to a single property by associating a setter
+function with the single property.  For example,
+</p><pre>        <span class="hl opt">&gt;</span> obj <span class="hl opt">= {</span>
+            a<span class="hl opt">:</span> <span class="hl num">1</span><span class="hl opt">,</span>
+            b<span class="hl opt">:</span> <span class="hl num">5</span><span class="hl opt">,</span>
+            set <span class="hl kwd">c</span><span class="hl opt">(</span>v<span class="hl opt">) {</span> <span class="hl kwa">this</span><span class="hl opt">.</span>a <span class="hl opt">=</span> <span class="hl kwa">this</span><span class="hl opt">.</span>b <span class="hl opt">=</span> v<span class="hl opt">; } }</span>
+        <span class="hl opt">{</span> a<span class="hl opt">:</span> <span class="hl num">1</span><span class="hl opt">,</span> b<span class="hl opt">:</span> <span class="hl num">5</span><span class="hl opt">,</span> c<span class="hl opt">: [</span>Setter<span class="hl opt">] }</span>
+        <span class="hl opt">&gt; [</span>obj<span class="hl opt">.</span>a<span class="hl opt">,</span> obj<span class="hl opt">.</span>b<span class="hl opt">]</span>
+        <span class="hl opt">[</span> <span class="hl num">1</span><span class="hl opt">,</span> <span class="hl num">5</span> <span class="hl opt">]</span>
+        <span class="hl opt">&gt;</span> obj<span class="hl opt">.</span>c <span class="hl opt">=</span> <span class="hl num">42</span>
+        <span class="hl num">42</span>
+        <span class="hl opt">&gt; [</span>obj<span class="hl opt">.</span>a<span class="hl opt">,</span> obj<span class="hl opt">.</span>b<span class="hl opt">]</span>
+        <span class="hl opt">[</span> <span class="hl num">42</span><span class="hl opt">,</span> <span class="hl num">42</span> <span class="hl opt">]</span>
+        <span class="hl opt">&gt;</span></pre><p data-coord="hw2-sol.umt:711:1">Hence the statement is <strong data-coord="hw2-sol.umt:711:24">true</strong>.
+</p></li></ol></li></ol></section>
+</div> <!-- #content -->
+</div> <!-- #main -->
+<div id="footer">&nbsp;</div>
+</div> <!-- #page -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../../assets/scripts/nav.js"></script>
+</body>
+</html>

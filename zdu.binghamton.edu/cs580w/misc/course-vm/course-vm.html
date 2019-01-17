@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="../../assets/styles/article.css" rel="stylesheet" type="text/css" />
+  <title>Course VM</title>
+<link href="course-vm/hl-fine_blue.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="page">
+<span id="opennav"><i class="material-icons">&#xe5d2;</i></span>
+<div id="nav">
+<div id="closenav"><i class="material-icons">&#xe5cd;</i></div>
+<ul>
+<li><a href="../../index.html">Home</a></li>
+<li><a href="../../docs/index.html">Documentation</a></li>
+<li><a href="../../exams-quizzes/index.html">Exams & Quizzes</a></li>
+<li><a href="../../hws/index.html">Homeworks</a></li>
+<li><a href="../../misc/index.html">Miscellaneous</a></li>
+<li><a href="../../projects/index.html">Projects</a></li>
+<li><a href="../../slides/index.html">Slides</a></li>
+
+</ul>
+</div> <!-- #nav -->
+<div id="main">
+  <div id="header">
+<h1>Programming for the Web</h1>
+</div> <!-- #header -->
+<div id="content">
+<section data-coord="course-vm.umt:1:0"><h1 data-coord="course-vm.umt:1:0">Course VM</h1><p data-coord="course-vm.umt:4:0">Each student is being given a virtual machine which is dedicated to this
+course.  You may use it for any activities relevant to this course or
+your CS interests.
+</p><p data-coord="course-vm.umt:8:0">The VM can only be accessed using ssh from <strong data-coord="course-vm.umt:8:43">within</strong> the campus network.
+Off-campus access will require setting up a ssh tunnel as outlined at
+the end of this document.
+</p><p data-coord="course-vm.umt:12:0">The VM runs Ubuntu 18.04.  Software which will be required by the
+course is <a href="./setup" data-coord="course-vm.umt:12:87">pre-installed,</a> but it is possible that you may need to
+install additional software during the course of the semester.
+</p><p data-coord="course-vm.umt:16:0">You should make sure that you perform each of the following steps:
+</p><ol data-coord="course-vm.umt:18:0"><li data-coord="course-vm.umt:18:0"><p data-coord="course-vm.umt:18:4">Initial password change.
+</p></li><li data-coord="course-vm.umt:20:0"><p data-coord="course-vm.umt:20:4">GUI access to your VM (<samp data-coord="course-vm.umt:20:31">x2go</samp> recommended).
+</p></li><li data-coord="course-vm.umt:22:0"><p data-coord="course-vm.umt:22:4">Off-campus access to your VM.
+</p></li><li data-coord="course-vm.umt:24:0"><p data-coord="course-vm.umt:24:4">Mirror the course git repository on your VM home directory.
+</p></li></ol><p data-coord="course-vm.umt:26:0">[This document uses the term "workstation" to refer to the computer
+you are using to access your VM].
+</p><section data-coord="course-vm.umt:30:0"><h2 data-coord="course-vm.umt:30:0">Initial Password Change</h2><p data-coord="course-vm.umt:33:0">You should have received an email giving you the IP address <samp data-coord="course-vm.umt:33:60">VM-IP</samp> of
+your VM, your login id <samp data-coord="course-vm.umt:33:94">VM-ID</samp> and your initial password <samp data-coord="course-vm.umt:33:128">VM-PW</samp>.
+Since your password has been exposed in an unsecure email, it <strong data-coord="course-vm.umt:33:199">must be
+changed</strong>.  Your should immediately login to your VM from the campus
+network and change your password to some <samp data-coord="course-vm.umt:33:317">VM-NEW-PW</samp> of your choosing.
+</p><p data-coord="course-vm.umt:39:0">The following log assumes that you are logging into your VM using
+<samp data-coord="course-vm.umt:39:66">ssh</samp> from <samp data-coord="course-vm.umt:39:77">remote.cs</samp>:
+</p><pre data-coord="course-vm.umt:43:0">remote02:~$ ssh VM-ID@VM-IP
+The authenticity of host 'VM-IP (VM-IP)' can't be established.
+ECDSA key fingerprint is ...
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'VM-IP' (ECDSA) to the list of known hosts.
+VM-ID@VM-IP's password: 
+Welcome to Ubuntu 18.04.1 LTS (GNU/Linux 4.15.0-33-generic x86_64)
+...
+VM-ID@COURSE-VM-ID:~$ passwd
+Changing password for VM-ID.
+(current) UNIX password: VM-PW
+Enter new UNIX password: VM-NEW-PW
+Retype new UNIX password: VM-NEW-PW
+</pre></section><section data-coord="course-vm.umt:58:0"><h2 data-coord="course-vm.umt:58:0">Administering Your VM</h2><p data-coord="course-vm.umt:61:0">Your VM-ID account has administrative privileges.  You can run any
+administrative CLI command by preceeding that command by <samp data-coord="course-vm.umt:61:124">sudo</samp> at
+which point you will be prompted for your current password.  If you
+run an administrative task using the GUI, you will again be
+prompted for your current VM password.
+</p><p data-coord="course-vm.umt:67:0">Besides your account, you will find that the VM has 2 additional
+accounts.  You should <strong data-coord="course-vm.umt:67:87">not</strong> touch these accounts.  If something
+goes wrong with your VM, we may be able to use these accounts to
+get back in to your VM and attempt to fix the problem.
+</p><p data-coord="course-vm.umt:72:0">You can install additional system-wide software packages using
+the command line using <a href="https://linux.die.net/man/8/apt-get" data-coord="course-vm.umt:72:125">apt-get</a>
+or using a GUI-program found on the system menu.
+</p><p data-coord="course-vm.umt:76:0">The VM has text editors like <samp data-coord="course-vm.umt:76:29">nano</samp>, <samp data-coord="course-vm.umt:76:37">emacs</samp> and <samp data-coord="course-vm.umt:76:49">vim</samp> already installed.
+However, you may want to use the above package manager to install
+a text editor of your choice, or even an IDE.
+</p></section><section data-coord="course-vm.umt:80:0"><h2 data-coord="course-vm.umt:80:0">Restarting your VM</h2><p data-coord="course-vm.umt:83:0">In case you accidentally shutdown your VM or simply find it
+unreachable, you can use your VM's web console to restart it.
+Specifically, use the <em data-coord="course-vm.umt:83:144">vSphere web console</em> to access your VM's
+console; then use the <samp data-coord="course-vm.umt:83:208">Actions-&gt;Power</samp> menu item to restart your VM.
+Instructions for connecting to the VM's console are in the
+<em data-coord="course-vm.umt:83:325"><a href="#vsphere" data-coord="course-vm.umt:83:325">vSphere Web Client section</a></em>.
+</p></section><section data-coord="course-vm.umt:91:0"><h2 data-coord="course-vm.umt:91:0">GUI Access to your VM</h2><p data-coord="course-vm.umt:95:0">If you use <samp data-coord="course-vm.umt:95:11">ssh</samp>, you basically obtain only command-line access to
+your VM.  But the VM has the <a href="https://xfce.org/" data-coord="course-vm.umt:95:117">xfce4</a> desktop
+environment installed.  Once you have GUI access to your VM, you can
+customize the GUI.  Here are some of the alternative methods which you
+can use to obtain GUI access.
+</p><section data-coord="course-vm.umt:103:0"><h3 data-coord="course-vm.umt:103:0">X2Go Access (Recommended)</h3><ol data-coord="course-vm.umt:106:0"><li data-coord="course-vm.umt:106:0"><p data-coord="course-vm.umt:106:4">Install a <em data-coord="course-vm.umt:106:63"><a href="https://wiki.x2go.org/doku.php/download:start" data-coord="course-vm.umt:106:63">X2Go client</a></em>
+for the workstation you are using to access your VM if one is not
+already installed (a <samp data-coord="course-vm.umt:106:172">x2goclient</samp> command should be available on
+<samp data-coord="course-vm.umt:106:220">remote.cs</samp>).
+</p></li><li data-coord="course-vm.umt:111:0"><p data-coord="course-vm.umt:111:4">Start the <samp data-coord="course-vm.umt:111:14">x2goclient</samp>.
+</p></li><li data-coord="course-vm.umt:113:0"><p data-coord="course-vm.umt:113:4">Create a session for connecting to your VM by clicking <em data-coord="course-vm.umt:113:59">Session</em>
+-&gt; <em data-coord="course-vm.umt:113:76">New session</em>.  Provide your VM's IP address <samp data-coord="course-vm.umt:113:121">VM-IP</samp> and your
+login id <samp data-coord="course-vm.umt:113:151">VM-ID</samp>.  Specify the session type as XFCE.
+</p></li><li data-coord="course-vm.umt:117:0"><p data-coord="course-vm.umt:117:4">You should now be able to use the above session to access your VM
+using a GUI.
+</p></li></ol><p data-coord="course-vm.umt:120:0">Please note that if the campus sub-net you are using does not allow
+direct access to your VM, you will need to tunnel in to your VM.
+Please follow the instructions given below for x2go access using a
+tunnel.
+</p></section><section data-coord="course-vm.umt:125:0"><h3 data-coord="course-vm.umt:125:0">VNC Access</h3><p data-coord="course-vm.umt:128:0"><a href="https://www.tightvnc.com/" data-coord="course-vm.umt:128:29">VNC</a> allows remote access to graphical
+desktops.  It is not as efficient as x2go which is optimized for X11, but
+has the advantage that it can be used to access non-X11 desktops like
+a Windows desktop.
+</p><ol data-coord="course-vm.umt:133:0"><li data-coord="course-vm.umt:133:0"><p data-coord="course-vm.umt:133:4">Connect to your VM using <samp data-coord="course-vm.umt:133:29">ssh</samp>.
+</p></li><li data-coord="course-vm.umt:135:0"><p data-coord="course-vm.umt:135:4">Set up a <a href="./vnc-xstartup" data-coord="course-vm.umt:135:31">~/.vnc/xstartup</a> script on your VM to
+start <samp data-coord="course-vm.umt:135:78">xfce4</samp>.
+</p></li><li data-coord="course-vm.umt:138:0"><p data-coord="course-vm.umt:138:4">Start up a VNC server on your VM.
+</p><ol data-coord="course-vm.umt:140:0"><li data-coord="course-vm.umt:140:0"><p data-coord="course-vm.umt:140:9">Run <samp data-coord="course-vm.umt:140:13">vncpasswd</samp> to set up a password <samp data-coord="course-vm.umt:140:46">VNC-PW</samp> for your VNC
+sessions.
+</p></li><li data-coord="course-vm.umt:143:0"><p data-coord="course-vm.umt:143:9">Run <samp data-coord="course-vm.umt:143:13">vncserver</samp> to start up the VNC server.  Note the VNC
+port <samp data-coord="course-vm.umt:143:81">VNC-PORT</samp> on which the server starts (usually 1).
+</p></li></ol></li><li data-coord="course-vm.umt:146:0"><p data-coord="course-vm.umt:146:4">Install a VNC viewer for the workstation you are using to access
+your VM if one is not already installed.
+</p></li><li data-coord="course-vm.umt:149:0"><p data-coord="course-vm.umt:149:4">Run the VNC viewer to connect to <samp data-coord="course-vm.umt:149:37">VM-IP:VNC-PORT</samp>.  Provide your
+VNC password <samp data-coord="course-vm.umt:149:86">VNC-PW</samp> when prompted.  You should see your desktop.
+</p></li></ol></section><section data-coord="course-vm.umt:152:0"><h3 data-coord="course-vm.umt:152:0">vSphere Web Client</h3><ol data-coord="course-vm.umt:155:0"><li data-coord="course-vm.umt:155:0"><p data-coord="course-vm.umt:155:4"><span id="vsphere" data-coord="course-vm.umt:155:15">Go</span> to this URL: <em data-coord="course-vm.umt:155:66"><a href="https://csvb-vc.pods.bu.int/ui/" data-coord="course-vm.umt:155:66">&lt;https://csvb-vc.pods.bu.int/ui/&gt;</a></em>
+</p></li><li data-coord="course-vm.umt:157:0"><p data-coord="course-vm.umt:157:4">Login with your PODS username and password.
+Enter <samp data-coord="course-vm.umt:157:58">PODS\</samp> before your username
+</p></li><li data-coord="course-vm.umt:160:0"><p data-coord="course-vm.umt:160:4">Once the vsphere-client loads, click on the <samp data-coord="course-vm.umt:160:48">Menu</samp> drop down and then
+click <samp data-coord="course-vm.umt:160:84">VMs and Templates</samp>
+</p></li><li data-coord="course-vm.umt:163:0"><p data-coord="course-vm.umt:163:4">On the left-hand side of the interface you can expand the
+tree. Keep expanding the levels until you see a VM whose name is based
+on your PODS ID.  You should see a summary of your VM.
+</p></li><li data-coord="course-vm.umt:167:0"><p data-coord="course-vm.umt:167:4">Use the provided link to open a <strong data-coord="course-vm.umt:167:36">web console</strong> to the VM which will
+allow you to interact with it as if you were sitting in front of
+it using a console which runs within your web browser.
+</p></li></ol><p data-coord="course-vm.umt:171:0">Note that unlike the x2go or vnc options, the vSphere web client will
+not persist your session on your VM.
+</p></section></section><section data-coord="course-vm.umt:176:0"><h2 data-coord="course-vm.umt:176:0">Off-Campus Access to your VM</h2><p data-coord="course-vm.umt:179:0">You will need to tunnel in to your VM in order to access your VM from
+off campus. The exact method you use to establish the tunnel will
+depend on the method you use to access the VM and the OS used on your
+workstation.  The following instructions assume the use of Unix-based
+(Linux, OS/X) workstations.
+</p><section data-coord="course-vm.umt:186:0"><h3 data-coord="course-vm.umt:186:0">X2Go Access</h3><p data-coord="course-vm.umt:190:0">When configuring your X2Go session, select 'Use Proxy server for SSH
+connection'.  Provide the parameters for the proxy server: Type: SSH,
+your login on <samp data-coord="course-vm.umt:190:153">remote.cs</samp>; since <samp data-coord="course-vm.umt:190:172">remote.cs</samp> is a cluster, you may
+want to specify a particular <samp data-coord="course-vm.umt:190:235">remote</samp> for the host; say
+<samp data-coord="course-vm.umt:190:262">remote01.cs.binghamton.edu</samp>.
+</p><p data-coord="course-vm.umt:196:0">The following is a screen shot of my <samp data-coord="course-vm.umt:196:37">x2go</samp> configuration for
+accessing my VM from off-campus:
+</p><img src="webprog-x2go-config.png"/><p data-coord="course-vm.umt:201:0">When connecting, I need to type in passwords for both my VM and
+<samp data-coord="course-vm.umt:201:64">remote.cs</samp>.
+</p></section><section data-coord="course-vm.umt:204:0"><h3 data-coord="course-vm.umt:204:0">VNC Access</h3><p data-coord="course-vm.umt:207:0">Assuming your VNC server is running on VNC port 1 (which corresponds
+to TCP port 5901), set up a tunnel via <samp data-coord="course-vm.umt:207:108">remote.cs</samp> using a script like
+the following:
+</p><pre>SERVER<span class="hl opt">=</span>VM-IP<span class="hl opt">:</span><span class="hl num">5901</span>
+LOCAL_PORT<span class="hl opt">=</span><span class="hl num">5901</span>
+TUNNEL<span class="hl opt">=</span>YOUR-REMOTE-CS-LOGIN&#64;remote.cs.binghamton.edu
+
+<span class="hl kwc">ssh</span> <span class="hl kwb">-fAX -L</span><span class="hl kwd">$LOCAL_PORT</span><span class="hl opt">:</span><span class="hl kwd">$SERVER $TUNNEL</span> <span class="hl kwb">-N</span></pre><p data-coord="course-vm.umt:220:0">You should then be able to set up vnc access to your VM using
+a command like
+</p><pre data-coord="course-vm.umt:224:0">vncviewer localhost:1 &amp;
+</pre></section><section data-coord="course-vm.umt:227:0"><h3 data-coord="course-vm.umt:227:0">Command-Line Access</h3><p data-coord="course-vm.umt:230:0">Set up a tunnel via <samp data-coord="course-vm.umt:230:20">remote.cs</samp> using a script like the following:
+</p><pre>SERVER<span class="hl opt">=</span>VM-IP<span class="hl opt">:</span><span class="hl num">22</span>
+LOCAL_PORT<span class="hl opt">=</span><span class="hl num">2222</span>
+TUNNEL<span class="hl opt">=</span>YOUR-REMOTE-CS-LOGIN&#64;remote.cs.binghamton.edu
+
+<span class="hl kwc">ssh</span> <span class="hl kwb">-fAX -L</span><span class="hl kwd">$LOCAL_PORT</span><span class="hl opt">:</span><span class="hl kwd">$SERVER $TUNNEL</span> <span class="hl kwb">-N</span></pre><p data-coord="course-vm.umt:241:0">You should then be able to set up ssh access to your VM using
+a command like
+</p><pre data-coord="course-vm.umt:245:0">   ssh -p 2222 VM-ID@localhost
+</pre></section></section><section data-coord="course-vm.umt:248:0"><h2 data-coord="course-vm.umt:248:0">Mirror Course Git Repository on your VM</h2><ol data-coord="course-vm.umt:251:0"><li data-coord="course-vm.umt:251:0"><p data-coord="course-vm.umt:251:4">On your VM, create a public-private key-pair:
+</p><pre data-coord="course-vm.umt:254:0">    $ ssh-keygen 
+</pre><p data-coord="course-vm.umt:257:4">If you accept the defaults, you will create a private key in
+<samp data-coord="course-vm.umt:257:69">~/.ssh/id_rsa</samp> and the corresponding public key in
+<samp data-coord="course-vm.umt:257:125">~/.ssh/id_rsa.pub</samp>.  The former should be retained on
+your VM whereas the latter may be distributed to machines
+to which you would like to access from your VM.
+</p></li><li data-coord="course-vm.umt:263:0"><p data-coord="course-vm.umt:263:4">Copy the public member of the above key-pair to <samp data-coord="course-vm.umt:263:52">remote.cs</samp>:
+</p><p data-coord="course-vm.umt:265:6"><samp data-coord="course-vm.umt:265:6">$ ssh-copy-id -i ~/.ssh/id_rsa</samp> <em data-coord="course-vm.umt:265:39">LOGIN</em><samp data-coord="course-vm.umt:265:50">@remote.cs.binghamton.edu</samp>
+</p><p data-coord="course-vm.umt:268:4">where <em data-coord="course-vm.umt:268:10">LOGIN</em> is your login-id on <samp data-coord="course-vm.umt:268:38">remote.cs</samp>.
+</p><p data-coord="course-vm.umt:270:4">You will be prompted for your password on <samp data-coord="course-vm.umt:270:46">remote.cs</samp>.
+</p></li><li data-coord="course-vm.umt:272:0"><p data-coord="course-vm.umt:272:4">Create a ~/git-repos top-level directory to hold all your <samp data-coord="course-vm.umt:272:62">git</samp>
+projects and go into it.
+</p><pre data-coord="course-vm.umt:276:0">      $ mkdir ~/git-repos
+      $ cd ~/git-repos
+</pre></li><li data-coord="course-vm.umt:280:0"><p data-coord="course-vm.umt:280:4">Clone the course web site:
+</p><p data-coord="course-vm.umt:283:6"><samp data-coord="course-vm.umt:283:6">$ git clone</samp> <em data-coord="course-vm.umt:283:20">LOGIN</em><samp data-coord="course-vm.umt:283:31">@remote.cs.binghamton.edu:~umrigar/git-repos/cs580w.git</samp> 
+</p><p data-coord="course-vm.umt:285:4">where <em data-coord="course-vm.umt:285:10">LOGIN</em> is your login-id on <samp data-coord="course-vm.umt:285:38">remote.cs</samp>.  All the files
+contained within the course web site should be copied into a
+<samp data-coord="course-vm.umt:285:135">cs580w</samp> sub-directory.
+</p></li><li data-coord="course-vm.umt:289:0"><p data-coord="course-vm.umt:289:4">Go into the <samp data-coord="course-vm.umt:289:16">cs580w</samp> directory.  You should then see all the course
+web site files.  
+</p></li><li data-coord="course-vm.umt:292:0"><p data-coord="course-vm.umt:292:4">Create a symlink to the <samp data-coord="course-vm.umt:292:28">cs580w</samp> directory in your home directory:
+</p><pre data-coord="course-vm.umt:295:0">    $ cd
+    $ ln -s git-repos/cs580w .
+</pre><p data-coord="course-vm.umt:299:4">This will ensure that scripts can find the directory.
+</p></li></ol><p data-coord="course-vm.umt:301:0">You should never be writing into this directory.  Periodically update
+this directory:
+</p><pre data-coord="course-vm.umt:305:0">     $ cd ~/git-repos/cs580w
+     $ git pull
+</pre><p data-coord="course-vm.umt:309:0">Use <samp data-coord="course-vm.umt:309:4">git log</samp> to see a brief description of the commits made since
+you last updated your directory.
+</p><p data-coord="course-vm.umt:312:0">You should treat this as a read-only repository; you can always update
+your mirror by going into <samp data-coord="course-vm.umt:312:97">~/cs580w</samp> and typing <samp data-coord="course-vm.umt:312:119">git pull</samp>.  You can
+also consider setting up your
+<a href="http://man7.org/linux/man-pages/man1/crontab.1.html" data-coord="course-vm.umt:312:225">crontab</a> to
+periodically <samp data-coord="course-vm.umt:312:249">pull</samp> it.
+</p></section><section data-coord="course-vm.umt:318:0"><h2 data-coord="course-vm.umt:318:0">Manually Tracking cs580w Changes</h2><p data-coord="course-vm.umt:321:0">You can get a summary of all git changes by running a Ruby script:
+</p><pre data-coord="course-vm.umt:324:0">$ ~/cs580w/bin/git-changes.rb
+</pre><p data-coord="course-vm.umt:327:0">This will output a summary of all git changes since the last time
+you ran the script (it records the time via the timestamp on
+<samp data-coord="course-vm.umt:327:127">~/cs580w/.last-login</samp>).
+</p><p data-coord="course-vm.umt:331:0">If you want to see all the commits in a particular directory like <samp data-coord="course-vm.umt:331:66">hws/hw1</samp>:
+</p><pre data-coord="course-vm.umt:334:0">$ cd ~/cs580w
+$ git log --oneline -- hws/hw1
+dcdef92 minor hw1 changes
+05fc1a1 added hw1; minor correction to prj1
+$
+</pre><p data-coord="course-vm.umt:341:0">Your commit id's may differ.
+</p><p data-coord="course-vm.umt:343:0">If you want to see the details of a particular commit, use:
+</p><pre data-coord="course-vm.umt:346:0">$ git log --stat dcdef92^!
+</pre><p data-coord="course-vm.umt:349:0">To see the diff's for a particular commit-id:
+</p><pre data-coord="course-vm.umt:352:0">$ git show dcdef92
+</pre><p data-coord="course-vm.umt:355:0">To restrict the diff's to a particular path:
+</p><pre data-coord="course-vm.umt:358:0">$ git show dcdef92 -- hws/hw1/hw1.umt
+</pre></section></section>
+</div> <!-- #content -->
+</div> <!-- #main -->
+<div id="footer">&nbsp;</div>
+</div> <!-- #page -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../../assets/scripts/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="../../assets/styles/article.css" rel="stylesheet" type="text/css" />
+  <title>Project 3</title>
+
+</head>
+<body>
+<div id="page">
+<span id="opennav"><i class="material-icons">&#xe5d2;</i></span>
+<div id="nav">
+<div id="closenav"><i class="material-icons">&#xe5cd;</i></div>
+<ul>
+<li><a href="../../index.html">Home</a></li>
+<li><a href="../../docs/index.html">Documentation</a></li>
+<li><a href="../../exams-quizzes/index.html">Exams & Quizzes</a></li>
+<li><a href="../../exercises/index.html">Exercises</a></li>
+<li><a href="../../hws/index.html">Homeworks</a></li>
+<li><a href="../../misc/index.html">Miscellaneous</a></li>
+<li><a href="../../projects/index.html">Projects</a></li>
+<li><a href="../../slides/index.html">Slides</a></li>
+
+</ul>
+</div> <!-- #nav -->
+<div id="main">
+  <div id="header">
+<h1>Programming for the Web</h1>
+</div> <!-- #header -->
+<div id="content">
+<section data-coord="prj3.umt:1:0"><h1 data-coord="prj3.umt:1:0">Project 3</h1><p data-coord="prj3.umt:3:0"><strong data-coord="prj3.umt:3:0">Due</strong>: Nov 3 by 11:59p
+</p><p data-coord="prj3.umt:5:0"><strong data-coord="prj3.umt:5:0">Important Reminder</strong>: As per the course <em data-coord="prj3.umt:5:110"><a href="../../misc/academic-honesty-statement/academic-honesty-policy.html" data-coord="prj3.umt:5:110">Academic Honesty Statement</a></em>,
+cheating of any kind will minimally result in receiving an F letter
+grade for the entire course.
+</p><p data-coord="prj3.umt:9:0">This document first provides the aims of this project.  It then lists
+the requirements as explicitly as possible.  It then provides some
+background information.  Finally, it provides some hints as to how
+those requirements can be met.
+</p><section data-coord="prj3.umt:14:0"><h2 data-coord="prj3.umt:14:0">Aims</h2><p data-coord="prj3.umt:17:0">The aims of this project are as follows:
+</p><ul data-coord="prj3.umt:19:0"><li data-coord="prj3.umt:19:0"><p data-coord="prj3.umt:19:4">To introduce you to building
+<a href="https://en.wikipedia.org/wiki/Representational_state_transfer" data-coord="prj3.umt:19:106">REST</a> web services.
+</p></li><li data-coord="prj3.umt:23:0"><p data-coord="prj3.umt:23:4">To expose you to the potential of
+<a href="https://en.wikipedia.org/wiki/HATEOAS" data-coord="prj3.umt:23:83">HATEOS</a> in REST.
+</p></li><li data-coord="prj3.umt:26:0"><p data-coord="prj3.umt:26:4">To give you some familiarity with using the
+<a href="https://expressjs.com/" data-coord="prj3.umt:26:78">express.js</a> web framework.
+</p></li></ul></section><section data-coord="prj3.umt:30:0"><h2 data-coord="prj3.umt:30:0">Requirements</h2><p data-coord="prj3.umt:33:0">You must check in a <samp data-coord="prj3.umt:33:20">submit/prj3-sol</samp> directory in your gitlab
+project such that typing <samp data-coord="prj3.umt:33:88">npm install</samp> within that directory is
+sufficient to run the project using <samp data-coord="prj3.umt:33:163">./index.js</samp> with usage
+as follows:
+</p><pre data-coord="prj3.umt:39:0">$ ./index.js MONGO_DB_URL PORT NOISE_FILE [CONTENT_FILE...]
+</pre><p data-coord="prj3.umt:42:0">where
+</p><dl data-coord="prj3.umt:44:0"><dt data-coord="prj3.umt:44:2"> <samp data-coord="prj3.umt:44:1">MONGO_DB_URL</samp> </dt><dd data-coord="prj3.umt:45:0"><p data-coord="prj3.umt:45:4">Specifies the URL of the mongo database to be used
+for storing document information.
+</p></dd><dt data-coord="prj3.umt:48:2"> <samp data-coord="prj3.umt:48:1">PORT</samp> </dt><dd data-coord="prj3.umt:49:0"><p data-coord="prj3.umt:49:4">Specifies the port at which your program will listen
+for HTTP requests.
+</p></dd><dt data-coord="prj3.umt:52:2"> <samp data-coord="prj3.umt:52:1">NOISE_FILE</samp> </dt><dd data-coord="prj3.umt:53:0"><p data-coord="prj3.umt:53:4">Specifies a path to a file containing words which should
+be ignored within document content and searches.
+</p></dd><dt data-coord="prj3.umt:56:2"> <samp data-coord="prj3.umt:56:1">CONTENT_FILE...</samp> </dt><dd data-coord="prj3.umt:57:0"><p data-coord="prj3.umt:57:4">Specifies zero-or-more paths to files containing content
+which should be used for initializing the document collection.
+</p></dd></dl><p data-coord="prj3.umt:60:0">When started, the program will write its process id <em data-coord="prj3.umt:60:52">PID</em> into a file
+<samp data-coord="prj3.umt:60:70">.pid</samp> in the current directory.
+</p><p data-coord="prj3.umt:63:0">Many of the web services described below are required to return a list
+of <samp data-coord="prj3.umt:63:74">links</samp> to resources.  Each link will have two properties:
+</p><dl data-coord="prj3.umt:66:0"><dt data-coord="prj3.umt:66:2"> <samp data-coord="prj3.umt:66:1">href</samp> </dt><dd data-coord="prj3.umt:67:0"><p data-coord="prj3.umt:67:4">The URL of the linked resource.
+</p></dd><dt data-coord="prj3.umt:69:2"> <samp data-coord="prj3.umt:69:1">rel</samp> </dt><dd data-coord="prj3.umt:70:0"><p data-coord="prj3.umt:70:4">The relationship the resource identified with the link has
+with the resource returned by the web service.
+</p></dd></dl><p data-coord="prj3.umt:73:0">The project requires three types of <samp data-coord="prj3.umt:73:36">rel</samp> relationships:
+</p><dl data-coord="prj3.umt:75:0"><dt data-coord="prj3.umt:75:2"> <samp data-coord="prj3.umt:75:1">self</samp> </dt><dd data-coord="prj3.umt:76:0"><p data-coord="prj3.umt:76:4">The <samp data-coord="prj3.umt:76:8">href</samp> links back to the returned resource.
+</p></dd><dt data-coord="prj3.umt:78:2"> <samp data-coord="prj3.umt:78:1">next</samp> </dt><dd data-coord="prj3.umt:79:0"><p data-coord="prj3.umt:79:4">The <samp data-coord="prj3.umt:79:8">href</samp> links back to the <em data-coord="prj3.umt:79:33">next</em> resource(s) in a collection
+of resources.
+</p></dd><dt data-coord="prj3.umt:82:2"> <samp data-coord="prj3.umt:82:1">previous</samp> </dt><dd data-coord="prj3.umt:83:0"><p data-coord="prj3.umt:83:4">The <samp data-coord="prj3.umt:83:8">href</samp> links back to the <em data-coord="prj3.umt:83:33">previous</em> resource(s) in a collection
+of resources.
+</p></dd></dl><p data-coord="prj3.umt:86:0">Note that <samp data-coord="prj3.umt:86:10">next</samp> and <samp data-coord="prj3.umt:86:21">previous</samp> links can be used by a client for
+scrolling through a collection of resources.
+</p><p data-coord="prj3.umt:89:0">The requirements below only provide partial specifications for error
+conditions.  They specify the HTTP status code for only some errors.
+Suitable HTTP status codes should be returned for other errors.
+Specifically, any server errors should result in a 500 <samp data-coord="prj3.umt:89:257">SERVER_ERROR</samp>
+status code.  Besides the HTTP status code, all error response bodies
+should contain a JSON object giving details of the error with the
+following fields:
+</p><dl data-coord="prj3.umt:97:0"><dt data-coord="prj3.umt:97:2"> <samp data-coord="prj3.umt:97:1">code</samp></dt><dd data-coord="prj3.umt:98:0"><p data-coord="prj3.umt:98:4">A string specifying a code for the error.  
+</p></dd><dt data-coord="prj3.umt:100:2"> <samp data-coord="prj3.umt:100:1">message</samp> </dt><dd data-coord="prj3.umt:101:0"><p data-coord="prj3.umt:101:4">A human readable message giving the details of the error.
+</p></dd></dl><p data-coord="prj3.umt:103:0">Your server should support the following web services:
+</p><dl data-coord="prj3.umt:105:0"><dt data-coord="prj3.umt:105:2"> <strong data-coord="prj3.umt:105:1">Get Content</strong>: <samp data-coord="prj3.umt:105:16">GET /docs/</samp><em data-coord="prj3.umt:105:32">name</em> </dt><dd data-coord="prj3.umt:106:0"><p data-coord="prj3.umt:106:4">Return the contents of the document identified by <em data-coord="prj3.umt:106:54">name</em>.  The
+returned JSON object should have a <samp data-coord="prj3.umt:106:106">content</samp> field giving the
+document's contents and a <samp data-coord="prj3.umt:106:163">links</samp> property specifying a <samp data-coord="prj3.umt:106:193">self</samp>
+link.
+</p><p data-coord="prj3.umt:111:4">If the document <em data-coord="prj3.umt:111:20">name</em> does not exist, the server must return a
+HTTP status of 404 <samp data-coord="prj3.umt:111:91">NOT FOUND</samp> along with a JSON object giving
+details of the error.
+</p></dd><dt data-coord="prj3.umt:115:2"> <strong data-coord="prj3.umt:115:1">Search Content</strong>: <samp data-coord="prj3.umt:115:19">GET /docs?</samp> <em data-coord="prj3.umt:115:32">QUERY_PARAMS</em> </dt><dd data-coord="prj3.umt:116:0"><p data-coord="prj3.umt:116:4">Search for documents which satisfy query parameters <em data-coord="prj3.umt:116:56">QUERY_PARAMS</em>.
+The supported parameters must include the following:
+</p><dl data-coord="prj3.umt:119:0"><dt data-coord="prj3.umt:119:6"> <samp data-coord="prj3.umt:119:1">q</samp> </dt><dd data-coord="prj3.umt:120:0"><p data-coord="prj3.umt:120:8">This <strong data-coord="prj3.umt:120:13">required</strong> parameter specify the terms to be search for.
+Successive search terms will be separated by space (usually
+encoded as a <samp data-coord="prj3.umt:120:159">+</samp> or <samp data-coord="prj3.umt:120:166">%20</samp>).
+</p></dd><dt data-coord="prj3.umt:124:6"> <samp data-coord="prj3.umt:124:1">count</samp> </dt><dd data-coord="prj3.umt:125:0"><p data-coord="prj3.umt:125:8">This optional parameter should specify the maximum number
+of returned results.  Default: 5.
+</p></dd><dt data-coord="prj3.umt:128:6"> <samp data-coord="prj3.umt:128:1">start</samp> </dt><dd data-coord="prj3.umt:129:0"><p data-coord="prj3.umt:129:8">This optional parameter should specify the index of the
+first item in the returned results in the overall results.
+Default: 0.
+</p></dd></dl><p data-coord="prj3.umt:133:4">The returned JSON object should have the following fields:
+</p><dl data-coord="prj3.umt:135:0"><dt data-coord="prj3.umt:135:6"> <samp data-coord="prj3.umt:135:1">results</samp> </dt><dd data-coord="prj3.umt:136:0"><p data-coord="prj3.umt:136:8">A list of results which satisfy <em data-coord="prj3.umt:136:40">QUERY_PARAMS</em>.  Each item
+in the list should be a JSON object containing the following
+fields:
+</p><dl data-coord="prj3.umt:140:0"><dt data-coord="prj3.umt:140:10"> <samp data-coord="prj3.umt:140:1">name</samp> </dt><dd data-coord="prj3.umt:141:0"><p data-coord="prj3.umt:141:5">The name of the matching document.
+</p></dd><dt data-coord="prj3.umt:143:10"> <samp data-coord="prj3.umt:143:1">score</samp> </dt><dd data-coord="prj3.umt:144:0"><p data-coord="prj3.umt:144:5">A score which is a measure of how well the matching document
+matches the search terms.
+</p></dd><dt data-coord="prj3.umt:147:10"> <samp data-coord="prj3.umt:147:1">lines</samp> </dt><dd data-coord="prj3.umt:148:0"><p data-coord="prj3.umt:148:5">A list of the matching lines from the document in source order.
+</p></dd><dt data-coord="prj3.umt:150:10"> <samp data-coord="prj3.umt:150:1">href</samp> </dt><dd data-coord="prj3.umt:151:0"><p data-coord="prj3.umt:151:5">A URL which can be used to access the matching document.
+</p></dd></dl><p data-coord="prj3.umt:153:9">The results must be ordered in descending order by score with
+ties broken by sorting in ascending lexicographical order by
+document name.
+</p><p data-coord="prj3.umt:157:2">If there are no documents which satisfy the <em data-coord="prj3.umt:157:46">QUERY_PARAMS</em>, then
+<samp data-coord="prj3.umt:157:69">results</samp> should be returned as the empty list <samp data-coord="prj3.umt:157:116">[]</samp>.
+</p></dd><dt data-coord="prj3.umt:160:6"> <samp data-coord="prj3.umt:160:1">totalCount</samp> </dt><dd data-coord="prj3.umt:161:0"><p data-coord="prj3.umt:161:8">An integer giving the total number of matching results.
+</p></dd><dt data-coord="prj3.umt:163:6"> <samp data-coord="prj3.umt:163:1">links</samp> </dt><dd data-coord="prj3.umt:164:0"><p data-coord="prj3.umt:164:8">A list of link objects providing links for the <samp data-coord="prj3.umt:164:55">self</samp>, <samp data-coord="prj3.umt:164:63">next</samp>
+and <samp data-coord="prj3.umt:164:75">previous</samp> <samp data-coord="prj3.umt:164:86">rel</samp> relations.
+</p></dd></dl><p data-coord="prj3.umt:167:6">If the request has incorrect <em data-coord="prj3.umt:167:35">QUERY_PARAMS</em>, then the server
+must return a HTTP status of 400 <samp data-coord="prj3.umt:167:106">BAD REQUEST</samp> along with a JSON
+object giving details of the error.
+</p><dl data-coord="prj3.umt:172:0"><dt data-coord="prj3.umt:172:4"> <strong data-coord="prj3.umt:172:1">Add Content</strong>: <samp data-coord="prj3.umt:172:16">POST /docs</samp> </dt><dd data-coord="prj3.umt:173:0"><p data-coord="prj3.umt:173:6">This request will add a document to the collection.  The
+request body must be a JSON object containing the following
+fields:
+</p><dl data-coord="prj3.umt:177:0"><dt data-coord="prj3.umt:177:8"> <samp data-coord="prj3.umt:177:1">name</samp> </dt><dd data-coord="prj3.umt:178:0"><p data-coord="prj3.umt:178:3">A name for the document being added.
+</p></dd><dt data-coord="prj3.umt:180:8"> <samp data-coord="prj3.umt:180:1">content</samp> </dt><dd data-coord="prj3.umt:181:0"><p data-coord="prj3.umt:181:3">The contents of the document being added.
+</p></dd></dl><p data-coord="prj3.umt:183:6">The document should be added to the collection updating the
+contents if added earlier.  Success should be indicated
+by a HTTP status code of 201 <samp data-coord="prj3.umt:183:163">CREATED</samp> with a <samp data-coord="prj3.umt:183:180">Location</samp>
+header giving a URL for the added document and a JSON
+body provided a <samp data-coord="prj3.umt:183:273">href</samp> field with value specifying a URL
+for the added document.
+</p><p data-coord="prj3.umt:190:6">If the request body is incorrect, then the server must return a
+HTTP status of 400 <samp data-coord="prj3.umt:190:95">BAD REQUEST</samp> along with a JSON object giving
+details of the error.
+</p></dd><dt data-coord="prj3.umt:194:4"> <strong data-coord="prj3.umt:194:1">Get Completions</strong>: <samp data-coord="prj3.umt:194:20">GET /completions?text=</samp><em data-coord="prj3.umt:194:48">TEXT</em> </dt><dd data-coord="prj3.umt:195:0"><p data-coord="prj3.umt:195:6">Return a JSON list containing all the completions of the last
+word in <em data-coord="prj3.umt:195:82">TEXT</em> sorted in lexicographically ascending order.  
+</p></dd></dl></dd></dl></section><section data-coord="prj3.umt:199:0"><h2 data-coord="prj3.umt:199:0">Project Log</h2><p data-coord="prj3.umt:203:0">An <em data-coord="prj3.umt:203:14"><a href="aux/LOG" data-coord="prj3.umt:203:14">annotated log</a></em> of using the project using
+<a href="https://curl.haxx.se/" data-coord="prj3.umt:203:82">curl</a> as a client is available.
+</p><p data-coord="prj3.umt:206:0">A working version of the project is also available on
+<em data-coord="prj3.umt:206:88"><a href="http://zdu.binghamton.edu:1235" data-coord="prj3.umt:206:88">&lt;http://zdu.binghamton.edu:1235&gt;</a></em>.  This server has been started
+with all the <samp data-coord="prj3.umt:206:135">_*.txt</samp> files in <em data-coord="prj3.umt:206:180"><a href="../../data/corpus/snark" data-coord="prj3.umt:206:180">&lt;../../data/corpus/snark&gt;</a></em>
+preloaded.  Note that to prevent database buildup, the database is
+reset every one hour.  This service is only available from
+<strong data-coord="prj3.umt:206:309">within</strong> the campus network.
+</p></section><section data-coord="prj3.umt:214:0"><h2 data-coord="prj3.umt:214:0">Provided Files</h2><p data-coord="prj3.umt:217:0">The <a href="./prj3-sol" data-coord="prj3.umt:217:18">prj3-sol</a> directory contains a start for your
+project.  It contains the following files:
+</p><dl data-coord="prj3.umt:220:0"><dt data-coord="prj3.umt:220:4"> <a href="./prj3-sol/docs-ws.js?colorize=true" data-coord="prj3.umt:220:40">docs-ws.js</a></dt><dd data-coord="prj3.umt:221:0"><p data-coord="prj3.umt:221:6">This skeleton file constitutes the guts of your project.
+You will need to flesh out the skeleton, adding code as per
+the documentation.  You should feel free to add any auxiliary
+function or method definitions as required.
+</p></dd><dt data-coord="prj3.umt:226:4"> <a href="./prj3-sol/index.js?colorize=true" data-coord="prj3.umt:226:38">index.js</a></dt><dd data-coord="prj3.umt:227:0"><p data-coord="prj3.umt:227:6">This file provides the complete command-line behavior which is
+required by your program.  It requires
+<a href="./prj3-sol/docs-ws.js?colorize=true" data-coord="prj3.umt:227:159">docs-ws.js.</a>  You
+<strong data-coord="prj3.umt:227:182">must not</strong> modify this file.
+</p></dd><dt data-coord="prj3.umt:232:4"> <a href="./prj3-sol/README" data-coord="prj3.umt:232:22">README</a></dt><dd data-coord="prj3.umt:233:0"><p data-coord="prj3.umt:233:6">A README file which must be submitted along with your project.
+It contains an initial header which you must complete (replace
+the dummy entries with your name, B-number and email address at
+which you would like to receive project-related email).  After
+the header you may include any content which you would like read
+during the grading of your project.
+</p></dd></dl><p data-coord="prj3.umt:240:0">The course <a href="../../data" data-coord="prj3.umt:240:25">data</a> directory containing test data has an
+additional <a href="../../data/corpus/snark" data-coord="prj3.umt:240:106">corpus</a> with documents containing
+the individual verses of Lewis Carroll's
+<em data-coord="prj3.umt:240:253"><a href="https://www.poetryfoundation.org/poems/43909/the-hunting-of-the-snark" data-coord="prj3.umt:240:253">The Hunting of the Snark</a></em> poem.  The emphasis of this project is not
+on indexing or the database and this new corpus allows searching many
+small documents.
+</p><p data-coord="prj3.umt:248:0">Additionally, the course <a href="../../lib" data-coord="prj3.umt:248:38">lib</a> directory contains a
+modified solution to your previous project so that it can be used as a
+module for your project.  Changes from the solution include the
+following:
+</p><ul data-coord="prj3.umt:253:0"><li data-coord="prj3.umt:253:0"><p data-coord="prj3.umt:253:4">The <samp data-coord="prj3.umt:253:8">find()</samp> instance method of <samp data-coord="prj3.umt:253:36">DocFinder()</samp> takes a single
+string parameter specifying the words to be searched for
+(previously it took a list of non-noise words).
+</p></li><li data-coord="prj3.umt:257:0"><p data-coord="prj3.umt:257:4">A single <samp data-coord="prj3.umt:257:13">create()</samp> factory method is used to construct
+a <samp data-coord="prj3.umt:257:66">DocFinder</samp> instance (previously, construction required
+a call to a constructor followed by a call to <samp data-coord="prj3.umt:257:172">init()</samp>).
+</p></li><li data-coord="prj3.umt:261:0"><p data-coord="prj3.umt:261:4">The <samp data-coord="prj3.umt:261:8">lines</samp> in the search result object has been changed from
+a string to a list.
+</p></li></ul></section><section data-coord="prj3.umt:264:0"><h2 data-coord="prj3.umt:264:0">Testing your Project</h2><p data-coord="prj3.umt:267:0">Since this project requires implementing web services, you will
+need a web client for testing your project.  You could simply
+use a web browser but doing so will be inconvenient especially
+for <samp data-coord="prj3.umt:267:193">POST</samp> requests.
+</p><p data-coord="prj3.umt:272:0">One alternative is to use a command-line client like
+<a href="https://curl.haxx.se/" data-coord="prj3.umt:272:78">curl</a> as in the provided <em data-coord="prj3.umt:272:113"><a href="aux/LOG" data-coord="prj3.umt:272:113">annotated
+log</a></em>.  You can pretty-print the returned JSON using <samp data-coord="prj3.umt:272:176">json_pp</samp> (already
+available on your VM) or <samp data-coord="prj3.umt:272:220">jq .</samp>.  If using the latter, you will need to
+install it on your VM:
+</p><pre data-coord="prj3.umt:279:0">$ sudo apt-get install -y jq
+</pre><p data-coord="prj3.umt:282:0">Another alternative is to use a GUI client like
+<a href="https://chrome.google.com/webstore/detail/restlet-client-rest-api-t/aejoelaoggembcahagimdiliamlcdmfm?hl=en" data-coord="prj3.umt:282:158">Restlet.</a>
+</p></section><section data-coord="prj3.umt:285:0"><h2 data-coord="prj3.umt:285:0">Hints</h2><p data-coord="prj3.umt:288:0">This project merely requires four handler functions for the four
+required web services plus any auxiliary functions you may choose to
+define.
+</p><p data-coord="prj3.umt:292:0">The following steps are not prescriptive in that you may choose to ignore
+them as long as you meet all project requirements.
+</p><ol data-coord="prj3.umt:295:0"><li data-coord="prj3.umt:295:0"><p data-coord="prj3.umt:295:4">Read the project requirements thoroughly.  Look at the sample
+<a href="./aux/LOG" data-coord="prj3.umt:295:83">log</a> to make sure you understand the necessary
+behavior and play with the solution available on
+<em data-coord="prj3.umt:295:220"><a href="http://zdu.binghamton.edu:1235" data-coord="prj3.umt:295:220">&lt;http://zdu.binghamton.edu:1235&gt;</a></em>.
+</p></li><li data-coord="prj3.umt:300:0"><p data-coord="prj3.umt:300:4">Study the <em data-coord="prj3.umt:300:50"><a href="../../slides/user-ws/user-ws.pdf" data-coord="prj3.umt:300:50">User Web Services</a></em>
+<a href="../../slides/user-ws/code/user-ws" data-coord="prj3.umt:300:111">code</a> discussed in class.
+In particular, note the set up of the routes as well as the
+wrapping of handlers to ensure that any server errors are
+handled properly.
+</p></li><li data-coord="prj3.umt:306:0"><p data-coord="prj3.umt:306:4">You can use the provided <samp data-coord="prj3.umt:306:29">doc-finder</samp> project as a module
+in this project.  Install its dependencies:
+</p><pre data-coord="prj3.umt:310:0">    $ cd ~/cs580w/lib/doc-finder
+    $ npm install
+</pre><p data-coord="prj3.umt:314:4">You should be able to run the project using <samp data-coord="prj3.umt:314:48">./docs-cli.js</samp>,
+with the same command-line behavior as your previous project.
+</p></li><li data-coord="prj3.umt:317:0"><p data-coord="prj3.umt:317:4">Start your project by creating a <samp data-coord="prj3.umt:317:37">work/prj3-sol</samp> directory.
+Change into that directory and initialize your project
+by running <samp data-coord="prj3.umt:317:138">npm init -y</samp>.  This will create a <samp data-coord="prj3.umt:317:173">package.json</samp>
+file; this file should be committed to your repository.
+</p></li><li data-coord="prj3.umt:322:0"><p data-coord="prj3.umt:322:4">Copy the provided files into your project directory:
+</p><pre data-coord="prj3.umt:325:0">    $ cp -p $HOME/cs580w/projects/prj3/prj3-sol/* .
+</pre><p data-coord="prj3.umt:328:4">This should copy in the <samp data-coord="prj3.umt:328:28">README</samp> template, the <samp data-coord="prj3.umt:328:51">index.js</samp>
+command-line interface program, and the <samp data-coord="prj3.umt:328:106">docs-ws.js</samp> skeleton file
+into your project directory.
+</p></li><li data-coord="prj3.umt:332:0"><p data-coord="prj3.umt:332:4">Install project dependencies.  Minimally, you will need
+<samp data-coord="prj3.umt:332:64">cors</samp>, <samp data-coord="prj3.umt:332:72">express.js</samp> and the locally installed doc-finder module:
+</p><pre data-coord="prj3.umt:336:0">    $ npm install cors express ~/cs580w/lib/doc-finder
+</pre><p data-coord="prj3.umt:339:4">Note that npm will install the local <samp data-coord="prj3.umt:339:41">doc-finder</samp> module
+by creating symlinks in your <samp data-coord="prj3.umt:339:94">node_modules</samp> directory.
+You should be able to run its command-line interface:
+</p><pre data-coord="prj3.umt:345:0">    $ ./node_modules/.bin/doc-finder
+</pre></li><li data-coord="prj3.umt:349:0"><p data-coord="prj3.umt:349:4">You should now be able to run the project: 
+</p><pre data-coord="prj3.umt:352:0">    $ ./index.js
+    usage: index.js MONGO_DB_URL PORT NOISE_FILE [CONTENT_FILE...]
+    $
+</pre></li><li data-coord="prj3.umt:357:0"><p data-coord="prj3.umt:357:4">You will need to add routes to the provided <samp data-coord="prj3.umt:357:48">docs-ws.js</samp> skeleton
+file.  Start by adding a route for the <strong data-coord="prj3.umt:357:113">Get Content</strong> service.  You
+will need to use a simple pattern to match the document name.
+Within your handler, you can access what matched a pattern
+identifier by using that identifier as a property on <samp data-coord="prj3.umt:357:327">req.params</samp>.
+</p><p data-coord="prj3.umt:363:4">First simply ensure that you can use the <samp data-coord="prj3.umt:363:45">docContent()</samp>
+<samp data-coord="prj3.umt:363:64">DocFinder</samp> method to return the requested content.  Then return a
+JSON object as per the specs; you can use the provided <samp data-coord="prj3.umt:363:190">baseUrl()</samp>
+function to help build the URL needed for the required <samp data-coord="prj3.umt:363:261">self</samp> link
+in the response.
+</p></li><li data-coord="prj3.umt:369:0"><p data-coord="prj3.umt:369:4">Implement the <strong data-coord="prj3.umt:369:18">Get Completions</strong> service using the <samp data-coord="prj3.umt:369:54">complete()</samp>
+<samp data-coord="prj3.umt:369:71">DocFinder</samp> method.  You can access query parameters as properties
+of the <samp data-coord="prj3.umt:369:149">req.query</samp> object.  Add verification to return a suitable
+error response when the <samp data-coord="prj3.umt:369:236">text</samp> query parameter is missing.
+</p></li><li data-coord="prj3.umt:374:0"><p data-coord="prj3.umt:374:4">Implement the <strong data-coord="prj3.umt:374:18">Search Content</strong> service using the <samp data-coord="prj3.umt:374:53">find()</samp> <samp data-coord="prj3.umt:374:62">DocFinder()</samp>
+method (note that the change in specs for <samp data-coord="prj3.umt:374:122">find()</samp> from your previous
+project allows you to provide the <samp data-coord="prj3.umt:374:188">q</samp> parameter directly
+as its argument).  Note that you will need to add a suitable
+<samp data-coord="prj3.umt:374:280">href</samp> property to each result returned by the <samp data-coord="prj3.umt:374:327">find()</samp> method.
+</p><p data-coord="prj3.umt:380:4">You should probably split off validations for the query parameters
+and assembly of the response into auxiliary functions.  You can
+use JavaScript's <samp data-coord="prj3.umt:380:160">Number()</samp> function to convert from the incoming
+<samp data-coord="prj3.umt:380:213">String</samp> parameters to numbers.
+</p></li><li data-coord="prj3.umt:385:0"><p data-coord="prj3.umt:385:4">Implement the <strong data-coord="prj3.umt:385:18">Add Content</strong> service using the <samp data-coord="prj3.umt:385:50">addContent()</samp>
+<samp data-coord="prj3.umt:385:69">DocFinder</samp> method.  
+</p></li><li data-coord="prj3.umt:388:0"><p data-coord="prj3.umt:388:4">Iterate until you meet all requirements.  
+</p></li></ol><p data-coord="prj3.umt:390:0">It is a good idea to commit and push your project periodically whenever
+you have made significant changes.  When it is complete, please follow
+the procedure given in the
+<em data-coord="prj3.umt:390:215"><a href="../../misc/gitlab-setup/gitlab-setup.html" data-coord="prj3.umt:390:215">gitlab setup directions</a></em> to
+submit your project using the <samp data-coord="prj3.umt:390:274">submit</samp> directory.
+</p></section></section>
+</div> <!-- #content -->
+</div> <!-- #main -->
+<div id="footer">&nbsp;</div>
+</div> <!-- #page -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../../assets/scripts/nav.js"></script>
+</body>
+</html>

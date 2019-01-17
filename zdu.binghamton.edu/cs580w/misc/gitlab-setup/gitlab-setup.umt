@@ -1,0 +1,213 @@
+                     G i t L a b   S e t u p
+
+We will be using .<https://git-scm.com/doc> git for project submissions:
+
+  + You will be submitting your course projects using a private
+    git repository on .<https://gitlab.com> gitlab.com.
+
+  + Project submission will be done from a clone of your gitlab
+    repository on your course VM.
+
+You should obtain basic familiarity with `git` by looking at the
+copious documentation and tutorials available on the web.
+
+
+                      Quick Start
+                      ===========
+
+If you know what you are doing, this `tl;dr` section should largely suffice:
+
+  # Set up a personal gitlab account and create a `i480w` or `i580w`
+    git project, depending on the course you are registered for.  Set up
+    two gitlab users to share your project with assigned role `Reporter`:
+
+      # `@umrigar`.
+
+      # *One of* `@mjohns54` (for CS 480W), `@vkudalk1` (for CS
+        580W-01), `@nraverk1` (for CS 580W-02).
+
+    As there are many similar names and some people may have multiple
+    accounts, *make 100% sure that you have the correct gitlab
+    accounts* (the `@`"ID"'s must match).
+
+  # Clone your gitlab project into the `~/git-repos` directory on your
+    VM.
+
+  # Create a top-level `.gitignore` file in your git project to
+    ignore `node_modules` and `*~`.
+
+  # Within the cloned directory, use a `work` subdirectory for
+    working on projects and a `submit` subdirectory for submitting
+    projects.  If submitting late, email the grader assigned to your
+    course.
+
+
+
+The following sections explain each of the above steps in detail.
+
+
+                Setting Up A Git Lab Repository
+                ===============================
+                
+Each student needs to set up a *private* git project called `i480w` or
+`i580w` (depending on the course you are registered for) on gitlab.
+It will be referred to as "iXXX" in the sequel.  This repository will
+be shared with the instructor and course grader and will be used for
+submitting projects for grading.
+
+  # Go to .<https://gitlab.com> gitlab.com.
+
+  # Click on `Sign In/Register`, select the *Register* tab and
+    complete the form.  You may choose any appropriate *Username*, but
+    it is strongly recommended that you use the user-name associated
+    with your `binghamton.edu` email id (if it is available).
+
+    Please ensure that you provide your `binghamton.edu` email address
+    in the *Email* field.  This may make it slightly easier for the
+    grader to associate your gitlab account with your BU id.
+
+  # Once you have submitted your form, you will need to complete your
+    registration by clicking on the link provided in an email which
+    will be sent to the email address you provided during
+    registration.
+
+  # Set up your account appropriately.  Upload the generated *public*
+    ssh-key from your VM (default `~/.ssh/id_rsa.pub`) to gitlab by
+    copying-and-pasting it into your
+    .<https://gitlab.com/profile/keys> profile.
+
+  # To set up a project for the course, click on the green *New
+    Project* button on your .<https://gitlab.com> "gitlab home page".
+
+  # Fill in the project name as `i480w` or `i580w` depending on which
+    course you are registered for (this is absolutely essential).
+    Make sure that you set up your project as *Private*.  Provide a
+    suitable description for the project.  Make sure to select
+    `Initialize repository with a README`. Hit the *Create project*
+    button.
+
+  # Go to your project using the link you will now find on your gitlab
+    homepage. Go to `Settings->Members` from the left-hand side
+    navigation.  Go to the *Add member* tab and add in the course
+    grader and instructor as project members with *Reporter* roles.
+
+    You can get to the gitlab user id by searching on the person's name.
+
+      # Add in your grader with role `Reporter`:
+
+          + If registered for CS 480W (meeting MWF 3:30-4:30p), add
+            Mr. Maryson Johnson having gitlab id `@mjohns54` as your grader. 
+
+          + If registered for CS 580W-01 (meeting MW 6:15-7:40p), add
+            Ms. Vidisha Kudalkar having gitlab id `@vkudalk1` as your
+            grader.
+
+          + If registered for CS 580W-02 (meeting MW 12:30-2:00p), add
+            Mr. Nikhil Raverkar having gitlab id `@nraverk1` as your
+            grader.
+
+        *Since multiple accounts will show up in the search results,
+        please ensure that you choose the correct account with the
+        matching @ID*.
+    
+      # Add in the member with gitlab id `@umrigar` with role
+        *Reporter*.  You can get to the gitlab id by doing a search for
+        `umrigar`
+
+        *Since multiple accounts will show up in the search results
+        for "umrigar", please ensure that you choose the correct
+        account @umrigar.*
+    
+    Make sure to specify the *Reporter* role for both new members.
+
+                  Initializing Your Repository on your VM
+                  =======================================
+
+Clone your gitlab repository into your `~/git-repos` directory:
+
+  `$ cd ~/git-repos` .;
+  `$ git clone` "YOUR_GITLAB_PROJECT_URL" .;
+
+You can copy and paste your gitlab project URL from your project
+page.  If you get an error when doing so, recheck your ssh keys.
+
+Set up a `.gitignore` (note the leading `.`) at the top-level of
+your git project to contain at least the following two lines:
+
+```
+node_modules
+*~
+```
+
+and commit:
+
+    ```
+    git add .gitignore
+    git commit -m 'ignore node_modules dir & emacs backups'
+    ```
+
+
+                Working On and Submitting Projects
+                ==================================
+
+To work on and submit projects, you must create `work` and `submit`
+directories within your "iXXX" directory where "iXXX" is the directory
+containing the clone of your gitlab project:
+
+   `$ cd ~/git-repos/` .- "iXXX" .;
+   `$ mkdir work submit`
+
+
+Create your project solution directories `prj`"i"`-sol` within your
+`work` directory.  As you work on your project, keep committing and
+pushing your changes.  This ensures that you do not accidentally loose
+your work.
+
+When ready to submit your project, you must move it over to your `submit`
+directory.  Assuming that you are in your "iXXX" directory:
+
+    `$ git mv work/prj`"i"`-sol` `submit` .;
+    `$ git commit -m 'submitted project` "i" .- `'` .;
+    `$ git push`
+
+If you find a problem with your submission, you may directly update
+your project in the `submit` directory.  The timestamp of the latest
+commit and push within the `submit` directory will count as the
+submission time for your project.
+
+Do not confuse the gitlab project with the course projects you will be
+submitting.  You will only have a single gitlab "iXXX" project, but
+will have multiple course projects (typically 5) under your gitab project.
+So by the end of the semester your `i580w` gitlab project may look like:
+
+```
+i580w/---+-submit/---+-prj1-sol/
+         |           |
+         |           +-prj2-sol/
+         ...         ...
+         |           |
+         |           +-prj5-sol/
+         |
+         +-work/-----+-prj1-sol/
+                     |
+                     +-prj2-sol/
+                     ...
+                     |
+                     +-prj5-sol/
+```
+
+You should feel free to create any other subdirectories within your
+"iXXX" directory.  The only directory which will be monitored for
+submitted projects is the `submit` directory.
+
+If the submission is late, please email the grader assigned to your course:
+
+  :*CS 480W* (meeting MWF 3::30-4::30p):
+     Maryson Johnson .<mailto:mjohns54@binghamton.edu> mjohns54@binghamton.edu .;
+
+  :*CS 580W-01* (meeting MW 6::15-7::40p): 
+     Vidisha P Kudalkar .<mailto:vkudalk1@binghamton.edu> vkudalk1@binghamton.edu .;
+  :*CS 580W-02* (meeting MW 12::30-2::00p):
+    Nikhil C Raverkar .<mailto:nraverk1@binghamton.edu> nraverk1@binghamton.edu .;
+
+

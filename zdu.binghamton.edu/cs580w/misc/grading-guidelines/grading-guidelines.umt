@@ -1,0 +1,251 @@
+		  G r a d i n g   G u i d e l i n e s
+
+[This document is available in multiple formats:
+.<./grading-guidelines.umt> "text", .<./grading-guidelines.html>
+"HTML", and .<./grading-guidelines.pdf> "PDF".]
+
+The following should be regarded as what they are: merely "guidelines"
+rather than hard-and-fast rules.
+
+
+			     General Grading Guidelines
+			     ==========================
+
+The following guidelines apply to grading both homeworks and projects:
+
+  + The grading should be as consistent as possible:
+
+      #  For each assignment, between different students.
+
+      #  Between different assignments, though that is less important than
+         (1).
+
+  + To help achieve consistency, it may be a good idea to hold off on
+    completing grading, until the late submission deadline has passed.  Of
+    course, end-of-semester and other deadlines may preclude this.
+
+  + For what seem to be minor problems, 1/2 a point can be taken off.
+    However, when the overall assignment grade is recorded it should be
+    rounded up to the nearest integer.
+
+  + The guidelines given here are not inviolate and can be violated when it
+    makes sense to do so.
+
+			Exam and Homework Grading Guidelines
+			====================================
+
+  + Not all homework/exam questions have exactly one answer; in fact, some
+    homeworks questions may be vague, intentionally or sometimes
+    unintentionally.  The student's answer to such questions should be
+    graded against what the question (and any clarifications made to it)
+    actually specifies and not only by comparison with the solution.  For
+    such questions, the provided solution may be only one of many possible
+    solutions.
+
+  + It is the student's obligation to ensure that work turned in is readable
+    by any average person. A grader should not feel obligated to decipher
+    illegible scribblings.
+
+  + It is the student's obligation to clearly indicate which answers are
+    canceled; if there are multiple answers to the same question, then only
+    the last answer will be graded.
+
+  + A reasonable answer should get at least 50% of the maximum points for
+    that question.
+
+  + If a question is marked `[RECORD]`, then the grader should record the
+    grade obtained for that question individually for each student.
+    
+
+			  Project Grading Guidelines
+			  ==========================	
+
+  + A project may be submitted multiple times before the project submission
+    deadline.  Only the last submission should be graded.  It is expected
+    that students do not abuse this privilege.
+
+  + If a project does not compile, the student should usually get no more
+    than 65%.  Depending on how complete the project is, it may get
+    appreciably less.  In this case, it is useful to look for README or
+    other files the student may have enclosed explaining the status of his
+    or her project.
+
+    If it doesn't compile because it appears to be missing a file,
+    then the grader *may* attempt to contact the student by email.
+    However, the grader has no obligation to do so, since it is entirely
+    the student's responsibility to ensure that the submission is
+    complete.
+
+  + If a project compiles and passes all its runtime tests it should be
+    guaranteed at least 85% assuming it has met *all* aspects of the project
+    specification.  Note that this does not imply that a project which fails
+    a single test cannot get more than 85%.
+
+  + The remaining 15% should be a judgement call on the grader's part.  Things
+    like the following:
+
+      + Quality of code.  Is it modular?  Does it exhibit cut-and-paste reuse
+        rather than reuse using programming constructs?
+
+	If a reader cannot understand the code because the code logic
+        is convoluted with assignments to the same variable
+        interspersed in complex control flow, then that is often an
+        indication of poor code quality.
+
+        5-10 points may be taken off for particularly egregious submissions.
+
+      + Is it well-commented?  Note that the important point is that
+        the program should be easily understandable and not that it
+        meet some bureaucratic guidelines that every function have
+        comments in such-and-such form.  Also note that a program
+        understandable on its own with minimal or even no comments is
+        preferable to a convoluted program which needs heavy
+        commenting to explain its convolutions.
+
+      + Is it over-commented?  Does it exhibit the `i++; /* increment i */`
+        syndrome?
+
+      + Consistency of formatting and naming conventions.  No
+        particular style is mandated as we all have our favorites.
+        The consistency though is important and IMHO a important
+        indicator of how well crafted the program may be.  5-10 points
+        may be taken off for particularly egregious submissions.
+
+      + Are there unnecessary fixed limits built into the code?  Are
+        there arrays declared with a fixed size which does not
+        naturally follow from the problem domain?
+
+      + Are there magic numbers hardwired into code rather than being
+        referenced via symbolic names.  This is such an egregious
+        violation of good programming practice that even a single
+        violation can be penalized by taking off 5 points.
+
+      + Does the project use the method(s) and algorithm(s) specified
+        in the assignment.  If not, you can take off much more than
+        15%, depending on how far off the project went from the spirit
+        of the assignment.
+
+  + The grader should usually merely be glancing at the code.  If a test case
+    has failed, then an attempt may be made to try finding out what caused
+    it to fail, but usually it would be unreasonable to spend more than a
+    couple of minutes on it.
+
+A graded project should be returned to the students either by hardcopy
+or email.  The returned material should contain at least the
+following:
+
+  a) The overall grade (and breakup if applicable).
+
+  b) A copy of the student's README file.
+
+  c) Log of the compilation.
+
+  d) Some description of the test case(s) used along with inputs and 
+     expected outputs.
+
+  e) Log of the program execution.
+
+Additionally it may also contain listings of portions of the students
+programs with the grader's comments added.
+
+
+	      	        Recording Grades
+			================
+
+Before assignments are returned to the student, the grader should
+record those grades electronically.  Since *mycourses* is not capable
+of performing the computations needed for determining the overall
+grade, it is advisable to use a spreadsheet like Google Sheets, Excel,
+or Open-Office to maintain the master copy of the grades for the
+class.  After the master copy has been updated, the changes can be
+uploaded over to *mycourses* so that they can be accessed by students.
+
+It is important to ensure that the spreadsheet distinguishes between
+assignments which were not turned in and those for which a zero grade
+was obtained.  The former should not be used in computing course
+statistics whereas the latter should be used.
+
+      	       		Accreditation Requirements
+			==========================
+
+For accreditation purposes, it is necessary to track the work done by
+students.  Specifically, if a question on a homework or exam is
+marked `[RECORD]`, then the grader should record the grade obtained for that
+question individually for each student.
+
+
+       	      	  	 Assignment of Final Grades
+			 ==========================
+
+Letter grades will be assigned strictly monotonically based on the overall
+grades with major input from the grader.  If at all possible, students whose
+overall grades differ by a very tiny amount will receive the same letter
+grade.
+
+Assignment of final grades will be done during a meeting after all
+work has been graded.  For this meeting, the TA should provide a tab
+containing a summary of all the class grades (details of grades for
+individual assignments can be on other tabs).  Headings on the summary
+tab should be fixed so that they are always visible as the content of
+the tab are scrolled.  This tab should contain the following columns:
+
+  # A single column for the student name titled `Student Name`.  Each
+    entry should be of the form "Last"`,` "First".
+
+  # A single column for the students B-number titled `B-Number`.
+
+  # A single column for the grade for each project assigned titled
+    `prj`"N" for "N" in 1, 2...
+
+  # A single column the grade for for each homework assigned titled
+    `hw`"N" for "N" in 1, 2...
+
+  # A single column for the grade for each quiz assigned `qz`"N" for
+    "N" in 1, 2...
+
+  # A single column for the overall project grade out of 100, titled
+    `PrjAvg` with lowest grades dropped as per the course grading
+    policy.
+
+  # A single column for the overall homework grade out of 100, titled
+    `HwAvg` with lowest grades dropped as per the course grading
+    policy.
+
+  # A single column for the overall quiz grade out of 100, titled
+    `QzAvg` with lowest grades dropped as per the course grading
+    policy.
+
+  # A single column for the midterm grade titled `Mid`.
+
+  # A column for the final grade titled `Fin`.
+
+  # A single column for the overall course grade out of 100 titled
+    `Total` weighted as per the weights specified in the course
+    grading policy.
+
+  # A single column for the assigned letter grade titled `Grade`.
+    This column will be completed during the meeting.
+
+  # During the meeting, the cutoffs used will be recorded in the
+    spreadsheet, possibly on a separate tab.
+
+There should be a row for each student with the rows set up in
+alternating colors so that they are easy to scan.  These rows should
+be sorted in descending order by the `Total` column.
+
+Additionally, at the bottom of the sheet there should be a row giving
+course statistics for each individual column:
+
+  # Number submitted titled `Number`.
+
+  # Maximum grade titled `Max`.
+
+  # Average grade titled `Average`.
+
+  # Minimum grade titled `Min`.
+
+A printout should be provided before the meeting of this tab in
+landscape mode with the fonts and column widths adjusted so that all
+columns fit within a single sheet.  If that is impossible and students
+can be uniquely identified by their names drop the B-number column.
+

@@ -1,0 +1,49 @@
+#!/bin/sh
+
+#run using sudo
+
+apt-get update
+apt-get install -y xubuntu-desktop 
+
+#set up for automatic unattended upgrades; important for security
+apt-get install -y unattended-upgrades
+
+#popular revision control system
+apt-get install -y git 
+
+#install packages which may be necessary in building native js modules
+apt-get install -y software-properties-common build-essential libssl-dev
+
+#install nodejs and npm
+apt-get install -y nodejs
+apt-get install -y npm
+
+#install nodejs testing package + db
+apt-get install -y mocha mongodb
+
+#editors
+apt-get install -y xauth emacs vim
+
+#remote desktop vnc
+apt-get install -y tightvncserver xtightvncviewer
+
+#
+apt-get install -y xfce4 gnome-system-tools
+
+#install autocutsel for VNC copy text between client and server
+apt-get install -y autocutsel
+
+#google-chrome
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub \
+  | apt-key add -
+echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' \
+  | sudo tee /etc/apt/sources.list.d/google-chrome.list 
+apt-get install -y google-chrome-stable
+
+#x2go remote desktop
+apt-add-repository ppa:x2go/stable
+apt-get update
+apt-get install -y x2goserver x2goclient x2goserver-xsession
+
+#ruby
+apt-get install -y ruby

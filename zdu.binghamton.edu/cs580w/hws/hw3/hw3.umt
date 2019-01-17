@@ -1,0 +1,111 @@
+                      H o m e w o r k   3 
+
+*Due Date*: Nov 14; To be turned in on paper in class.
+
+.% *No late submissions.* %
+
+*Important Reminder*: As per the course .<../../misc/academic-honesty-statement/academic-honesty-policy.html> "Academic Honesty Statement",
+cheating of any kind will minimally result in receiving an F letter
+grade for the entire course.
+
+Please remember to justify all answers.
+
+%%%
+Note that some of the questions require you to show code or the output
+resulting from some code.  You may use a JavaScript implementation to
+verify your answers but you should realize that you will not have
+access to an implementation during exams.
+%%%
+
+You are encouraged to use the web or the library but are required to
+cite any external sources used in your answers.
+
+  # The mustache template given in the
+    .<../../slides/templates/code/mustache-play/recursive.js>
+    recursive.js example discussed in class depends on one of the bad
+    parts of JavaScript and would not work in other languages like
+    Ruby.  Identify why that is so and how would you fix it to remove
+    the problem?  "15-points"
+
+  # When search terms include noise words in
+    .<../../projects/prj4/prj4.html> "Project 4", those noise words
+    are also highlighted in successful results. 
+
+      # Is this a bug or a feature?
+
+      # What changes would you need to make in the overall setup for
+        projects 3 and 4 to ensure that noise words are not
+        highlighted in successful results?  "15-points"
+
+  # The last route used for the
+    .<../../slides/users-ss/code/users/users.js> "users application"
+    has a comment .~//must be last~.  Discuss why this is so.  What
+    changes would you make to avoid such ordering requirements?
+    "10-points"
+
+
+  # Discuss how you would design RESTful web services for recording
+    and retrieving student grades for a typical university.
+    Specifically, your discussion should include the following:
+
+      + Details of the data model including support for different
+        grading policies for different courses.
+
+      + The web service API including choice of HTTP methods,
+        URLs and parameters.
+
+    You may regard any authorization requirements for the web services
+    as orthogonal issues outside the scope of your design.  "15-points"
+
+
+  # Discuss which HTML control you would use for each of the following
+    form controls:
+
+      # A control which allows the user to provide the percentage
+        of components which are defective.
+
+      # A control which allows the user to select one-or-more
+        of the courses which are currently being offered by
+	the CS department.
+
+      # A control which allows the user to enter a customer-service
+        complaint.
+        
+      # A control which allows the user to enter in a BU B-Number.
+
+      # A control which allows the user to select their favorite
+        dessert from a predefined list of desserts.
+
+      # A control which allows a US user to enter in a telephone
+        number (which may be an international phone number).
+
+    Your answers should be set up to maximally constrain the user's
+    input to legal values and minimize the opportunity for error.  You
+    should use at most a single HTML control for each of the above and
+    should provide the actual HTML code for each control. "15-points"
+
+
+  # Discuss how you would serialize an abitrary JavaScript object
+    *hierarchy* to HTML using mustache.  You may assume that the
+    values of object properties are either primitives or objects or
+    arrays.  "15-points"
+
+  # Discuss the validity of the following statements. What is more
+    important than whether you ultimately classify the statement as
+    *true* or *false* is your justification for arriving at your
+    conclusion. "15-points"
+
+      # It is more efficient to send JSON rather than XML over a
+        network since JSON is a more compact representation than XML.
+
+      # If an attempt to create a resource using `PUT` hangs, then it
+        is ok to make a second attempt.
+
+      # If an attempt to create a resource using `POST` hangs, then it
+        is ok to make a second attempt.
+
+      # If a HTML document has a syntax error, then an attempt to
+        render it in a browser will result in an empty page.
+
+      # REST is a framework for building web services.
+

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="../../assets/styles/article.css" rel="stylesheet" type="text/css" />
+  <title>Homework 3 Solution</title>
+<link href="hw3-sol/hl-fine_blue.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="page">
+<span id="opennav"><i class="material-icons">&#xe5d2;</i></span>
+<div id="nav">
+<div id="closenav"><i class="material-icons">&#xe5cd;</i></div>
+<ul>
+<li><a href="../../index.html">Home</a></li>
+<li><a href="../../docs/index.html">Documentation</a></li>
+<li><a href="../../exams-quizzes/index.html">Exams & Quizzes</a></li>
+<li><a href="../../exercises/index.html">Exercises</a></li>
+<li><a href="../../hws/index.html">Homeworks</a></li>
+<li><a href="../../misc/index.html">Miscellaneous</a></li>
+<li><a href="../../projects/index.html">Projects</a></li>
+<li><a href="../../slides/index.html">Slides</a></li>
+
+</ul>
+</div> <!-- #nav -->
+<div id="main">
+  <div id="header">
+<h1>Programming for the Web</h1>
+</div> <!-- #header -->
+<div id="content">
+<section data-coord="hw3-sol.umt:1:0"><h1 data-coord="hw3-sol.umt:1:0">Homework 3 Solution</h1><p data-coord="hw3-sol.umt:3:0"><strong data-coord="hw3-sol.umt:3:0">Due Date</strong>: Nov 14; To be turned in on paper in class.
+</p><p data-coord="hw3-sol.umt:5:0">
+</p><p data-coord="hw3-sol.umt:7:0"><strong data-coord="hw3-sol.umt:7:0">Important Reminder</strong>: As per the course <em data-coord="hw3-sol.umt:7:110"><a href="../../misc/academic-honesty-statement/academic-honesty-policy.html" data-coord="hw3-sol.umt:7:110">Academic Honesty Statement</a></em>,
+cheating of any kind will minimally result in receiving an F letter
+grade for the entire course.
+</p><p data-coord="hw3-sol.umt:11:0">Please remember to justify all answers.
+</p><p data-coord="hw3-sol.umt:20:0">You are encouraged to use the web or the library but are required to
+cite any external sources used in your answers.
+</p><ol data-coord="hw3-sol.umt:23:0"><li data-coord="hw3-sol.umt:23:0"><p data-coord="hw3-sol.umt:23:4">The mustache template given in the
+<a href="../../slides/templates/code/mustache-play/recursive.js" data-coord="hw3-sol.umt:23:105">recursive.js</a> example discussed in class depends on one of the bad
+parts of JavaScript and would not work in other languages like
+Ruby.  Identify why that is so and how would you fix it to remove
+the problem?  <em data-coord="hw3-sol.umt:23:326">15-points</em>
+</p><p data-coord="hw3-sol.umt:30:4">The template uses a mustache conditional:
+</p><pre data-coord="hw3-sol.umt:33:0">    {{#components.length}}
+      ...
+    {{/components.length}}
+</pre><p data-coord="hw3-sol.umt:38:4">This will skip the nested section when length is <code><span class="hl num">0</span></code>; i.e. it
+depends on the fact that one of the bad parts of JavaScript is
+that it interprets <code><span class="hl num">0</span></code> as <code><span class="hl kwa">false</span></code> in a boolean context.  That is
+not the case for other languages like Java or Ruby.  (Note that
+<code><span class="hl num">0</span></code> being falsy probably came into JavaScript from Perl; that may
+also be the rational for it being falsy in Python, though Python
+appears to have really gone to town on falsy values).
+</p><p data-coord="hw3-sol.umt:46:4">Rather than depending on the <samp data-coord="hw3-sol.umt:46:33">length</samp> property of <samp data-coord="hw3-sol.umt:46:54">components</samp>,
+it may be a better idea to add some kind of property like
+<samp data-coord="hw3-sol.umt:46:134">hasKids</samp> to each component.  Note that compound components
+should have <samp data-coord="hw3-sol.umt:46:210">hasKids</samp> set to <code><span class="hl kwa">true</span></code>, while leaf components
+should have <samp data-coord="hw3-sol.umt:46:274">hasKids</samp> set to <code><span class="hl kwa">false</span></code>.  Note that the latter
+is explicitly necessary for the same reason the original solution
+had leaf nodes with <samp data-coord="hw3-sol.umt:46:417">components</samp> set to <samp data-coord="hw3-sol.umt:46:437">[]</samp>; if not provided,
+then mustache's contextual lookup will find <samp data-coord="hw3-sol.umt:46:508">hasKids</samp> <code><span class="hl kwa">true</span></code>
+in the parent leading to an infinite rendering loop.
+</p><p data-coord="hw3-sol.umt:56:4">Though not required for this answer, a fixed version of the
+code is <a href="./code/recursive.js?colorize=true" data-coord="hw3-sol.umt:56:113">available.</a>
+</p></li><li data-coord="hw3-sol.umt:59:0"><p data-coord="hw3-sol.umt:59:4">When search terms include noise words in
+<em data-coord="hw3-sol.umt:59:82"><a href="../../projects/prj4/prj4.html" data-coord="hw3-sol.umt:59:82">Project 4</a></em>, those noise words
+are also highlighted in successful results. 
+</p><ol data-coord="hw3-sol.umt:63:0"><li data-coord="hw3-sol.umt:63:0"><p data-coord="hw3-sol.umt:63:8">Is this a bug or a feature?
+</p></li><li data-coord="hw3-sol.umt:65:0"><p data-coord="hw3-sol.umt:65:8">What changes would you need to make in the overall setup for
+projects 3 and 4 to ensure that noise words are not
+highlighted in successful results?  <em data-coord="hw3-sol.umt:65:173">15-points</em>
+</p></li></ol><p data-coord="hw3-sol.umt:69:4">The answers follow:
+</p><ol data-coord="hw3-sol.umt:71:0"><li data-coord="hw3-sol.umt:71:0"><p data-coord="hw3-sol.umt:71:8">When a user is conducting a search, the user is quite unaware
+of which words are noise words; in fact, the user may be totally
+ignorant of even the concept of noise words.  Hence it would
+seem natural to the user that all the search-term words be
+highlighted in the results.  Hence this behavior appears to
+be more a feature than a bug.
+</p><p data-coord="hw3-sol.umt:78:8">A technical case could be made for the fact that this behavior
+is a bug: highlighting the noise words is misleading since
+we never did actually search for them.
+</p></li><li data-coord="hw3-sol.umt:82:0"><p data-coord="hw3-sol.umt:82:8">In order to not highlight noise words, project 4 would need
+to know which words are noise words.  We could hardcode
+the noise words into Project 4, but that would be a major
+<a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself" data-coord="hw3-sol.umt:82:249">DRY</a>
+violation.  A better alternative would be to have a web service
+return the list of noise words, or one to filter the search terms
+to remove noise words.
+</p><p data-coord="hw3-sol.umt:90:8">[Note that <em data-coord="hw3-sol.umt:90:52"><a href="../../projects/prj2/prj2.html" data-coord="hw3-sol.umt:90:52">Project 2</a></em> did provide
+a method <code><span class="hl kwd">words</span><span class="hl opt">()</span></code> which could be used to filter the search
+terms to remove noise words.  This was not exposed as a web
+service in <em data-coord="hw3-sol.umt:90:244"><a href="../../projects/prj3/prj3.html" data-coord="hw3-sol.umt:90:244">Project 3</a></em> for
+simplicity and also as it was felt that the resulting behavior
+would be more a feature than a bug.]
+</p></li></ol></li><li data-coord="hw3-sol.umt:97:0"><p data-coord="hw3-sol.umt:97:4">The last route used for the
+<em data-coord="hw3-sol.umt:97:81"><a href="../../slides/users-ss/code/users/users.js" data-coord="hw3-sol.umt:97:81">users application</a></em>
+has a comment <code><span class="hl slc">//must be last</span></code>.  Discuss why this is so.  What
+changes would you make to avoid such ordering requirements?
+<em data-coord="hw3-sol.umt:97:237">10-points</em>
+</p><p data-coord="hw3-sol.umt:103:4">The reason that the specified pattern route <samp data-coord="hw3-sol.umt:103:48">:id.html</samp> must be
+last is that it matches earlier routes. So if it occurs earlier,
+those earlier routes would never be selected.
+</p><p data-coord="hw3-sol.umt:107:4">One fix would be to ensure that the pattern does not match
+other routes.  For example, changing the route from
+<samp data-coord="hw3-sol.umt:107:123">${base}/:id.html</samp> to something like <samp data-coord="hw3-sol.umt:107:160">${base}/user/:id.html</samp>
+would achieve this.  
+</p></li><li data-coord="hw3-sol.umt:112:0"><p data-coord="hw3-sol.umt:112:4">Discuss how you would design RESTful web services for recording
+and retrieving student grades for a typical university.
+Specifically, your discussion should include the following:
+</p><ul data-coord="hw3-sol.umt:116:0"><li data-coord="hw3-sol.umt:116:0"><p data-coord="hw3-sol.umt:116:8">Details of the data model including support for different
+grading policies for different courses.
+</p></li><li data-coord="hw3-sol.umt:119:0"><p data-coord="hw3-sol.umt:119:8">The web service API including choice of HTTP methods,
+URLs and parameters.
+</p></li></ul><p data-coord="hw3-sol.umt:122:4">You may regard any authorization requirements for the web services
+as orthogonal issues outside the scope of your design.  <em data-coord="hw3-sol.umt:122:131">15-points</em>
+</p><p data-coord="hw3-sol.umt:125:4">This question requires analyzing the requirements for a grading system
+and coming up with a web service API based on that analysis.
+</p><p data-coord="hw3-sol.umt:128:4">The first concept which needs to be nailed down is the idea of
+a grade:
+</p><ol data-coord="hw3-sol.umt:131:0"><li data-coord="hw3-sol.umt:131:0"><p data-coord="hw3-sol.umt:131:9">A grade can be a course grade which is understood by the
+university. 
+</p></li><li data-coord="hw3-sol.umt:134:0"><p data-coord="hw3-sol.umt:134:9">A grade can be internal to a course.  These may be grades
+assigned to individual assignments. 
+</p></li><li data-coord="hw3-sol.umt:137:0"><p data-coord="hw3-sol.umt:137:9">The values for a grade can include the common letter grades,
+<samp data-coord="hw3-sol.umt:137:79">A+</samp>, <samp data-coord="hw3-sol.umt:137:85">A</samp>, <samp data-coord="hw3-sol.umt:137:90">A-</samp>, etc; a numeric value; options like <samp data-coord="hw3-sol.umt:137:131">PASS</samp> or
+<samp data-coord="hw3-sol.umt:137:150">FAIL</samp>.
+</p></li></ol><p data-coord="hw3-sol.umt:141:4">So in general we will have a <samp data-coord="hw3-sol.umt:141:33">Gradable</samp> entity like a course,
+homework, paper or project.  Associated with each <samp data-coord="hw3-sol.umt:141:120">Gradable</samp> will
+be will be a <samp data-coord="hw3-sol.umt:141:153">GradingOption</samp> which may be <samp data-coord="hw3-sol.umt:141:182">Letter('A+', 'A', 'A-',
+    ...)</samp>, <samp data-coord="hw3-sol.umt:141:218">Numeric(0, 100)</samp>, <samp data-coord="hw3-sol.umt:141:237">Numeric(0, 3)</samp>, <samp data-coord="hw3-sol.umt:141:254">Options('Pass',
+    'Fail')</samp>, etc.
+</p><p data-coord="hw3-sol.umt:147:4">We will need some way of grouping <samp data-coord="hw3-sol.umt:147:38">Gradable</samp>'s together.  This can
+be done by associating one or more categories with each gradable.
+Example categories used at the University level for categorizing
+course <samp data-coord="hw3-sol.umt:147:221">Gradable</samp>'s would be <samp data-coord="hw3-sol.umt:147:243">Major</samp>, <samp data-coord="hw3-sol.umt:147:252">Minor</samp> for categorizing
+courses which meet a major/minor requirement.  Example categories
+used within a course would include <samp data-coord="hw3-sol.umt:147:386">Homework</samp>, <samp data-coord="hw3-sol.umt:147:398">Project</samp>, <samp data-coord="hw3-sol.umt:147:409">Paper</samp>.
+</p><p data-coord="hw3-sol.umt:154:4">We will need some kind of <samp data-coord="hw3-sol.umt:154:30">GradeFormula</samp> abstraction for combining
+grades together.  One formula could take <samp data-coord="hw3-sol.umt:154:116">GradingOption</samp> <samp data-coord="hw3-sol.umt:154:132">Letter</samp>
+grades and compute a GPA.  Another formula could take a set of
+<samp data-coord="hw3-sol.umt:154:212">GradingOption Numeric</samp> grades and compute the average after
+dropping the lowest grade.
+</p><p data-coord="hw3-sol.umt:160:4">We will also need the entities for a <samp data-coord="hw3-sol.umt:160:41">CourseOffering</samp> and a
+<samp data-coord="hw3-sol.umt:160:68">Student</samp>. These entities would be identified by some opaque id
+which could be derived from a database key.  It could also be
+built based on the entity; for example, a <samp data-coord="hw3-sol.umt:160:244">CourseOffering</samp> id
+could be formed from the course number/section like <samp data-coord="hw3-sol.umt:160:320">cs580w-01</samp>
+combined with a semester to get an id like <samp data-coord="hw3-sol.umt:160:379">cs580w-01_f18</samp>.
+</p><p data-coord="hw3-sol.umt:167:4">There would be a many-to-many correspondence between <samp data-coord="hw3-sol.umt:167:57">CourseOffering</samp>'s
+and <samp data-coord="hw3-sol.umt:167:84">Students</samp>.  This would lead to a basic tension in our data model;
+should we group <samp data-coord="hw3-sol.umt:167:171">CourseOffering</samp>'s under a <samp data-coord="hw3-sol.umt:167:198">Student</samp> or group
+<samp data-coord="hw3-sol.umt:167:221">Student</samp>'s under a <samp data-coord="hw3-sol.umt:167:241">CourseOffering</samp>.  We should try to accomodate
+both.
+</p><p data-coord="hw3-sol.umt:173:4">For each <samp data-coord="hw3-sol.umt:173:13">CourseOffering</samp>-<samp data-coord="hw3-sol.umt:173:34">Student</samp> pair we would have a list
+of <samp data-coord="hw3-sol.umt:173:77">Gradables</samp>.
+</p><p data-coord="hw3-sol.umt:176:4">Our web services would be set up under two basic URLs: <samp data-coord="hw3-sol.umt:176:59">/course-offerings</samp>
+and <samp data-coord="hw3-sol.umt:176:87">/students</samp>.  We would provide HTTP methods for accessing or adding
+entities at these URLs.
+</p><dl data-coord="hw3-sol.umt:180:0"><dt data-coord="hw3-sol.umt:180:6"> <samp data-coord="hw3-sol.umt:180:1">GET</samp> </dt><dd data-coord="hw3-sol.umt:181:0"><p data-coord="hw3-sol.umt:181:8">A <samp data-coord="hw3-sol.umt:181:10">GET</samp> to one of these URLs would result in a summary list of
+all the corresponding entities.  Since the number of entities
+will likely go into the 1000's, we should allow
+filter query parameters like <samp data-coord="hw3-sol.umt:181:213">/course-offerings?year=2018</samp> or
+<samp data-coord="hw3-sol.umt:181:247">/students?year=2018&amp;department=cs</samp>.
+</p></dd><dt data-coord="hw3-sol.umt:187:6"> <samp data-coord="hw3-sol.umt:187:1">POST</samp> </dt><dd data-coord="hw3-sol.umt:188:0"><p data-coord="hw3-sol.umt:188:8">A <samp data-coord="hw3-sol.umt:188:10">POST</samp> request to one of these URLs would create a new
+entity.  The body of the request would be JSON containing the
+details of the entity being created.
+</p><p data-coord="hw3-sol.umt:192:8">The returned response will contain a <samp data-coord="hw3-sol.umt:192:45">Location</samp> header
+giving the URL for the newly created course offering.
+</p></dd></dl><p data-coord="hw3-sol.umt:197:4">For each of the above two URLs we would have methods for
+subordinate URLs based on the id of the course offering or
+student.  For example:
+</p><dl data-coord="hw3-sol.umt:201:0"><dt data-coord="hw3-sol.umt:201:6"> <samp data-coord="hw3-sol.umt:201:1">GET /students/:id</samp></dt><dd data-coord="hw3-sol.umt:202:0"><p data-coord="hw3-sol.umt:202:8">This would return all univerity level information including
+university level grades for the student specified by <samp data-coord="hw3-sol.umt:202:122">:id</samp>.
+We could use query parameters to specify exactly what information
+should be returned. Similarly for <samp data-coord="hw3-sol.umt:202:231">/course-offerings/:id</samp>.
+</p></dd><dt data-coord="hw3-sol.umt:207:6"> <samp data-coord="hw3-sol.umt:207:1">PATCH /course-offerings/:id</samp> </dt><dd data-coord="hw3-sol.umt:208:0"><p data-coord="hw3-sol.umt:208:9">Update information for course offering specified by <samp data-coord="hw3-sol.umt:208:61">:id</samp>.
+Similarly for <samp data-coord="hw3-sol.umt:208:84">/students/:id</samp>.
+</p></dd><dt data-coord="hw3-sol.umt:211:6"> <samp data-coord="hw3-sol.umt:211:1">DELETE /course-offerings/:id</samp> </dt><dd data-coord="hw3-sol.umt:212:0"><p data-coord="hw3-sol.umt:212:9">Remove course offering specified by <samp data-coord="hw3-sol.umt:212:45">:id</samp>.  Similarly
+for <samp data-coord="hw3-sol.umt:212:69">/students/::id</samp>.
+</p></dd></dl><p data-coord="hw3-sol.umt:215:4">Note that the above URLs can be used for updating / accessing what
+is normally thought of as data like grades as well as meta-data
+like assigning categories to gradables or adding formulas.
+</p><p data-coord="hw3-sol.umt:219:4">The system should come with built-in meta-information for common
+categories and formulas.  However, it should be possible to define
+additional meta-information beyond what is standard; some kind of
+plugin system can be used to provide these extensions.
+</p></li><li data-coord="hw3-sol.umt:224:0"><p data-coord="hw3-sol.umt:224:4">Discuss which HTML control you would use for each of the following
+form controls:
+</p><ol data-coord="hw3-sol.umt:227:0"><li data-coord="hw3-sol.umt:227:0"><p data-coord="hw3-sol.umt:227:8">A control which allows the user to provide the percentage
+of components which are defective.
+</p></li><li data-coord="hw3-sol.umt:230:0"><p data-coord="hw3-sol.umt:230:8">A control which allows the user to select one-or-more
+of the courses which are currently being offered by
+the CS department.
+</p></li><li data-coord="hw3-sol.umt:234:0"><p data-coord="hw3-sol.umt:234:8">A control which allows the user to enter a customer-service
+complaint.
+</p></li><li data-coord="hw3-sol.umt:237:0"><p data-coord="hw3-sol.umt:237:8">A control which allows the user to enter in a BU B-Number.
+</p></li><li data-coord="hw3-sol.umt:239:0"><p data-coord="hw3-sol.umt:239:8">A control which allows the user to select their favorite
+dessert from a predefined list of desserts.
+</p></li><li data-coord="hw3-sol.umt:242:0"><p data-coord="hw3-sol.umt:242:8">A control which allows a US user to enter in a telephone
+number (which may be an international phone number).
+</p></li></ol><p data-coord="hw3-sol.umt:245:4">Your answers should be set up to maximally constrain the user's
+input to legal values and minimize the opportunity for error.  You
+should use at most a single HTML control for each of the above and
+should provide the actual HTML code for each control. <em data-coord="hw3-sol.umt:245:268">15-points</em>
+</p><ol data-coord="hw3-sol.umt:250:0"><li data-coord="hw3-sol.umt:250:0"><p data-coord="hw3-sol.umt:250:8">The percentage of components which are defective would be between
+0 and 100.  So assuming that an integer is acceptable for the
+percentage, something like:
+</p><pre>        <span class="hl kwa">&lt;input</span> <span class="hl kwb">name</span>=<span class="hl str">&quot;percentDefective&quot;</span> <span class="hl kwb">type</span>=<span class="hl str">&quot;number&quot;</span>
+               <span class="hl kwb">min</span>=<span class="hl str">&quot;0&quot;</span> <span class="hl kwb">max</span>=<span class="hl str">&quot;100&quot;</span><span class="hl kwa">&gt;</span></pre><p data-coord="hw3-sol.umt:260:1">would be acceptable.
+</p><p data-coord="hw3-sol.umt:262:1">If the percentage does not need to be entered too precisely, then
+a range control may also be acceptable:
+</p><pre>        <span class="hl kwa">&lt;input</span> <span class="hl kwb">name</span>=<span class="hl str">&quot;percentDefective&quot;</span> <span class="hl kwb">type</span>=<span class="hl str">&quot;range&quot;</span>
+               <span class="hl kwb">min</span>=<span class="hl str">&quot;0&quot;</span> <span class="hl kwb">max</span>=<span class="hl str">&quot;100&quot;</span><span class="hl kwa">&gt;</span></pre><p data-coord="hw3-sol.umt:271:1">The latter may be preferred if the rest of the form controls
+are all mousable.
+</p></li><li data-coord="hw3-sol.umt:274:0"><p data-coord="hw3-sol.umt:274:8">Two possibilities come to mind:
+</p><ul data-coord="hw3-sol.umt:276:0"><li data-coord="hw3-sol.umt:276:0"><p data-coord="hw3-sol.umt:276:12">Using checkboxes.
+</p></li><li data-coord="hw3-sol.umt:278:0"><p data-coord="hw3-sol.umt:278:12">Using a select box with the <samp data-coord="hw3-sol.umt:278:40">multiple</samp> attribute.
+</p></li></ul><p data-coord="hw3-sol.umt:280:8">Given the relatively large number of courses, neither choice
+is ideal.
+</p><p data-coord="hw3-sol.umt:283:8">If checkboxes are used, then the courses should be formatted
+compactly.  Something like:
+</p><pre>          <span class="hl kwa">&lt;table&gt;</span>
+            <span class="hl kwa">&lt;tr&gt;</span>
+              <span class="hl kwa">&lt;td&gt;</span>
+                <span class="hl kwa">&lt;input</span> <span class="hl kwb">type</span>=<span class="hl str">&quot;checkbox&quot;</span> <span class="hl kwb">name</span>=<span class="hl str">&quot;courses&quot;</span>
+                        <span class="hl kwb">value</span>=<span class="hl str">&quot;110&gt;</span>
+<span class="hl str">                CS 110</span>
+<span class="hl str">              &lt;/td&gt;</span>
+<span class="hl str">              &lt;td&gt;</span>
+<span class="hl str">                &lt;input type=&quot;</span>checkbox<span class="hl str">&quot; name=&quot;</span>courses<span class="hl str">&quot; </span>
+<span class="hl str">                       value=&quot;</span><span class="hl num">140</span><span class="hl kwa">&gt;</span>
+                CS <span class="hl num">140</span>
+              <span class="hl kwa">&lt;/td&gt;</span>
+              <span class="hl kwa">&lt;td&gt;</span>
+                <span class="hl kwa">&lt;input</span> <span class="hl kwb">type</span>=<span class="hl str">&quot;checkbox&quot;</span> <span class="hl kwb">name</span>=<span class="hl str">&quot;courses&quot;</span>
+                       <span class="hl kwb">value</span>=<span class="hl str">&quot;210&gt;</span>
+<span class="hl str">                CS 210</span>
+<span class="hl str">              &lt;/td&gt;</span>
+<span class="hl str">             &lt;/tr&lt;</span>
+<span class="hl str">             ...</span>
+<span class="hl str">          &lt;/table&gt;</span></pre><p data-coord="hw3-sol.umt:310:1">A select box could be specified as follows:
+</p><pre>        <span class="hl kwa">&lt;select</span> <span class="hl kwb">name</span>=<span class="hl str">&quot;courses&quot;</span> multiple<span class="hl kwa">&gt;</span>
+          <span class="hl kwa">&lt;option</span> <span class="hl kwb">value</span>=<span class="hl str">&quot;110&quot;</span><span class="hl kwa">&gt;</span>CS <span class="hl num">110</span><span class="hl kwa">&lt;/option&gt;</span>
+          <span class="hl kwa">&lt;option</span> <span class="hl kwb">value</span>=<span class="hl str">&quot;140&quot;</span><span class="hl kwa">&gt;</span>CS <span class="hl num">140</span><span class="hl kwa">&lt;/option&gt;</span>
+          <span class="hl kwa">&lt;option</span> <span class="hl kwb">value</span>=<span class="hl str">&quot;210&quot;</span><span class="hl kwa">&gt;</span>CS <span class="hl num">210</span><span class="hl kwa">&lt;/option&gt;</span>
+          ...
+        <span class="hl kwa">&lt;/select&gt;</span></pre><p data-coord="hw3-sol.umt:322:8">An argument against a select box is that many users are
+unfamiliar with the concept of using a select box to make
+multiple selections.  If that is true for the target
+population, then a checkbox would definitely be the best
+choice.
+</p></li><li data-coord="hw3-sol.umt:328:0"><p data-coord="hw3-sol.umt:328:8">The only possible choice would be a <samp data-coord="hw3-sol.umt:328:44">textarea</samp>.
+</p><pre>        <span class="hl kwa">&lt;textarea</span> <span class="hl kwb">name</span>=<span class="hl str">&quot;complaint&quot;</span> <span class="hl kwb">rows</span>=<span class="hl str">&quot;10&quot;</span><span class="hl kwa">&gt;&lt;/textarea&gt;</span></pre></li><li data-coord="hw3-sol.umt:335:0"><p data-coord="hw3-sol.umt:335:8">An input tag with a regex to constrain the input:
+</p><pre>        <span class="hl kwa">&lt;input</span> <span class="hl kwb">name</span>=<span class="hl str">&quot;bNumber&quot;</span> <span class="hl kwb">pattern</span>=<span class="hl str">&quot;B\d{8}&quot;</span> 
+               <span class="hl kwb">placeholder</span>=<span class="hl str">&quot;B12345678&quot;</span><span class="hl kwa">&gt;</span></pre></li><li data-coord="hw3-sol.umt:343:0"><p data-coord="hw3-sol.umt:343:8">A select box is probably appropriate:
+</p><pre>         <span class="hl kwa">&lt;select</span> <span class="hl kwb">name</span>=<span class="hl str">&quot;favoriteDessert&quot;</span><span class="hl kwa">&gt;</span>
+           <span class="hl kwa">&lt;option</span> <span class="hl kwb">value</span>=<span class="hl str">&quot;bananaSplit&quot;</span><span class="hl kwa">&gt;</span>Banana Split<span class="hl kwa">&lt;/option&gt;</span>
+           <span class="hl kwa">&lt;option</span> <span class="hl kwb">value</span>=<span class="hl str">&quot;chocolateCake&quot;</span><span class="hl kwa">&gt;</span>Chocolate Cake<span class="hl kwa">&lt;/option&gt;</span>
+           ...
+         <span class="hl kwa">&lt;/select&gt;</span></pre></li><li data-coord="hw3-sol.umt:354:0"><p data-coord="hw3-sol.umt:354:8">A telephone number is always problematic.  Complexities
+include:
+</p><ul data-coord="hw3-sol.umt:357:0"><li data-coord="hw3-sol.umt:357:0"><p data-coord="hw3-sol.umt:357:13">International telephone numbers and the unfamiliarity
+of most US users with the standard <samp data-coord="hw3-sol.umt:357:115">+</samp> country-code
+prefix.
+</p></li><li data-coord="hw3-sol.umt:361:0"><p data-coord="hw3-sol.umt:361:13">The possibility of needing to enter an extension,
+usually after the letter <samp data-coord="hw3-sol.umt:361:94">x</samp>.
+</p></li><li data-coord="hw3-sol.umt:364:0"><p data-coord="hw3-sol.umt:364:13">Different delimiters used for separating different
+parts of the number.  For example, is a US phone
+number to be entered as (607) 777-2000 or as 
+<samp data-coord="hw3-sol.umt:364:191">607-777-2000</samp>, or as <samp data-coord="hw3-sol.umt:364:213">607 777 2000</samp>?
+</p></li></ul><p data-coord="hw3-sol.umt:369:9">The best which could be done would be to use an <samp data-coord="hw3-sol.umt:369:57">input</samp>
+control with <samp data-coord="hw3-sol.umt:369:87">type=tel</samp> and use a reasonably restrictive
+pattern.  Given the variety of possible inputs, a placeholder
+may not be possible but the text around the control
+should describe expected telephone number formats.
+</p><pre>          <span class="hl kwa">&lt;input</span> <span class="hl kwb">name</span>=<span class="hl str">&quot;phone&quot;</span> <span class="hl kwb">type</span>=<span class="hl str">&quot;tel&quot;</span>
+                 <span class="hl kwb">pattern</span>=<span class="hl str">&quot;\+?[\d\-\(\)\s]+(x\s?\d+)?&quot;</span><span class="hl kwa">&gt;</span></pre><p data-coord="hw3-sol.umt:381:1">After the user has provided the input, it will be necessary
+to run fairly smart code to parse the entered number heuristically
+and validate it.
+</p><p data-coord="hw3-sol.umt:385:1">If there is context elsewhere to figure out what country
+phone number the user is about to enter, then it may be
+possible to provide a more constrained pattern as well as an
+appropriate placeholder.  For example, if we know definitely
+that the user is about to enter a US phone number without an
+extension:
+</p><pre>          <span class="hl kwa">&lt;input</span> <span class="hl kwb">name</span>=<span class="hl str">&quot;phone&quot;</span> <span class="hl kwb">type</span>=<span class="hl str">&quot;tel&quot;</span>
+                 <span class="hl kwb">pattern</span>=<span class="hl str">&quot;\(\d{3}\)\s\d{3}\-\d{4}&quot;</span>
+                 <span class="hl kwb">placeholder</span>=<span class="hl str">&quot;(123) 456-7890&quot;</span><span class="hl kwa">&gt;</span></pre></li></ol></li><li data-coord="hw3-sol.umt:399:0"><p data-coord="hw3-sol.umt:399:4">Discuss how you would serialize an abitrary JavaScript object
+<strong data-coord="hw3-sol.umt:399:70">hierarchy</strong> to HTML using mustache.  You may assume that the
+values of object properties are either primitives or objects or
+arrays.  <em data-coord="hw3-sol.umt:399:212">15-points</em>
+</p><p data-coord="hw3-sol.umt:404:4">There are two parts to this question:
+</p><ol data-coord="hw3-sol.umt:406:0"><li data-coord="hw3-sol.umt:406:0"><p data-coord="hw3-sol.umt:406:9">The exact HTML constructs used for the serialization:
+</p><ul data-coord="hw3-sol.umt:408:0"><li data-coord="hw3-sol.umt:408:0"><p data-coord="hw3-sol.umt:408:11">Objects are serialized as <samp data-coord="hw3-sol.umt:408:37">&lt;dl&gt;...&lt;/dl&gt;</samp> definition
+lists with property names embedded within <samp data-coord="hw3-sol.umt:408:116">&lt;dt&gt;...&lt;/dt&gt;</samp>,
+and the recursive serialization of property values
+embedded withing <samp data-coord="hw3-sol.umt:408:208">&lt;dd&gt;...&lt;/dd&gt;</samp>.
+</p></li><li data-coord="hw3-sol.umt:413:0"><p data-coord="hw3-sol.umt:413:11">Arrays could be serialized as ordered lists using
+<samp data-coord="hw3-sol.umt:413:65">&lt;ol&gt;...&lt;/ol&gt;</samp>.  If the order of the array elements is not
+regarded as significant, then they could be serialized
+using <samp data-coord="hw3-sol.umt:413:193">&lt;ul&gt;...&lt;/ul&gt;</samp>.  The recursive serialization of the
+array elements would go into <samp data-coord="hw3-sol.umt:413:278">&lt;li&gt;...&lt;/li&gt;</samp>.
+</p></li><li data-coord="hw3-sol.umt:419:0"><p data-coord="hw3-sol.umt:419:11">Primitives would be serialized using their string
+representations.
+</p></li></ul></li><li data-coord="hw3-sol.umt:422:0"><p data-coord="hw3-sol.umt:422:9">How to achieve the serialization using mustache:
+</p><p data-coord="hw3-sol.umt:424:2">This would be very similar to the <samp data-coord="hw3-sol.umt:424:36">recursive.js</samp> example
+from the first question.  It would be critical to create
+a view model to get around the limitations of mustache.
+</p><p data-coord="hw3-sol.umt:428:2">Since mustache can only loop through arrays and not objects,
+it is necessary to convert all objects to arrays.
+</p><p data-coord="hw3-sol.umt:431:2">All JavaScript values would be converted to uniform objects
+with the properties: <samp data-coord="hw3-sol.umt:431:85">isArray</samp>, <samp data-coord="hw3-sol.umt:431:96">isObject</samp>, <samp data-coord="hw3-sol.umt:431:108">isKeyValue</samp> and
+<samp data-coord="hw3-sol.umt:431:127">isPrimitive</samp> (only one of these four properties would be
+true), as well as a <samp data-coord="hw3-sol.umt:431:207">value</samp> property.  The latter would be
+set as follows:
+</p><ul data-coord="hw3-sol.umt:437:0"><li data-coord="hw3-sol.umt:437:0"><p data-coord="hw3-sol.umt:437:13">For a primitive it would be the string value of the
+primitive.
+</p></li><li data-coord="hw3-sol.umt:440:0"><p data-coord="hw3-sol.umt:440:13">For an array it would be an array of the view models
+of the element values.
+</p></li><li data-coord="hw3-sol.umt:443:0"><p data-coord="hw3-sol.umt:443:13">For an object it would be an array of objects with three
+keys: <samp data-coord="hw3-sol.umt:443:82">isKeyValue</samp> with the value <code><span class="hl kwa">true</span></code>, <samp data-coord="hw3-sol.umt:443:119">key</samp> and
+<samp data-coord="hw3-sol.umt:443:135">value</samp> with the latter giving the view model of the
+property with name <samp data-coord="hw3-sol.umt:443:213">key</samp>.
+</p></li></ul><p data-coord="hw3-sol.umt:448:9">Using this view model it should be possible to set up a
+mustache template with four mutually exclusive sections
+(chosen based on which of <samp data-coord="hw3-sol.umt:448:165">isArray</samp>, <samp data-coord="hw3-sol.umt:448:176">isObject</samp> <samp data-coord="hw3-sol.umt:448:187">isKeyValue</samp>
+or <samp data-coord="hw3-sol.umt:448:212">isPrimitive</samp> is true).  The template would use a 
+recursive partial to render arbitrarily nested objects.
+</p></li></ol></li><li data-coord="hw3-sol.umt:455:0"><p data-coord="hw3-sol.umt:455:4">Discuss the validity of the following statements. What is more
+important than whether you ultimately classify the statement as
+<strong data-coord="hw3-sol.umt:455:139">true</strong> or <strong data-coord="hw3-sol.umt:455:149">false</strong> is your justification for arriving at your
+conclusion. <em data-coord="hw3-sol.umt:455:216">15-points</em>
+</p><ol data-coord="hw3-sol.umt:460:0"><li data-coord="hw3-sol.umt:460:0"><p data-coord="hw3-sol.umt:460:8">It is more efficient to send JSON rather than XML over a
+network since JSON is a more compact representation than XML.
+</p></li><li data-coord="hw3-sol.umt:463:0"><p data-coord="hw3-sol.umt:463:8">If an attempt to create a resource using <samp data-coord="hw3-sol.umt:463:49">PUT</samp> hangs, then it
+is ok to make a second attempt.
+</p></li><li data-coord="hw3-sol.umt:466:0"><p data-coord="hw3-sol.umt:466:8">If an attempt to create a resource using <samp data-coord="hw3-sol.umt:466:49">POST</samp> hangs, then it
+is ok to make a second attempt.
+</p></li><li data-coord="hw3-sol.umt:469:0"><p data-coord="hw3-sol.umt:469:8">If a HTML document has a syntax error, then an attempt to
+render it in a browser will result in an empty page.
+</p></li><li data-coord="hw3-sol.umt:472:0"><p data-coord="hw3-sol.umt:472:8">REST is a framework for building web services.
+</p></li></ol><p data-coord="hw3-sol.umt:474:4">The answers follow:
+</p><ol data-coord="hw3-sol.umt:476:0"><li data-coord="hw3-sol.umt:476:0"><p data-coord="hw3-sol.umt:476:8">JSON is definitely more compact than XML.  Consider the
+equivalent fragments:
+</p><pre>        <span class="hl kwa">&lt;person&gt;</span>
+          <span class="hl kwa">&lt;name&gt;</span>
+            <span class="hl kwa">&lt;first&gt;</span>Bart<span class="hl kwa">&lt;/first&gt;</span>
+            <span class="hl kwa">&lt;last&gt;</span>Simpson<span class="hl kwa">&lt;/last&gt;</span>
+          <span class="hl kwa">&lt;/name&gt;</span>
+        <span class="hl kwa">&lt;/person&gt;</span></pre><p data-coord="hw3-sol.umt:489:1">versus:
+</p><pre>        <span class="hl kwa">{</span> <span class="hl kwc">&quot;person&quot;</span><span class="hl opt">:</span> <span class="hl kwa">{</span>
+            <span class="hl kwc">&quot;name&quot;</span><span class="hl opt">:</span> <span class="hl kwa">{</span>
+               <span class="hl kwc">&quot;first&quot;</span><span class="hl opt">:</span> <span class="hl str">&quot;Bart&quot;</span><span class="hl opt">,</span>
+               <span class="hl kwc">&quot;last&quot;</span><span class="hl opt">:</span> <span class="hl str">&quot;Simpson&quot;</span>
+            <span class="hl kwa">}</span>
+          <span class="hl kwa">}</span>
+        <span class="hl kwa">}</span></pre><p data-coord="hw3-sol.umt:502:1">If we count the number of characters (ignoring whitespace),
+the above XML clocks in at 69 characters while the JSON clocks
+in at 53 characters.  The difference is likely to be more substantial
+for more highly nested documents where the end tags in the XML would
+add up.
+</p><p data-coord="hw3-sol.umt:508:1">So if our analysis was complete, the answer definitely be
+true.  But our analysis is not complete since it is often the
+case that network transmissions are compressed and the cost of
+XML end tags is likely to disappear. For example, running gzip
+on the above fragments without whitespace resulted in 77 and
+73 characters respectively; so the XML compressed to almost
+the same size as the JSON.  (Note that compressed size is
+larger than uncompressed size because of the compression
+overhead which will be insignificant for larger files).	
+</p><p data-coord="hw3-sol.umt:518:1">So the statement is <strong data-coord="hw3-sol.umt:518:21">true</strong> if compression is not being used; 
+and tends to be <strong data-coord="hw3-sol.umt:518:80">false</strong> if compression is used.
+</p></li><li data-coord="hw3-sol.umt:521:0"><p data-coord="hw3-sol.umt:521:8">Since <samp data-coord="hw3-sol.umt:521:14">PUT</samp> is defined to be idempotent, then it is ok to make
+an additional attempt.  So the statement is <strong data-coord="hw3-sol.umt:521:123">true</strong>.
+</p></li><li data-coord="hw3-sol.umt:524:0"><p data-coord="hw3-sol.umt:524:8">Since <samp data-coord="hw3-sol.umt:524:14">POST</samp> is not defined to be idempotent, it is not ok to make
+an additional attempt.  So the statement is <strong data-coord="hw3-sol.umt:524:127">false</strong>.
+</p></li><li data-coord="hw3-sol.umt:527:0"><p data-coord="hw3-sol.umt:527:8">Browsers tend to be very forgiving of syntax errors; so attempting
+to render a syntactically incorrect page is uniikely to result
+in an empty page.
+</p><p data-coord="hw3-sol.umt:531:1">Note that this was not true for early attempts at implementing
+XHTML (which was one reason why XHTML failed).
+</p><p data-coord="hw3-sol.umt:534:1">If we regard the term HTML to refer to non-XHTML HTML, then the
+statement is definitely <strong data-coord="hw3-sol.umt:534:90">false</strong>.
+</p></li><li data-coord="hw3-sol.umt:537:0"><p data-coord="hw3-sol.umt:537:8">The answer is it depends on what is meant by the term <em data-coord="hw3-sol.umt:537:62">framework</em>.
+</p><ul data-coord="hw3-sol.umt:539:0"><li data-coord="hw3-sol.umt:539:0"><p data-coord="hw3-sol.umt:539:12">If <em data-coord="hw3-sol.umt:539:15">framework</em> is used in a technical sense as a program
+in which code can be embedded then the statement is definitely
+<strong data-coord="hw3-sol.umt:539:142">false</strong>.
+</p></li><li data-coord="hw3-sol.umt:543:0"><p data-coord="hw3-sol.umt:543:12">If <em data-coord="hw3-sol.umt:543:15">framework</em> is used in a more general sense to refer to
+<em data-coord="hw3-sol.umt:543:132"><a href="https://www.merriam-webster.com/dictionary/framework" data-coord="hw3-sol.umt:543:132">a
+	    basic conceptional structure</a></em>, then the statement is
+definitely <strong data-coord="hw3-sol.umt:543:209">true</strong>.</p></li></ul></li></ol></li></ol></section>
+</div> <!-- #content -->
+</div> <!-- #main -->
+<div id="footer">&nbsp;</div>
+</div> <!-- #page -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../../assets/scripts/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="../../assets/styles/article.css" rel="stylesheet" type="text/css" />
+  <title>Exams and Quizzes</title>
+
+</head>
+<body>
+<div id="page">
+<span id="opennav"><i class="material-icons">&#xe5d2;</i></span>
+<div id="nav">
+<div id="closenav"><i class="material-icons">&#xe5cd;</i></div>
+<ul>
+<li><a href="../../index.html">Home</a></li>
+<li><a href="../../docs/index.html">Documentation</a></li>
+<li><a href="../../exams-quizzes/index.html">Exams & Quizzes</a></li>
+<li><a href="../../exercises/index.html">Exercises</a></li>
+<li><a href="../../hws/index.html">Homeworks</a></li>
+<li><a href="../../misc/index.html">Miscellaneous</a></li>
+<li><a href="../../projects/index.html">Projects</a></li>
+<li><a href="../../slides/index.html">Slides</a></li>
+
+</ul>
+</div> <!-- #nav -->
+<div id="main">
+  <div id="header">
+<h1>Programming for the Web</h1>
+</div> <!-- #header -->
+<div id="content">
+<section data-coord="index.umt:1:0"><h1 data-coord="index.umt:1:0">Exams and Quizzes</h1><p data-coord="index.umt:6:0"><em data-coord="index.umt:6:20"><a href="quiz1/quiz1.html" data-coord="index.umt:6:20">Quiz 1</a></em>.  Alternate formats
+<em data-coord="index.umt:6:68"><a href="quiz1/quiz1.pdf" data-coord="index.umt:6:68">PDF</a></em>, <em data-coord="index.umt:6:94"><a href="quiz1/quiz1.umt" data-coord="index.umt:6:94">markup text</a></em>.
+</p><p data-coord="index.umt:9:0"><em data-coord="index.umt:9:28"><a href="quiz1-sol/quiz1-sol.html" data-coord="index.umt:9:28">Quiz 1 Solution</a></em>.  Alternate formats
+<em data-coord="index.umt:9:93"><a href="quiz1-sol/quiz1-sol.pdf" data-coord="index.umt:9:93">PDF</a></em>, <em data-coord="index.umt:9:127"><a href="quiz1-sol/quiz1-sol.umt" data-coord="index.umt:9:127">markup text</a></em>.
+</p><p data-coord="index.umt:12:0"><em data-coord="index.umt:12:20"><a href="quiz2/quiz2.html" data-coord="index.umt:12:20">Quiz 2</a></em>.  Alternate formats
+<em data-coord="index.umt:12:68"><a href="quiz2/quiz2.pdf" data-coord="index.umt:12:68">PDF</a></em>, <em data-coord="index.umt:12:94"><a href="quiz2/quiz2.umt" data-coord="index.umt:12:94">markup text</a></em>.
+</p><p data-coord="index.umt:15:0"><em data-coord="index.umt:15:28"><a href="quiz2-sol/quiz2-sol.html" data-coord="index.umt:15:28">Quiz 2 Solution</a></em>.  Alternate formats
+<em data-coord="index.umt:15:93"><a href="quiz2-sol/quiz2-sol.pdf" data-coord="index.umt:15:93">PDF</a></em>, <em data-coord="index.umt:15:127"><a href="quiz2-sol/quiz2-sol.umt" data-coord="index.umt:15:127">markup text</a></em>.
+</p><p data-coord="index.umt:18:0"><em data-coord="index.umt:18:40"><a href="midterm-outline/midterm-outline.html" data-coord="index.umt:18:40">Midterm Outline</a></em>.  Alternate formats
+<em data-coord="index.umt:18:117"><a href="midterm-outline/midterm-outline.pdf" data-coord="index.umt:18:117">PDF</a></em>, <em data-coord="index.umt:18:163"><a href="midterm-outline/midterm-outline.umt" data-coord="index.umt:18:163">markup text</a></em>.
+</p><p data-coord="index.umt:21:0"><a href="midterm/midterm.html" data-coord="index.umt:21:24">Midterm.</a>  Alternate formats
+<em data-coord="index.umt:21:75"><a href="midterm/midterm.pdf" data-coord="index.umt:21:75">PDF</a></em>, <em data-coord="index.umt:21:105"><a href="midterm/midterm.umt" data-coord="index.umt:21:105">markup text</a></em>.
+</p><p data-coord="index.umt:24:0"><em data-coord="index.umt:24:32"><a href="midterm-sol/midterm-sol.html" data-coord="index.umt:24:32">Midterm Solution</a></em>.  Alternate formats
+<em data-coord="index.umt:24:102"><a href="midterm-sol/midterm-sol.pdf" data-coord="index.umt:24:102">PDF</a></em>, <em data-coord="index.umt:24:140"><a href="midterm-sol/midterm-sol.umt" data-coord="index.umt:24:140">markup text</a></em>.
+</p><p data-coord="index.umt:27:0"><em data-coord="index.umt:27:20"><a href="quiz3/quiz3.html" data-coord="index.umt:27:20">Quiz 3</a></em>.  Alternate formats
+<em data-coord="index.umt:27:68"><a href="quiz3/quiz3.pdf" data-coord="index.umt:27:68">PDF</a></em>, <em data-coord="index.umt:27:94"><a href="quiz3/quiz3.umt" data-coord="index.umt:27:94">markup text</a></em>.
+</p><p data-coord="index.umt:30:0"><em data-coord="index.umt:30:28"><a href="quiz3-sol/quiz3-sol.html" data-coord="index.umt:30:28">Quiz 3 Solution</a></em>.  Alternate formats
+<em data-coord="index.umt:30:93"><a href="quiz3-sol/quiz3-sol.pdf" data-coord="index.umt:30:93">PDF</a></em>, <em data-coord="index.umt:30:127"><a href="quiz3-sol/quiz3-sol.umt" data-coord="index.umt:30:127">markup text</a></em>.
+</p><p data-coord="index.umt:33:0"><em data-coord="index.umt:33:20"><a href="quiz4/quiz4.html" data-coord="index.umt:33:20">Quiz 4</a></em>.  Alternate formats
+<em data-coord="index.umt:33:68"><a href="quiz4/quiz4.pdf" data-coord="index.umt:33:68">PDF</a></em>, <em data-coord="index.umt:33:94"><a href="quiz4/quiz4.umt" data-coord="index.umt:33:94">markup text</a></em>.
+</p><p data-coord="index.umt:36:0"><em data-coord="index.umt:36:28"><a href="quiz4-sol/quiz4-sol.html" data-coord="index.umt:36:28">Quiz 4 Solution</a></em>.  Alternate formats
+<em data-coord="index.umt:36:93"><a href="quiz4-sol/quiz4-sol.pdf" data-coord="index.umt:36:93">PDF</a></em>, <em data-coord="index.umt:36:127"><a href="quiz4-sol/quiz4-sol.umt" data-coord="index.umt:36:127">markup text</a></em>.
+</p><p data-coord="index.umt:39:0"><em data-coord="index.umt:39:20"><a href="quiz5/quiz5.html" data-coord="index.umt:39:20">Quiz 5</a></em>.  Alternate formats
+<em data-coord="index.umt:39:68"><a href="quiz5/quiz5.pdf" data-coord="index.umt:39:68">PDF</a></em>, <em data-coord="index.umt:39:94"><a href="quiz5/quiz5.umt" data-coord="index.umt:39:94">markup text</a></em>.
+</p><p data-coord="index.umt:42:0"><em data-coord="index.umt:42:28"><a href="quiz5-sol/quiz5-sol.html" data-coord="index.umt:42:28">Quiz 5 Solution</a></em>.  Alternate formats
+<em data-coord="index.umt:42:93"><a href="quiz5-sol/quiz5-sol.pdf" data-coord="index.umt:42:93">PDF</a></em>, <em data-coord="index.umt:42:127"><a href="quiz5-sol/quiz5-sol.umt" data-coord="index.umt:42:127">markup text</a></em>.
+</p><p data-coord="index.umt:45:0"><em data-coord="index.umt:45:20"><a href="quiz6/quiz6.html" data-coord="index.umt:45:20">Quiz 6</a></em>.  Alternate formats
+<em data-coord="index.umt:45:68"><a href="quiz6/quiz6.pdf" data-coord="index.umt:45:68">PDF</a></em>, <em data-coord="index.umt:45:94"><a href="quiz6/quiz6.umt" data-coord="index.umt:45:94">markup text</a></em>.
+</p><p data-coord="index.umt:48:0"><em data-coord="index.umt:48:28"><a href="quiz6-sol/quiz6-sol.html" data-coord="index.umt:48:28">Quiz 6 Solution</a></em>.  Alternate formats
+<em data-coord="index.umt:48:93"><a href="quiz6-sol/quiz6-sol.pdf" data-coord="index.umt:48:93">PDF</a></em>, <em data-coord="index.umt:48:127"><a href="quiz6-sol/quiz6-sol.umt" data-coord="index.umt:48:127">markup text</a></em>.
+</p></section>
+</div> <!-- #content -->
+</div> <!-- #main -->
+<div id="footer">&nbsp;</div>
+</div> <!-- #page -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../../assets/scripts/nav.js"></script>
+</body>
+</html>

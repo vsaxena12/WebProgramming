@@ -1,0 +1,27 @@
+.choices li input {
+  position: absolute;
+  margin-left: -40px;
+  margin-top: 5px; }
+
+.choices li, #question li {
+  list-style-type: lower-latin; }
+
+#buttons {
+  max-width: 50em; }
+
+#next {
+  float: right; }
+
+#submit, #repeat {
+  margin-left: 30%; }
+
+.correct {
+  background-color: #0f8; }
+
+.incorrect {
+  background-color: red; }
+
+.button-form {
+  display: inline; }
+
+/*# sourceMappingURL=questions.css.map */

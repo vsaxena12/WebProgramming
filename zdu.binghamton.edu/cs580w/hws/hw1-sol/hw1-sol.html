@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="../../assets/styles/article.css" rel="stylesheet" type="text/css" />
+  <title>Homework 1 Solution</title>
+<link href="hw1-sol/hl-fine_blue.css" rel="stylesheet"/><link href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" 
+       rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML" async=""></script>    
+
+</head>
+<body>
+<div id="page">
+<span id="opennav"><i class="material-icons">&#xe5d2;</i></span>
+<div id="nav">
+<div id="closenav"><i class="material-icons">&#xe5cd;</i></div>
+<ul>
+<li><a href="../../index.html">Home</a></li>
+<li><a href="../../docs/index.html">Documentation</a></li>
+<li><a href="../../exams-quizzes/index.html">Exams & Quizzes</a></li>
+<li><a href="../../exercises/index.html">Exercises</a></li>
+<li><a href="../../hws/index.html">Homeworks</a></li>
+<li><a href="../../misc/index.html">Miscellaneous</a></li>
+<li><a href="../../projects/index.html">Projects</a></li>
+<li><a href="../../slides/index.html">Slides</a></li>
+
+</ul>
+</div> <!-- #nav -->
+<div id="main">
+  <div id="header">
+<h1>Programming for the Web</h1>
+</div> <!-- #header -->
+<div id="content">
+<section data-coord="hw1-sol.umt:1:0"><h1 data-coord="hw1-sol.umt:1:0">Homework 1 Solution</h1><p data-coord="hw1-sol.umt:3:0"><strong data-coord="hw1-sol.umt:3:0">Due Date</strong>: Sep 24; To be turned in on paper in class.
+</p><p data-coord="hw1-sol.umt:5:0"><strong data-coord="hw1-sol.umt:5:0">Important Reminder</strong>: As per the course <em data-coord="hw1-sol.umt:5:110"><a href="../../misc/academic-honesty-statement/academic-honesty-policy.html" data-coord="hw1-sol.umt:5:110">Academic Honesty Statement</a></em>,
+cheating of any kind will minimally result in receiving an F letter
+grade for the entire course.
+</p><p data-coord="hw1-sol.umt:9:0">Please remember to justify all answers.
+</p><p data-coord="hw1-sol.umt:11:0">Note that some of the questions require you to show code.  You may use
+a JavaScript implementation to verify your answers but you should
+realize that you will not have access to an implementation during
+exams.
+</p><p data-coord="hw1-sol.umt:16:0">You are encouraged to use the web or the library but are required to
+cite any external sources used in your answers.
+</p><p id="restrict" data-coord="hw1-sol.umt:19:0"><strong data-coord="hw1-sol.umt:19:0">Restrictions</strong> </p><p data-coord="hw1-sol.umt:21:0">Your answers to Questions 1 - 12 may not make 
+any explicit use of destructive assignment, iteration or recursion.
+You may use any
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" data-coord="hw1-sol.umt:21:222">String</a> or
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" data-coord="hw1-sol.umt:21:322">Array</a> functions.
+</p><p data-coord="hw1-sol.umt:29:0">Questions 1 - 12 are meant to familiarize you with the built-in
+functions available in JavaScript (and many other languages) for
+arrays and strings.  Some hints:
+</p><ul data-coord="hw1-sol.umt:33:0"><li data-coord="hw1-sol.umt:33:0"><p data-coord="hw1-sol.umt:33:4">In the absence of assignment and iteration, your function bodies
+will consist of a single return statement returning a single
+expression.
+</p></li><li data-coord="hw1-sol.umt:37:0"><p data-coord="hw1-sol.umt:37:4">Your functions cannot contain any statements other than the
+single <samp data-coord="hw1-sol.umt:37:75">return</samp> statement.  In particular it cannot contain
+<samp data-coord="hw1-sol.umt:37:132">if</samp>-<samp data-coord="hw1-sol.umt:37:141">else</samp> statements, but can use conditional expressions
+involving the ternary operator <samp data-coord="hw1-sol.umt:37:231">?:</samp>.
+</p></li><li data-coord="hw1-sol.umt:42:0"><p data-coord="hw1-sol.umt:42:4">Use higher-order
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" data-coord="hw1-sol.umt:42:119">Array</a> functions to replace the use of iteration.
+</p></li><li data-coord="hw1-sol.umt:46:0"><p data-coord="hw1-sol.umt:46:4">Note that the functions provided to many of the <samp data-coord="hw1-sol.umt:46:52">Array</samp> functions
+like <samp data-coord="hw1-sol.umt:46:79">map()</samp> and <samp data-coord="hw1-sol.umt:46:91">reduce()</samp> take multiple arguments.
+</p></li><li data-coord="hw1-sol.umt:49:0"><p data-coord="hw1-sol.umt:49:4">Look at the ways the <samp data-coord="hw1-sol.umt:49:25">Array()</samp> constructor can be called.
+</p></li><li data-coord="hw1-sol.umt:51:0"><p data-coord="hw1-sol.umt:51:4">The <samp data-coord="hw1-sol.umt:51:8">Array.fill()</samp> function may be useful for setting up
+initial arrays.
+</p></li><li data-coord="hw1-sol.umt:54:0"><p data-coord="hw1-sol.umt:54:4">To give you some idea of what is expected, here is a function
+which returns an array containing the first <code>n</code> factorials:
+</p><pre>    <span class="hl com">/** If n &gt; 0, return an array arr of length n such </span>
+<span class="hl com">     *      that arr[i] === factorial(i) for all i &lt; n </span>
+<span class="hl com">     */</span>
+    function <span class="hl kwd">factValues</span><span class="hl opt">(</span>n<span class="hl opt">) {</span> 
+      <span class="hl kwa">return new</span> <span class="hl kwd">Array</span><span class="hl opt">(</span>n<span class="hl opt">-</span><span class="hl num">1</span><span class="hl opt">).</span>
+        <span class="hl kwd">fill</span><span class="hl opt">(</span><span class="hl num">0</span><span class="hl opt">).</span>
+        <span class="hl kwd">map</span><span class="hl opt">((</span>_<span class="hl opt">,</span> i<span class="hl opt">) =&gt;</span> i <span class="hl opt">+</span> <span class="hl num">2</span><span class="hl opt">).</span>
+        <span class="hl kwd">reduce</span><span class="hl opt">((</span>acc<span class="hl opt">,</span> e<span class="hl opt">,</span> i<span class="hl opt">) =&gt;</span> acc<span class="hl opt">.</span><span class="hl kwd">concat</span><span class="hl opt">([</span>e<span class="hl opt">*</span>acc<span class="hl opt">.</span><span class="hl kwd">slice</span><span class="hl opt">(-</span><span class="hl num">1</span><span class="hl opt">)[</span><span class="hl num">0</span><span class="hl opt">]]),</span>
+               <span class="hl opt">[</span><span class="hl num">1</span><span class="hl opt">]);</span> 
+    <span class="hl opt">}</span></pre><p data-coord="hw1-sol.umt:70:4">We create an initial array of length n - 1 and map its indexes to
+generate \(2 \ldots n\); we reduce these mapped indexes with an
+accumulator (initialized to <code><span class="hl opt">[</span><span class="hl num">1</span><span class="hl opt">]</span></code>) accumulating the values with the
+next value computed as the mapped index multiplied by the last
+value accumulated so far.
+</p><p data-coord="hw1-sol.umt:76:4">Note that instead of using <code>acc<span class="hl opt">.</span><span class="hl kwd">slice</span><span class="hl opt">(-</span><span class="hl num">1</span><span class="hl opt">)[</span><span class="hl num">0</span><span class="hl opt">]</span></code> to pick up the last
+acc value, we can use <code>acc<span class="hl opt">[</span>i<span class="hl opt">]</span></code> instead.
+</p></li></ul><ol data-coord="hw1-sol.umt:80:0"><li data-coord="hw1-sol.umt:80:0"><p data-coord="hw1-sol.umt:80:4">Subject to the above <a href="#restrict" data-coord="hw1-sol.umt:80:38">restrictions,</a> show code for a
+function <samp data-coord="hw1-sol.umt:80:81">rmPrefixSuffix(str, m, n)</samp> which, when given a string
+<samp data-coord="hw1-sol.umt:80:140">str</samp> and non-negative integers <samp data-coord="hw1-sol.umt:80:172">m</samp> and <samp data-coord="hw1-sol.umt:80:180">n</samp>, returns string <samp data-coord="hw1-sol.umt:80:200">str</samp>
+with the first <samp data-coord="hw1-sol.umt:80:225">m</samp> characters and last <samp data-coord="hw1-sol.umt:80:249">n</samp> characters
+removed. <em data-coord="hw1-sol.umt:80:277">3-points</em>
+</p><pre>        <span class="hl opt">&gt;</span> <span class="hl kwd">rmPrefixSuffix</span><span class="hl opt">(</span><span class="hl str">&apos;Twas brillig and the slithy toves&apos;</span><span class="hl opt">,</span>
+                         <span class="hl num">5</span><span class="hl opt">,</span> <span class="hl num">10</span><span class="hl opt">)</span>
+        <span class="hl str">&apos;brillig and the sl&apos;</span>
+        <span class="hl opt">&gt;</span> <span class="hl kwd">rmPrefixSuffix</span><span class="hl opt">(</span><span class="hl str">&apos;&apos;</span><span class="hl opt">,</span> <span class="hl num">5</span><span class="hl opt">,</span> <span class="hl num">10</span><span class="hl opt">)</span>
+        <span class="hl str">&apos;&apos;</span>
+        <span class="hl kwd">rmPrefixSuffix</span><span class="hl opt">(</span><span class="hl str">&apos;Twas brillig and the slithy toves&apos;</span><span class="hl opt">,</span>
+                       <span class="hl num">0</span><span class="hl opt">,</span> <span class="hl num">0</span><span class="hl opt">)</span>
+        <span class="hl str">&apos;Twas brillig and the slithy toves&apos;</span></pre><p data-coord="hw1-sol.umt:97:4">This function can be implemented directly by simply using <samp data-coord="hw1-sol.umt:97:62">substring()</samp>:
+</p><pre>    function <span class="hl kwd">rmPrefixSuffix</span><span class="hl opt">(</span>str<span class="hl opt">,</span> m<span class="hl opt">,</span> n<span class="hl opt">) {</span>
+      <span class="hl kwa">return</span> text<span class="hl opt">.</span><span class="hl kwd">substring</span><span class="hl opt">(</span>m<span class="hl opt">,</span> text<span class="hl opt">.</span>length <span class="hl opt">-</span> n<span class="hl opt">);</span>
+    <span class="hl opt">}</span></pre></li><li data-coord="hw1-sol.umt:105:0"><p data-coord="hw1-sol.umt:105:4">Subject to the above <a href="#restrict" data-coord="hw1-sol.umt:105:38">restrictions,</a> show code for a
+function <samp data-coord="hw1-sol.umt:105:81">lineAt(text, offset)</samp> which, when given a string <samp data-coord="hw1-sol.umt:105:131">text</samp>
+and index <samp data-coord="hw1-sol.umt:105:152">offset</samp>, returns the line at index <samp data-coord="hw1-sol.umt:105:188">offset</samp> in string
+<samp data-coord="hw1-sol.umt:105:211">text</samp>.  A line is defined to be a maximal sequence of characters
+which do not contain a <samp data-coord="hw1-sol.umt:105:304">'\n'</samp> newline character. <em data-coord="hw1-sol.umt:105:330">4-points</em>
+</p><pre>        <span class="hl opt">&gt;</span> <span class="hl kwd">lineAt</span><span class="hl opt">(</span><span class="hl str">&apos;012</span><span class="hl esc">\n</span><span class="hl str">abcd&apos;</span><span class="hl opt">,</span> <span class="hl num">0</span><span class="hl opt">)</span>
+        <span class="hl str">&apos;012&apos;</span>
+        <span class="hl opt">&gt;</span> <span class="hl kwd">lineAt</span><span class="hl opt">(</span><span class="hl str">&apos;012</span><span class="hl esc">\n</span><span class="hl str">abcd&apos;</span><span class="hl opt">,</span> <span class="hl num">1</span><span class="hl opt">)</span>
+        <span class="hl str">&apos;012&apos;</span>
+        <span class="hl opt">&gt;</span> <span class="hl kwd">lineAt</span><span class="hl opt">(</span><span class="hl str">&apos;012</span><span class="hl esc">\n</span><span class="hl str">abcd</span><span class="hl esc">\n</span><span class="hl str">&apos;</span><span class="hl opt">,</span> <span class="hl num">5</span><span class="hl opt">)</span>
+        <span class="hl str">&apos;abcd&apos;</span>
+        <span class="hl opt">&gt;</span> <span class="hl kwd">lineAt</span><span class="hl opt">(</span><span class="hl str">&apos;012</span><span class="hl esc">\n</span><span class="hl str">abcd&apos;</span><span class="hl opt">,</span> <span class="hl num">5</span><span class="hl opt">)</span>
+        <span class="hl str">&apos;abcd&apos;</span>
+        <span class="hl opt">&gt;</span> <span class="hl kwd">lineAt</span><span class="hl opt">(</span><span class="hl str">&apos;012</span><span class="hl esc">\n</span><span class="hl str">abcd&apos;</span><span class="hl opt">,</span> <span class="hl num">3</span><span class="hl opt">)</span>
+        <span class="hl str">&apos;&apos;</span></pre><p data-coord="hw1-sol.umt:124:4">Use <samp data-coord="hw1-sol.umt:124:8">lastIndexOf()</samp> to get the index of the newline preceeding
+offset; note the addition of 1 to the result of <samp data-coord="hw1-sol.umt:124:119">lastIndexOf()</samp> to
+point to the start of <samp data-coord="hw1-sol.umt:124:164">text</samp> when we are at the first line which
+will not have a preceeding newline.  Use <samp data-coord="hw1-sol.umt:124:252">indexOf()</samp> to get the
+index of the newline following <samp data-coord="hw1-sol.umt:124:310">offset</samp>; note the addition of a
+newline character to <samp data-coord="hw1-sol.umt:124:368">text</samp> to handle the situation where it does
+not end with a newline.  We extract the line using <samp data-coord="hw1-sol.umt:124:468">substring()</samp>
+and make a final use of <samp data-coord="hw1-sol.umt:124:510">replace()</samp> to handle the situation where
+<samp data-coord="hw1-sol.umt:124:556">offset</samp> indexes a newline character.
+</p><pre>        function <span class="hl kwd">lineAt</span><span class="hl opt">(</span>text<span class="hl opt">,</span> offset<span class="hl opt">) {</span>
+          <span class="hl kwa">return</span> text<span class="hl opt">.</span>
+            <span class="hl kwd">substring</span><span class="hl opt">(</span>text<span class="hl opt">.</span><span class="hl kwd">lastIndexOf</span><span class="hl opt">(</span><span class="hl str">&apos;</span><span class="hl esc">\n</span><span class="hl str">&apos;</span><span class="hl opt">,</span> offset<span class="hl opt">)+</span><span class="hl num">1</span><span class="hl opt">,</span>
+                      <span class="hl opt">(</span>text <span class="hl opt">+</span> <span class="hl str">&apos;</span><span class="hl esc">\n</span><span class="hl str">&apos;</span><span class="hl opt">).</span><span class="hl kwd">indexOf</span><span class="hl opt">(</span><span class="hl str">&apos;</span><span class="hl esc">\n</span><span class="hl str">&apos;</span><span class="hl opt">,</span> offset<span class="hl opt">)).</span>
+            <span class="hl kwd">replace</span><span class="hl opt">(</span><span class="hl str">&apos;</span><span class="hl esc">\n</span><span class="hl str">&apos;</span><span class="hl opt">,</span> <span class="hl str">&apos;&apos;</span><span class="hl opt">);</span>
+        <span class="hl opt">}</span></pre></li><li data-coord="hw1-sol.umt:143:0"><p data-coord="hw1-sol.umt:143:4">Subject to the above <a href="#restrict" data-coord="hw1-sol.umt:143:38">restrictions,</a> show code for a
+function <samp data-coord="hw1-sol.umt:143:81">fixedLengthLines(text, len)</samp> which returns <samp data-coord="hw1-sol.umt:143:125">text</samp> with
+all lines within text with length set to <samp data-coord="hw1-sol.umt:143:182">len</samp>.  When a line is
+shorter than <samp data-coord="hw1-sol.umt:143:222">len</samp> it is padded on the right with the requisite
+number of spaces; when it's length is greater than <samp data-coord="hw1-sol.umt:143:328">len</samp>, the
+requisite number of suffix characters are removed.  Note that a
+line is a maximal sequence of characters not containing a newline
+character <samp data-coord="hw1-sol.umt:143:491">'\n'</samp>.
+</p><p data-coord="hw1-sol.umt:152:4">All lines in the return value must always be followed by a <samp data-coord="hw1-sol.umt:152:63">'\n'</samp>
+character irrespective of whether that is the case for the
+corresponding line in <samp data-coord="hw1-sol.umt:152:159">text</samp>. <em data-coord="hw1-sol.umt:152:167">4-points</em>
+</p><pre>        <span class="hl opt">&gt;</span> <span class="hl kwd">fixedLengthLines</span><span class="hl opt">(</span><span class="hl str">&apos;12345</span><span class="hl esc">\n</span><span class="hl str">1</span><span class="hl esc">\n</span><span class="hl str">12&apos;</span><span class="hl opt">,</span> <span class="hl num">3</span><span class="hl opt">)</span>
+        <span class="hl str">&apos;123</span><span class="hl esc">\n</span><span class="hl str">1</span> <span class="hl esc">\n</span><span class="hl str">12</span> <span class="hl esc">\n</span><span class="hl str">&apos;</span>
+        <span class="hl opt">&gt;</span> <span class="hl kwd">fixedLengthLines</span><span class="hl opt">(</span><span class="hl str">&apos;&apos;</span><span class="hl opt">,</span> <span class="hl num">3</span><span class="hl opt">)</span>
+        <span class="hl str">&apos;</span>   <span class="hl esc">\n</span><span class="hl str">&apos;</span></pre><p data-coord="hw1-sol.umt:163:4">Use <samp data-coord="hw1-sol.umt:163:8">split()</samp> to get the lines in <samp data-coord="hw1-sol.umt:163:38">text</samp>, <samp data-coord="hw1-sol.umt:163:46">padEnd()</samp> or <samp data-coord="hw1-sol.umt:163:60">substr()</samp>
+as appropriate to create a new line of the specified <samp data-coord="hw1-sol.umt:163:128">len</samp>, add in
+a newline to each line, followed by a final <samp data-coord="hw1-sol.umt:163:190">join()</samp> to stick
+everything back together again into a single string.
+</p><pre>        function <span class="hl kwd">fixedLengthLines</span><span class="hl opt">(</span>text<span class="hl opt">,</span> len<span class="hl opt">) {</span>
+          <span class="hl kwa">return</span> text<span class="hl opt">.</span><span class="hl kwd">split</span><span class="hl opt">(</span><span class="hl str">&apos;</span><span class="hl esc">\n</span><span class="hl str">&apos;</span><span class="hl opt">).</span>
+            <span class="hl kwd">map</span><span class="hl opt">(</span>line <span class="hl opt">=&gt; (</span>line<span class="hl opt">.</span>length <span class="hl opt">&lt;</span> len<span class="hl opt">)</span>
+                        <span class="hl opt">?</span> line<span class="hl opt">.</span><span class="hl kwd">padEnd</span><span class="hl opt">(</span>len<span class="hl opt">) +</span> <span class="hl str">&apos;</span><span class="hl esc">\n</span><span class="hl str">&apos;</span>
+                        <span class="hl opt">:</span> line<span class="hl opt">.</span><span class="hl kwd">substr</span><span class="hl opt">(</span><span class="hl num">0</span><span class="hl opt">,</span> len<span class="hl opt">) +</span> <span class="hl str">&apos;</span><span class="hl esc">\n</span><span class="hl str">&apos;</span><span class="hl opt">).</span>
+            <span class="hl kwd">join</span><span class="hl opt">(</span><span class="hl str">&apos;&apos;</span><span class="hl opt">);</span>
+        <span class="hl opt">}</span></pre></li><li data-coord="hw1-sol.umt:178:0"><p data-coord="hw1-sol.umt:178:4">Subject to the above <a href="#restrict" data-coord="hw1-sol.umt:178:38">restrictions,</a> show code for a
+function <samp data-coord="hw1-sol.umt:178:81">oddLengthLines(text)</samp> which, when given a string <samp data-coord="hw1-sol.umt:178:131">text</samp>,
+returns <samp data-coord="hw1-sol.umt:178:151">text</samp> with all lines which have even length (not counting
+the <samp data-coord="hw1-sol.umt:178:218">'\n'</samp>) removed.  Note that a line is a maximal sequence of
+characters not containing a newline character <samp data-coord="hw1-sol.umt:178:328">'\n'</samp>.
+</p><p data-coord="hw1-sol.umt:184:4">All lines in the return value must always be followed by a <samp data-coord="hw1-sol.umt:184:63">'\n'</samp>
+character irrespective of whether that is the case for the
+corresponding line in <samp data-coord="hw1-sol.umt:184:159">text</samp>. <em data-coord="hw1-sol.umt:184:167">4-points</em>
+</p><pre>        <span class="hl opt">&gt;</span> <span class="hl kwd">oddLengthLines</span><span class="hl opt">(</span><span class="hl str">&apos;01</span><span class="hl esc">\n</span><span class="hl str">012</span><span class="hl esc">\n</span><span class="hl str">0123</span><span class="hl esc">\n</span><span class="hl str">01234</span><span class="hl esc">\n</span><span class="hl str">&apos;</span><span class="hl opt">)</span>
+        <span class="hl str">&apos;012</span><span class="hl esc">\n</span><span class="hl str">01234</span><span class="hl esc">\n</span><span class="hl str">&apos;</span>
+        <span class="hl opt">&gt;</span> <span class="hl kwd">oddLengthLines</span><span class="hl opt">(</span><span class="hl str">&apos;01</span><span class="hl esc">\n</span><span class="hl str">012</span><span class="hl esc">\n</span><span class="hl str">0123</span><span class="hl esc">\n</span><span class="hl str">01234&apos;</span><span class="hl opt">)</span>
+        <span class="hl str">&apos;012</span><span class="hl esc">\n</span><span class="hl str">01234</span><span class="hl esc">\n</span><span class="hl str">&apos;</span>
+        <span class="hl opt">&gt;</span> <span class="hl kwd">oddLengthLines</span><span class="hl opt">(</span><span class="hl str">&apos;&apos;</span><span class="hl opt">)</span>
+        <span class="hl str">&apos;&apos;</span>
+        <span class="hl opt">&gt;</span> <span class="hl kwd">oddLengthLines</span><span class="hl opt">(</span><span class="hl str">&apos;01&apos;</span><span class="hl opt">)</span>
+        <span class="hl str">&apos;&apos;</span>
+        <span class="hl opt">&gt;</span> <span class="hl kwd">oddLengthLines</span><span class="hl opt">(</span><span class="hl str">&apos;0&apos;</span><span class="hl opt">)</span>
+        <span class="hl str">&apos;0</span><span class="hl esc">\n</span><span class="hl str">&apos;</span></pre><p data-coord="hw1-sol.umt:201:4">Use <samp data-coord="hw1-sol.umt:201:8">split()</samp> to get the lines in <samp data-coord="hw1-sol.umt:201:38">text</samp>, <samp data-coord="hw1-sol.umt:201:46">filter()</samp> to only select
+odd-length lines, a <samp data-coord="hw1-sol.umt:201:96">map</samp> to stick on newline terminators, followed
+by a final <samp data-coord="hw1-sol.umt:201:159">join()</samp> to stick everything back together again into
+a single string.
+</p><pre>        function <span class="hl kwd">oddLengthLines</span><span class="hl opt">(</span>text<span class="hl opt">) {</span>
+          <span class="hl kwa">return</span> text<span class="hl opt">.</span><span class="hl kwd">split</span><span class="hl opt">(</span><span class="hl str">&apos;</span><span class="hl esc">\n</span><span class="hl str">&apos;</span><span class="hl opt">).</span>
+            <span class="hl kwd">filter</span><span class="hl opt">((</span>line<span class="hl opt">) =&gt;</span> line<span class="hl opt">.</span>length<span class="hl opt">%</span><span class="hl num">2</span> <span class="hl opt">===</span> <span class="hl num">1</span><span class="hl opt">).</span>
+            <span class="hl kwd">map</span><span class="hl opt">((</span>line<span class="hl opt">) =&gt;</span> line <span class="hl opt">+</span> <span class="hl str">&apos;</span><span class="hl esc">\n</span><span class="hl str">&apos;</span><span class="hl opt">).</span>
+            <span class="hl kwd">join</span><span class="hl opt">(</span><span class="hl str">&apos;&apos;</span><span class="hl opt">);</span>
+        <span class="hl opt">}</span></pre></li><li data-coord="hw1-sol.umt:215:0"><p data-coord="hw1-sol.umt:215:4">Subject to the above <a href="#restrict" data-coord="hw1-sol.umt:215:38">restrictions,</a> show code for a
+function <samp data-coord="hw1-sol.umt:215:81">positiveEvens(arr)</samp> which, when given an array <samp data-coord="hw1-sol.umt:215:129">arr</samp> of
+integers, returns an array of those elements in <samp data-coord="hw1-sol.umt:215:190">a</samp> which are even
+and positive. <em data-coord="hw1-sol.umt:215:227">3-points</em>
+</p><pre>        <span class="hl opt">&gt;</span> <span class="hl kwd">positiveEvens</span><span class="hl opt">([</span><span class="hl num">5</span><span class="hl opt">, -</span><span class="hl num">4</span><span class="hl opt">,</span> <span class="hl num">0</span><span class="hl opt">,</span> <span class="hl num">2</span><span class="hl opt">])</span>
+        <span class="hl opt">[</span> <span class="hl num">2</span> <span class="hl opt">]</span></pre><p data-coord="hw1-sol.umt:225:4">This is a straight-forward application of <samp data-coord="hw1-sol.umt:225:46">filter()</samp>:
+</p><pre>        function <span class="hl kwd">positiveEvens</span><span class="hl opt">(</span>a<span class="hl opt">) {</span>
+          <span class="hl kwa">return</span> a<span class="hl opt">.</span><span class="hl kwd">filter</span><span class="hl opt">((</span>e<span class="hl opt">) =&gt;</span> e <span class="hl opt">&gt;</span> <span class="hl num">0</span> <span class="hl opt">&amp;&amp;</span> e<span class="hl opt">%</span><span class="hl num">2</span> <span class="hl opt">===</span> <span class="hl num">0</span><span class="hl opt">);</span>
+        <span class="hl opt">}</span></pre></li><li data-coord="hw1-sol.umt:233:0"><p data-coord="hw1-sol.umt:233:4">Subject to the above <a href="#restrict" data-coord="hw1-sol.umt:233:38">restrictions,</a> show code for a
+function <samp data-coord="hw1-sol.umt:233:81">stringsLength(strings)</samp> which, when given an array
+<samp data-coord="hw1-sol.umt:233:137">strings</samp> of strings, returns the sum of the lengths of all the
+strings in <samp data-coord="hw1-sol.umt:233:216">strings</samp>. <em data-coord="hw1-sol.umt:233:227">3-points</em>
+</p><pre>        <span class="hl opt">&gt;</span> <span class="hl kwd">stringsLength</span><span class="hl opt">([</span><span class="hl str">&apos;hello&apos;</span><span class="hl opt">,</span> <span class="hl str">&apos;world&apos;</span><span class="hl opt">,</span> <span class="hl str">&apos;&apos;</span><span class="hl opt">])</span>
+        <span class="hl num">10</span></pre><p data-coord="hw1-sol.umt:243:4">This is a straight-forward application of <samp data-coord="hw1-sol.umt:243:46">reduce()</samp>.  We need to
+accumulate the sum of the <samp data-coord="hw1-sol.umt:243:100">length</samp> property of all the strings in
+an accumulator initialized to 0.
+</p><pre>        function <span class="hl kwd">stringsLength</span><span class="hl opt">(</span>strings<span class="hl opt">) {</span>
+          <span class="hl kwa">return</span> strings<span class="hl opt">.</span><span class="hl kwd">reduce</span><span class="hl opt">((</span>acc<span class="hl opt">,</span> s<span class="hl opt">) =&gt;</span> acc <span class="hl opt">+</span> s<span class="hl opt">.</span>length<span class="hl opt">,</span> <span class="hl num">0</span><span class="hl opt">);</span>
+        <span class="hl opt">}</span></pre></li><li data-coord="hw1-sol.umt:254:0"><p data-coord="hw1-sol.umt:254:4">Subject to the above <a href="#restrict" data-coord="hw1-sol.umt:254:38">restrictions,</a> show code for a
+function <samp data-coord="hw1-sol.umt:254:81">selectIndexes(arr, indexes)</samp> which, when given an array
+<samp data-coord="hw1-sol.umt:254:142">arr</samp> of arbitrary JavaScript objects and an array <samp data-coord="hw1-sol.umt:254:193">indexes</samp> of
+non-negative integers, returns an array <samp data-coord="hw1-sol.umt:254:250">selects[]</samp> such that
+<samp data-coord="hw1-sol.umt:254:276">selects.length === indexes.length</samp> and <samp data-coord="hw1-sol.umt:254:316">selects[i]</samp> is
+<samp data-coord="hw1-sol.umt:254:336">arr[indexes[i]]</samp>. <em data-coord="hw1-sol.umt:254:355">3-points</em>
+</p><pre>         <span class="hl opt">&gt;</span> <span class="hl kwd">selectIndexes</span><span class="hl opt">([</span><span class="hl str">&apos;hello&apos;</span><span class="hl opt">,</span> <span class="hl num">42</span><span class="hl opt">,</span> <span class="hl str">&apos;world&apos;</span><span class="hl opt">], [</span><span class="hl num">2</span><span class="hl opt">,</span> <span class="hl num">1</span><span class="hl opt">,</span> <span class="hl num">4</span><span class="hl opt">])</span>
+         <span class="hl opt">[</span> <span class="hl str">&apos;world&apos;</span><span class="hl opt">,</span> <span class="hl num">42</span><span class="hl opt">,</span> undefined <span class="hl opt">]</span></pre><p data-coord="hw1-sol.umt:266:4">Simply <samp data-coord="hw1-sol.umt:266:11">map()</samp> the <samp data-coord="hw1-sol.umt:266:23">indexes</samp> to select the <samp data-coord="hw1-sol.umt:266:47">arr</samp> elements:
+</p><pre>         function <span class="hl kwd">selectIndexes</span><span class="hl opt">(</span>arr<span class="hl opt">,</span> indexes<span class="hl opt">) {</span>
+           <span class="hl kwa">return</span> indexes<span class="hl opt">.</span><span class="hl kwd">map</span><span class="hl opt">((</span>e<span class="hl opt">) =&gt;</span> arr<span class="hl opt">[</span>e<span class="hl opt">]);</span>
+         <span class="hl opt">}</span></pre></li><li data-coord="hw1-sol.umt:275:0"><p data-coord="hw1-sol.umt:275:4">Subject to the above <a href="#restrict" data-coord="hw1-sol.umt:275:38">restrictions,</a> show code for a
+function <samp data-coord="hw1-sol.umt:275:81">seq(m, n)</samp> which, when given integers <samp data-coord="hw1-sol.umt:275:120">m</samp> and <samp data-coord="hw1-sol.umt:275:128">n</samp> with
+<samp data-coord="hw1-sol.umt:275:141">m &lt;= n</samp>, returns an array containing the integers from <samp data-coord="hw1-sol.umt:275:197">m</samp>
+(inclusive) to <samp data-coord="hw1-sol.umt:275:220">n</samp> (exclusive). <em data-coord="hw1-sol.umt:275:237">3-points</em>
+</p><pre>        <span class="hl opt">&gt;</span> <span class="hl kwd">seq</span><span class="hl opt">(</span><span class="hl num">4</span><span class="hl opt">,</span> <span class="hl num">5</span><span class="hl opt">)</span>
+        <span class="hl opt">[</span> <span class="hl num">4</span> <span class="hl opt">]</span>
+        <span class="hl opt">&gt;</span> <span class="hl kwd">seq</span><span class="hl opt">(</span><span class="hl num">4</span><span class="hl opt">,</span> <span class="hl num">8</span><span class="hl opt">)</span>
+        <span class="hl opt">[</span> <span class="hl num">4</span><span class="hl opt">,</span> <span class="hl num">5</span><span class="hl opt">,</span> <span class="hl num">6</span><span class="hl opt">,</span> <span class="hl num">7</span> <span class="hl opt">]</span>
+        <span class="hl opt">&gt;</span> <span class="hl kwd">seq</span><span class="hl opt">(</span><span class="hl num">4</span><span class="hl opt">,</span> <span class="hl num">4</span><span class="hl opt">)</span>
+        <span class="hl opt">[]</span>
+        <span class="hl opt">&gt;</span> <span class="hl kwd">seq</span><span class="hl opt">(-</span><span class="hl num">3</span><span class="hl opt">,</span> <span class="hl num">4</span><span class="hl opt">)</span>
+        <span class="hl opt">[ -</span><span class="hl num">3</span><span class="hl opt">, -</span><span class="hl num">2</span><span class="hl opt">, -</span><span class="hl num">1</span><span class="hl opt">,</span> <span class="hl num">0</span><span class="hl opt">,</span> <span class="hl num">1</span><span class="hl opt">,</span> <span class="hl num">2</span><span class="hl opt">,</span> <span class="hl num">3</span> <span class="hl opt">]</span></pre><p data-coord="hw1-sol.umt:291:4">Simply return the indexes of a <samp data-coord="hw1-sol.umt:291:35">n - m</samp> element array offset by
+<samp data-coord="hw1-sol.umt:291:71">m</samp>.
+</p><pre>        function <span class="hl kwd">seq</span><span class="hl opt">(</span>m<span class="hl opt">,</span> n<span class="hl opt">) {</span>
+          <span class="hl kwa">return new</span> <span class="hl kwd">Array</span><span class="hl opt">(</span>n <span class="hl opt">-</span> m<span class="hl opt">).</span><span class="hl kwd">fill</span><span class="hl opt">(</span><span class="hl num">0</span><span class="hl opt">).</span><span class="hl kwd">map</span><span class="hl opt">((</span>e<span class="hl opt">,</span> i<span class="hl opt">) =&gt;</span> i <span class="hl opt">+</span> m<span class="hl opt">);</span>
+        <span class="hl opt">}</span></pre></li><li data-coord="hw1-sol.umt:300:0"><p data-coord="hw1-sol.umt:300:4">Subject to the above <a href="#restrict" data-coord="hw1-sol.umt:300:38">restrictions,</a> show code for a
+function <samp data-coord="hw1-sol.umt:300:81">positiveIndexes(arr)</samp> which, when given an array <samp data-coord="hw1-sol.umt:300:131">arr</samp>
+of integers, returns an array of the indexes of those elements in
+<samp data-coord="hw1-sol.umt:300:211">a</samp> which are positive. <em data-coord="hw1-sol.umt:300:235">5-points</em>
+</p><pre>        <span class="hl opt">&gt;</span> <span class="hl kwd">positiveIndexes</span><span class="hl opt">([</span><span class="hl num">5</span><span class="hl opt">, -</span><span class="hl num">4</span><span class="hl opt">,</span> <span class="hl num">0</span><span class="hl opt">,</span> <span class="hl num">2</span><span class="hl opt">])</span>
+        <span class="hl opt">[</span> <span class="hl num">0</span><span class="hl opt">,</span> <span class="hl num">3</span> <span class="hl opt">]</span></pre><p data-coord="hw1-sol.umt:310:4">At first glance this seems to be related to <samp data-coord="hw1-sol.umt:310:48">filter()</samp> but
+<samp data-coord="hw1-sol.umt:310:67">filter()</samp> does not allow returning indexes; instead, we can use
+<samp data-coord="hw1-sol.umt:310:136">reduce()</samp> to accumulate only the indexes of positive elements.
+</p><pre>        function <span class="hl kwd">positiveIndexes</span><span class="hl opt">(</span>a<span class="hl opt">) {</span>
+          <span class="hl kwa">return</span> a<span class="hl opt">.</span><span class="hl kwd">reduce</span><span class="hl opt">((</span>acc<span class="hl opt">,</span> e<span class="hl opt">,</span> i<span class="hl opt">) =&gt;</span> e <span class="hl opt">&gt;</span> <span class="hl num">0</span> <span class="hl opt">?</span> acc<span class="hl opt">.</span><span class="hl kwd">concat</span><span class="hl opt">([</span>i<span class="hl opt">]) :</span> acc<span class="hl opt">,</span>
+                          <span class="hl opt">[]);</span>
+        <span class="hl opt">}</span></pre></li><li data-coord="hw1-sol.umt:321:0"><p data-coord="hw1-sol.umt:321:4">Subject to the above <a href="#restrict" data-coord="hw1-sol.umt:321:38">restrictions,</a> show code for a
+function <samp data-coord="hw1-sol.umt:321:81">nPermutations(arr)</samp> which, when given an array <samp data-coord="hw1-sol.umt:321:129">arr</samp> of
+arbitrary JavaScript objects, returns the number of permutations
+of that array.  Note that all array elements in <samp data-coord="hw1-sol.umt:321:259">arr</samp> are always
+regarded as distinct. <em data-coord="hw1-sol.umt:321:302">5-points</em>
+</p><pre>        <span class="hl opt">&gt;</span> <span class="hl kwd">nPermutations</span><span class="hl opt">([])</span>
+        <span class="hl num">1</span>
+        <span class="hl opt">&gt;</span> <span class="hl kwd">nPermutations</span><span class="hl opt">([</span><span class="hl num">1</span><span class="hl opt">,</span> <span class="hl num">2</span><span class="hl opt">,</span> <span class="hl num">3</span><span class="hl opt">])</span>
+        <span class="hl num">6</span>
+        <span class="hl opt">&gt;</span> <span class="hl kwd">nPermutations</span><span class="hl opt">([</span><span class="hl num">1</span><span class="hl opt">,</span> <span class="hl num">2</span><span class="hl opt">,</span> <span class="hl num">3</span><span class="hl opt">,</span> <span class="hl num">3</span><span class="hl opt">,</span> <span class="hl num">1</span><span class="hl opt">,</span> <span class="hl num">1</span><span class="hl opt">])</span>
+        <span class="hl num">720</span>
+        <span class="hl opt">&gt;</span> </pre><p data-coord="hw1-sol.umt:337:4">Assuming that all elements are treated as distinct means that the
+function merely needs to compute the factorial of the length of
+the array.  This is trivial to do by reducing the incremented
+array indexes using a multiplication function.
+</p><pre>        function <span class="hl kwd">nPermutations</span><span class="hl opt">(</span>arr<span class="hl opt">) {</span>
+          <span class="hl kwa">return new</span> <span class="hl kwd">Array</span><span class="hl opt">(</span>arr<span class="hl opt">.</span>length<span class="hl opt">).</span><span class="hl kwd">fill</span><span class="hl opt">(</span><span class="hl num">0</span><span class="hl opt">).</span>
+            <span class="hl kwd">reduce</span><span class="hl opt">((</span>acc<span class="hl opt">,</span> e<span class="hl opt">,</span> i<span class="hl opt">) =&gt;</span> acc<span class="hl opt">*(</span>i <span class="hl opt">+</span> <span class="hl num">1</span><span class="hl opt">),</span> <span class="hl num">1</span><span class="hl opt">);</span>
+        <span class="hl opt">}</span></pre></li><li data-coord="hw1-sol.umt:349:0"><p data-coord="hw1-sol.umt:349:4">Subject to the above <a href="#restrict" data-coord="hw1-sol.umt:349:38">restrictions,</a> show code for a
+function <samp data-coord="hw1-sol.umt:349:81">fib(n)</samp> which, when given a positive integer <samp data-coord="hw1-sol.umt:349:127">n &gt; 0</samp>,
+returns the <samp data-coord="hw1-sol.umt:349:152">n</samp>'th Fibonacci number. <em data-coord="hw1-sol.umt:349:177">6-points</em>
+</p><pre>        <span class="hl opt">&gt;</span> <span class="hl kwd">fib</span><span class="hl opt">(</span><span class="hl num">1</span><span class="hl opt">)</span>
+        <span class="hl num">1</span>
+        <span class="hl opt">&gt;</span> <span class="hl kwd">fib</span><span class="hl opt">(</span><span class="hl num">2</span><span class="hl opt">)</span>
+        <span class="hl num">1</span>
+        <span class="hl opt">&gt;</span> <span class="hl kwd">fib</span><span class="hl opt">(</span><span class="hl num">3</span><span class="hl opt">)</span>
+        <span class="hl num">2</span>
+        <span class="hl opt">&gt;</span> <span class="hl kwd">fib</span><span class="hl opt">(</span><span class="hl num">6</span><span class="hl opt">)</span>
+        <span class="hl num">8</span></pre><p data-coord="hw1-sol.umt:364:4">Use <samp data-coord="hw1-sol.umt:364:8">reduce()</samp> with an accumulator which is a pair containing the
+two previous Fibonacci numbers.  For call to the <samp data-coord="hw1-sol.umt:364:123">reduce()</samp>
+function return an accumulator which contains the next pair.
+Finally, take care of initial conditions and pulling the final
+Fibonacci number out of the accumulator:
+</p><pre>        function <span class="hl kwd">fib</span><span class="hl opt">(</span>n<span class="hl opt">) {</span>
+          <span class="hl kwa">return</span> n <span class="hl opt">&lt;=</span> <span class="hl num">2</span>
+                 <span class="hl opt">?</span> <span class="hl num">1</span>
+                 <span class="hl opt">:</span> <span class="hl kwa">new</span> <span class="hl kwd">Array</span><span class="hl opt">(</span>n <span class="hl opt">-</span> <span class="hl num">2</span><span class="hl opt">).</span><span class="hl kwd">fill</span><span class="hl opt">(</span><span class="hl num">0</span><span class="hl opt">).</span>
+                      <span class="hl kwd">reduce</span><span class="hl opt">((</span>acc<span class="hl opt">) =&gt; [</span>acc<span class="hl opt">[</span><span class="hl num">1</span><span class="hl opt">],</span> acc<span class="hl opt">[</span><span class="hl num">0</span><span class="hl opt">]+</span>acc<span class="hl opt">[</span><span class="hl num">1</span><span class="hl opt">]],</span>
+                              <span class="hl opt">[</span><span class="hl num">1</span><span class="hl opt">,</span> <span class="hl num">1</span><span class="hl opt">])</span>
+                             <span class="hl opt">[</span><span class="hl num">1</span><span class="hl opt">];</span>
+        <span class="hl opt">}</span></pre></li><li data-coord="hw1-sol.umt:381:0"><p data-coord="hw1-sol.umt:381:4">Subject to the above <a href="#restrict" data-coord="hw1-sol.umt:381:38">restrictions,</a> show code for a
+function <samp data-coord="hw1-sol.umt:381:81">fibValues(n)</samp> which, when given a positive integer <samp data-coord="hw1-sol.umt:381:133">n &gt;
+    0</samp>, returns a <samp data-coord="hw1-sol.umt:381:156">n</samp>-element array <samp data-coord="hw1-sol.umt:381:174">fibs[]</samp> such that <samp data-coord="hw1-sol.umt:381:193">fibs[i]</samp> is
+<samp data-coord="hw1-sol.umt:381:210">i</samp>'th Fibonacci number. <em data-coord="hw1-sol.umt:381:235">7-points</em>
+</p><pre>        <span class="hl opt">&gt;</span> <span class="hl kwd">fibValues</span><span class="hl opt">(</span><span class="hl num">1</span><span class="hl opt">)</span>
+        <span class="hl opt">[</span> <span class="hl num">1</span> <span class="hl opt">]</span>
+        <span class="hl opt">&gt;</span> <span class="hl kwd">fibValues</span><span class="hl opt">(</span><span class="hl num">2</span><span class="hl opt">)</span>
+        <span class="hl opt">[</span> <span class="hl num">1</span><span class="hl opt">,</span> <span class="hl num">1</span> <span class="hl opt">]</span>
+        <span class="hl opt">&gt;</span> <span class="hl kwd">fibValues</span><span class="hl opt">(</span><span class="hl num">10</span><span class="hl opt">)</span>
+        <span class="hl opt">[</span> <span class="hl num">1</span><span class="hl opt">,</span> <span class="hl num">1</span><span class="hl opt">,</span> <span class="hl num">2</span><span class="hl opt">,</span> <span class="hl num">3</span><span class="hl opt">,</span> <span class="hl num">5</span><span class="hl opt">,</span> <span class="hl num">8</span><span class="hl opt">,</span> <span class="hl num">13</span><span class="hl opt">,</span> <span class="hl num">21</span><span class="hl opt">,</span> <span class="hl num">34</span><span class="hl opt">,</span> <span class="hl num">55</span> <span class="hl opt">]</span></pre><p data-coord="hw1-sol.umt:395:4">Use <samp data-coord="hw1-sol.umt:395:8">reduce()</samp> with an accumulator accumulating the Fibonacci
+values:
+</p><pre>        function <span class="hl kwd">fibValues</span><span class="hl opt">(</span>n<span class="hl opt">) {</span>
+          <span class="hl kwa">return</span> n <span class="hl opt">&lt;</span> <span class="hl num">2</span>
+                 <span class="hl opt">? [</span><span class="hl num">1</span><span class="hl opt">]</span>
+                 <span class="hl opt">:</span> <span class="hl kwa">new</span> <span class="hl kwd">Array</span><span class="hl opt">(</span>n <span class="hl opt">-</span> <span class="hl num">2</span><span class="hl opt">).</span><span class="hl kwd">fill</span><span class="hl opt">(</span><span class="hl num">0</span><span class="hl opt">).</span>
+                     <span class="hl kwd">reduce</span><span class="hl opt">((</span>acc<span class="hl opt">,</span> e<span class="hl opt">,</span> i<span class="hl opt">) =&gt;</span> acc<span class="hl opt">.</span><span class="hl kwd">concat</span><span class="hl opt">([</span>acc<span class="hl opt">[</span>i<span class="hl opt">]+</span>acc<span class="hl opt">[</span>i<span class="hl opt">+</span><span class="hl num">1</span><span class="hl opt">]]),</span>
+                             <span class="hl opt">[</span><span class="hl num">1</span><span class="hl opt">,</span> <span class="hl num">1</span><span class="hl opt">]);</span>
+        <span class="hl opt">}</span></pre></li><li data-coord="hw1-sol.umt:409:0"><p data-coord="hw1-sol.umt:409:4">There is a mistake in the requirements for <em data-coord="hw1-sol.umt:409:84"><a href="../../projects/prj1/prj1.html" data-coord="hw1-sol.umt:409:84">Project 1</a></em> which makes it difficult for humans and other programs
+to understand the output of the project.  How would you fix
+the requirements to avoid this problem. <em data-coord="hw1-sol.umt:409:259">5-points</em>
+</p><p data-coord="hw1-sol.umt:414:4">There should be a single empty line printed after each matching document.
+This makes it easier for both humans and programs to identify the
+results for each document.
+</p></li><li data-coord="hw1-sol.umt:418:0"><p data-coord="hw1-sol.umt:418:4">When working on <em data-coord="hw1-sol.umt:418:57"><a href="../../projects/prj1/prj1.html" data-coord="hw1-sol.umt:418:57">Project 1</a></em>, a student decided to experiment with JavaScript
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map" data-coord="hw1-sol.umt:418:210">Map</a> objects.
+</p><pre>    <span class="hl opt">&gt;</span> m <span class="hl opt">=</span> <span class="hl kwa">new</span> <span class="hl kwd">Map</span><span class="hl opt">();</span>
+    Map <span class="hl opt">{}</span>
+    <span class="hl opt">&gt;</span> m<span class="hl opt">.</span><span class="hl kwd">set</span><span class="hl opt">(</span><span class="hl str">&apos;a&apos;</span><span class="hl opt">,</span> <span class="hl num">1</span><span class="hl opt">)</span> <span class="hl slc">//set value</span>
+    Map <span class="hl opt">{</span> <span class="hl str">&apos;a&apos;</span> <span class="hl opt">=&gt;</span> <span class="hl num">1</span> <span class="hl opt">}</span>
+    <span class="hl opt">&gt;</span> m<span class="hl opt">.</span><span class="hl kwd">get</span><span class="hl opt">(</span><span class="hl str">&apos;a&apos;</span><span class="hl opt">)</span> <span class="hl slc">//get it</span>
+    <span class="hl num">1</span>
+    <span class="hl opt">&gt;</span> m<span class="hl opt">[</span><span class="hl str">&apos;b&apos;</span><span class="hl opt">] =</span> <span class="hl num">2</span> <span class="hl slc">//try using more convenient [] notation</span>
+    <span class="hl num">2</span>
+    <span class="hl opt">&gt;</span> m<span class="hl opt">[</span><span class="hl str">&apos;b&apos;</span><span class="hl opt">]</span> <span class="hl slc">//it works!</span>
+    <span class="hl num">2</span></pre><p data-coord="hw1-sol.umt:435:4">The student first tried the <samp data-coord="hw1-sol.umt:435:32">get()</samp> and <samp data-coord="hw1-sol.umt:435:44">set()</samp> methods as per the
+documentation, but then found that the more convenient
+<samp data-coord="hw1-sol.umt:435:134">[]</samp>-indexing operator also worked.  So the student decided to do
+their project using the <samp data-coord="hw1-sol.umt:435:228">[]</samp>-indexing operator with <samp data-coord="hw1-sol.umt:435:256">Map</samp>'s.  The
+project worked perfectly.  It turns out that the student was wrong
+in using the <samp data-coord="hw1-sol.umt:435:358">[]</samp>-indexing operator with <samp data-coord="hw1-sol.umt:435:386">Map</samp>'s, so why did the
+project still work? <em data-coord="hw1-sol.umt:435:434">10-points</em>
+</p><p data-coord="hw1-sol.umt:443:4"><samp data-coord="hw1-sol.umt:443:4">Map</samp>'s are <samp data-coord="hw1-sol.umt:443:16">Object</samp>'s.  Hence the <samp data-coord="hw1-sol.umt:443:39">[]</samp> operations are accessing
+object properties rather than <samp data-coord="hw1-sol.umt:443:103">Map</samp> keys.  As mentioned in the
+project assignment, JavaScript <samp data-coord="hw1-sol.umt:443:171">Object</samp>'s can also be used as
+<samp data-coord="hw1-sol.umt:443:206">Map</samp>'s.  If the particular JavaScript implementation used by the
+student retained the insertion order in <samp data-coord="hw1-sol.umt:443:316">Object</samp>'s, then the
+project would appear to work perfectly even though the <samp data-coord="hw1-sol.umt:443:396">Map</samp>
+datastructure is not being used at all.
+</p></li><li data-coord="hw1-sol.umt:451:0"><p data-coord="hw1-sol.umt:451:4">Give regex's which precisely describe:
+</p><ol data-coord="hw1-sol.umt:453:0"><li data-coord="hw1-sol.umt:453:0"><p data-coord="hw1-sol.umt:453:8">All binary strings of 4-or-more <samp data-coord="hw1-sol.umt:453:40">0</samp>'s?
+</p></li><li data-coord="hw1-sol.umt:455:0"><p data-coord="hw1-sol.umt:455:8">All binary strings of odd length containing alternating <samp data-coord="hw1-sol.umt:455:64">0</samp>'s
+and <samp data-coord="hw1-sol.umt:455:82">1</samp>'s.
+</p></li><li data-coord="hw1-sol.umt:458:0"><p data-coord="hw1-sol.umt:458:8">All binary strings over <samp data-coord="hw1-sol.umt:458:32">0</samp> and <samp data-coord="hw1-sol.umt:458:40">1</samp> representing numbers greater
+than 5 when interpreted as binary numbers.
+</p></li><li data-coord="hw1-sol.umt:461:0"><p data-coord="hw1-sol.umt:461:8">All binary strings over <samp data-coord="hw1-sol.umt:461:32">0</samp> and <samp data-coord="hw1-sol.umt:461:40">1</samp> representing numbers which are
+evenly divisible by <samp data-coord="hw1-sol.umt:461:103">4</samp> when interpreted as binary numbers.
+</p></li><li data-coord="hw1-sol.umt:464:0"><p data-coord="hw1-sol.umt:464:8">All binary strings of length less than or equal to 5
+containing only <samp data-coord="hw1-sol.umt:464:85">0</samp>'s and <samp data-coord="hw1-sol.umt:464:95">1</samp>'s where the number of <samp data-coord="hw1-sol.umt:464:121">0</samp>'s is
+equal to the number of <samp data-coord="hw1-sol.umt:464:161">1</samp>'s. <em data-coord="hw1-sol.umt:464:168">10-points</em>
+</p></li></ol><p data-coord="hw1-sol.umt:468:4">We assume that an empty string is a string of even length.
+</p><ol data-coord="hw1-sol.umt:470:0"><li data-coord="hw1-sol.umt:470:0"><p data-coord="hw1-sol.umt:470:8"><samp data-coord="hw1-sol.umt:470:8">/0000+/</samp> or <samp data-coord="hw1-sol.umt:470:21">/0{4,}/</samp>.
+</p></li><li data-coord="hw1-sol.umt:472:0"><p data-coord="hw1-sol.umt:472:8"><samp data-coord="hw1-sol.umt:472:8">/1(01)*|0(10)*/</samp>.
+</p></li><li data-coord="hw1-sol.umt:474:0"><p data-coord="hw1-sol.umt:474:8">First considering only 3-bit numbers greater than 5: the
+least-significant 3 bits must be <samp data-coord="hw1-sol.umt:474:106">110</samp> (representing 6) or
+<samp data-coord="hw1-sol.umt:474:140">111</samp> (representing 7); hence a regex for these 3 bits would
+be <samp data-coord="hw1-sol.umt:474:212">/11[01]/</samp>.  We also need to handle binary numbers having
+more significant bits than 3.  This can be handled using
+<samp data-coord="hw1-sol.umt:474:343">/0*1[01]{3,}/</samp>, which allows an arbitrary number of
+non-significant leading <samp data-coord="hw1-sol.umt:474:428">0</samp>'s, a leading <samp data-coord="hw1-sol.umt:474:445">1</samp> followed by 3 or
+more arbitrary bits.  Hence the required regex would be
+<samp data-coord="hw1-sol.umt:474:538">/11[01]|0*1[01]{3,}/</samp>.
+</p><p data-coord="hw1-sol.umt:484:8">[Thanks to Mr. Santosh Hegde for pointing out a mistake in
+the original solution.]
+</p></li><li data-coord="hw1-sol.umt:488:0"><p data-coord="hw1-sol.umt:488:8">For a binary number to be evenly divisible by 4, it must
+either be <samp data-coord="hw1-sol.umt:488:83">0</samp> or have its least-significant 2 bits as <samp data-coord="hw1-sol.umt:488:127">00</samp>;
+hence the regex is <samp data-coord="hw1-sol.umt:488:160">/0|(0|1)*00/</samp>.
+</p></li><li data-coord="hw1-sol.umt:492:0"><p data-coord="hw1-sol.umt:492:8">Since the number of <samp data-coord="hw1-sol.umt:492:28">0</samp>'s must be equal to the number of
+<samp data-coord="hw1-sol.umt:492:73">1</samp>'s, it must be the case that the length of the regex must
+be even; i.e. have lengths of 0, 2 or 4.  Hence a matching
+regex is <samp data-coord="hw1-sol.umt:492:218">/|01|10|0011|0101|0110|1001|1010/</samp>.  Note the empty
+string indicated by the initial <samp data-coord="hw1-sol.umt:492:311">|</samp> may not be acceptable to
+some regex-engines; in that case, we could use the alternate
+regex: <samp data-coord="hw1-sol.umt:492:424">/(01)?|10|0011|0101|0110|1001|1010/</samp>.
+</p><p data-coord="hw1-sol.umt:500:8">Note that it is a result of automata theory that it is
+impossible to write a regex which matches strings containing
+the same number \(n\) of <samp data-coord="hw1-sol.umt:500:164">a</samp>'s and <samp data-coord="hw1-sol.umt:500:174">b</samp>'s for arbitrary \(n\).
+However, for any specified \(n\), it is possible to do so by
+enumerating all possibilities as in the regex provided above.
+</p></li></ol></li><li data-coord="hw1-sol.umt:507:0"><p data-coord="hw1-sol.umt:507:4">Give precise but compact descriptions for the strings described by
+the following regex's.  If possible, try to relate the matching
+strings to the syntax of common programming languages.
+</p><ol data-coord="hw1-sol.umt:511:0"><li data-coord="hw1-sol.umt:511:0"><p data-coord="hw1-sol.umt:511:8"><samp data-coord="hw1-sol.umt:511:8">/^[-+]\d+/m</samp>
+</p></li><li data-coord="hw1-sol.umt:513:0"><p data-coord="hw1-sol.umt:513:8">/0[bB][01_]+/
+</p></li><li data-coord="hw1-sol.umt:515:0"><p data-coord="hw1-sol.umt:515:8"><samp data-coord="hw1-sol.umt:515:8">/[-+]?(?:\d*\.\d+|\d+\.\d*)$/</samp>
+</p></li><li data-coord="hw1-sol.umt:517:0"><p data-coord="hw1-sol.umt:517:8"><samp data-coord="hw1-sol.umt:517:8">/\'[^\\\'\n]|\\.\'/</samp>
+</p></li><li data-coord="hw1-sol.umt:519:0"><p data-coord="hw1-sol.umt:519:8"><samp data-coord="hw1-sol.umt:519:8">/\"(?:[^\\\"\n]|\\.)*\"/</samp> <em data-coord="hw1-sol.umt:519:35">10-points</em>
+</p></li></ol><p data-coord="hw1-sol.umt:522:4">The answers follow:
+</p><ol data-coord="hw1-sol.umt:524:0"><li data-coord="hw1-sol.umt:524:0"><p data-coord="hw1-sol.umt:524:8">A signed base-10 integer at the start of a line.
+</p></li><li data-coord="hw1-sol.umt:526:0"><p data-coord="hw1-sol.umt:526:8"><samp data-coord="hw1-sol.umt:526:8">0</samp> followed by a <samp data-coord="hw1-sol.umt:526:26">b</samp> or <samp data-coord="hw1-sol.umt:526:33">B</samp> followed by one-or-more <samp data-coord="hw1-sol.umt:526:61">0</samp>, <samp data-coord="hw1-sol.umt:526:66">1</samp>
+or underscores.  This syntax is supported by languages like
+JavaScript, Python and Ruby to allow number literals in binary.
+Ruby allows <samp data-coord="hw1-sol.umt:526:230">_</samp> within numbers for readability (JavaScript and
+Python do not).
+</p></li><li data-coord="hw1-sol.umt:532:0"><p data-coord="hw1-sol.umt:532:8">An optionally signed base-10 decimal number at the end of
+a string.  The number must contain a decimal point and there
+must be at least one digit before or after the decimal point.
+</p></li><li data-coord="hw1-sol.umt:536:0"><p data-coord="hw1-sol.umt:536:8">A <samp data-coord="hw1-sol.umt:536:10">'</samp>-quoted string containing either a single character
+(which cannot be <samp data-coord="hw1-sol.umt:536:90">\', </samp>'` or newline); or a <samp data-coord="hw1-sol.umt:536:117">\</samp> followed by
+any character other than newline.  Hence this looks like a
+character literal in programming languages like Java or C,
+with <samp data-coord="hw1-sol.umt:536:280">\</samp> used for introducing escape sequences.
+</p></li><li data-coord="hw1-sol.umt:542:0"><p data-coord="hw1-sol.umt:542:8">A <samp data-coord="hw1-sol.umt:542:10">"</samp>-quoted string containing zero-or-more occurrences of
+characters other than <samp data-coord="hw1-sol.umt:542:97">\</samp>, <samp data-coord="hw1-sol.umt:542:102">"</samp> or newline or a <samp data-coord="hw1-sol.umt:542:122">\</samp> followed by
+any character other than newline.  Hence this looks like a
+<samp data-coord="hw1-sol.umt:542:213">"</samp>-quoted string in programming languages like Java or C,
+with <samp data-coord="hw1-sol.umt:542:285">\</samp> used for introducing escape sequences.
+</p></li></ol></li><li data-coord="hw1-sol.umt:549:0"><p data-coord="hw1-sol.umt:549:4">Here is an example of a simple <em data-coord="hw1-sol.umt:549:51"><a href="./sample.html" data-coord="hw1-sol.umt:549:51">HTML document</a></em>:
+</p><pre><span class="hl kwa">&lt;!DOCTYPE</span> html<span class="hl kwa">&gt;</span>
+<span class="hl kwa">&lt;html</span> <span class="hl kwb">lang</span>=<span class="hl str">&quot;en-US&quot;</span><span class="hl kwa">&gt;</span>
+  <span class="hl kwa">&lt;head&gt;</span>
+    <span class="hl kwa">&lt;title&gt;</span>Sample<span class="hl kwa">&lt;/title&gt;</span>
+  <span class="hl kwa">&lt;/head&gt;</span>
+  <span class="hl kwa">&lt;BODY&gt;</span>
+    <span class="hl kwa">&lt;h1&gt;</span>A Sample Document<span class="hl kwa">&lt;/h1&gt;</span>
+    <span class="hl kwa">&lt;p</span> <span class="hl kwb">class</span>=<span class="hl str">&quot;sample-para&quot;</span><span class="hl kwa">&gt;</span>
+      Some <span class="hl kwa">&lt;strong&gt;</span>strong and <span class="hl kwa">&lt;em&gt;</span>emphasized<span class="hl kwa">&lt;/em&gt;</span> text<span class="hl kwa">&lt;/strong&gt;</span>
+    <span class="hl kwa">&lt;/p&gt;</span>
+  <span class="hl kwa">&lt;/BODY&gt;</span>
+<span class="hl kwa">&lt;/html&gt;</span></pre><p data-coord="hw1-sol.umt:553:4">The HTML contains markup within <samp data-coord="hw1-sol.umt:553:36">&lt;</samp> and <samp data-coord="hw1-sol.umt:553:44">&gt;</samp> angle-brackets tags.
+Each tag has a case-insensitive element name; ending tags
+start with <samp data-coord="hw1-sol.umt:553:146">&lt;/</samp>.  The actual contents of the document is the
+content of the <samp data-coord="hw1-sol.umt:553:215">body</samp> element.
+</p><p data-coord="hw1-sol.umt:558:4">Find bugs and inadequacies in the following funtion which purports
+to extract the plain-text content of a HTML document.  Then
+provide a fixed version of the function.
+</p><pre>    <span class="hl com">/** Given a string html for a HTML document, return the text content</span>
+<span class="hl com">     *  with all the HTML markup removed.  Specifically, remove header</span>
+<span class="hl com">     *  info up to and including the initial &lt;body&gt; tag and the footer</span>
+<span class="hl com">     *  including &lt;/body&gt; and beyond.  Also strip out all remaining</span>
+<span class="hl com">     *  HTML tags as well as empty lines.</span>
+<span class="hl com">     */</span>
+    function <span class="hl kwd">htmlToText</span><span class="hl opt">(</span>html<span class="hl opt">) {</span>
+      <span class="hl kwa">return</span> html<span class="hl opt">.</span>
+        <span class="hl kwd">replace</span><span class="hl opt">(/(.|</span><span class="hl esc">\n</span><span class="hl opt">)*</span>\<span class="hl opt">&lt;</span>body<span class="hl opt">.+</span>\<span class="hl opt">&gt;/,</span> <span class="hl str">&apos;&apos;</span><span class="hl opt">).</span> <span class="hl slc">//remove up till body</span>
+        <span class="hl kwd">replace</span><span class="hl opt">(/</span>\<span class="hl opt">&lt;</span>\<span class="hl opt">/</span><span class="hl kwd">body</span><span class="hl opt">(.|</span><span class="hl esc">\n</span><span class="hl opt">)</span>*/<span class="hl opt">,</span> <span class="hl str">&apos;&apos;</span><span class="hl opt">).</span> <span class="hl slc">//remove from &lt;/body</span>
+        <span class="hl kwd">replace</span><span class="hl opt">(/</span>\<span class="hl opt">&lt;.+</span>\<span class="hl opt">&gt;/,</span> <span class="hl str">&apos;&apos;</span><span class="hl opt">).</span> <span class="hl slc">//remove tags</span>
+        <span class="hl kwd">replace</span><span class="hl opt">(/^</span>\s<span class="hl opt">*</span>$<span class="hl opt">/,</span> <span class="hl str">&apos;&apos;</span><span class="hl opt">);</span>  <span class="hl slc">//remove empty lines</span>
+    <span class="hl opt">}</span></pre><p data-coord="hw1-sol.umt:578:4">The extracted text for the sample document should be something
+like:
+</p><pre data-coord="hw1-sol.umt:582:0">      A Sample Document
+        Some strong and emphasized text
+</pre><p data-coord="hw1-sol.umt:586:4"><em data-coord="hw1-sol.umt:586:4">15-points</em>
+</p><p data-coord="hw1-sol.umt:588:4">The problems include the following:
+</p><ul data-coord="hw1-sol.umt:590:0"><li data-coord="hw1-sol.umt:590:0"><p data-coord="hw1-sol.umt:590:8">The most serious problem is the use of the regex <code><span class="hl opt">/.+/</span></code> to
+match the rest of a tag.  Since <samp data-coord="hw1-sol.umt:590:108">.+</samp> matches the rest of a
+line, the regex could skip over other tags on the same line.
+A better regex to match the rest of a tag would be <code><span class="hl opt">/[^&gt;]+/</span></code>.
+</p></li><li data-coord="hw1-sol.umt:595:0"><p data-coord="hw1-sol.umt:595:8">The regex's which look for <samp data-coord="hw1-sol.umt:595:35">&lt;body</samp> and <samp data-coord="hw1-sol.umt:595:47">&lt;/body</samp> should be
+case insensitive.
+</p></li><li data-coord="hw1-sol.umt:598:0"><p data-coord="hw1-sol.umt:598:8">The intent behind the <samp data-coord="hw1-sol.umt:598:30">$</samp> in the regex for removing empty lines
+is to indicate the end of a line (this is incorrect without
+the use of the <samp data-coord="hw1-sol.umt:598:163">/m</samp> flag).  However, the <samp data-coord="hw1-sol.umt:598:189">$</samp> merely sets the
+context for the rest of the regex, it does not actually match
+a newline.  Hence to actually remove empty lines completely,
+the regex would need to include <code><span class="hl opt">/</span><span class="hl esc">\n</span><span class="hl opt">/</span></code>.
+</p></li><li data-coord="hw1-sol.umt:605:0"><p data-coord="hw1-sol.umt:605:8">The regex for removing empty lines should use the <samp data-coord="hw1-sol.umt:605:58">/m</samp> flag
+to force <samp data-coord="hw1-sol.umt:605:85">^</samp> to anchor at the start of a line instead of
+the start of a string.
+</p></li><li data-coord="hw1-sol.umt:609:0"><p data-coord="hw1-sol.umt:609:8">Many of the replacements need to be specified as <em data-coord="hw1-sol.umt:609:57">global</em>
+using the <samp data-coord="hw1-sol.umt:609:84">/g</samp> flag.
+</p></li></ul><p data-coord="hw1-sol.umt:612:4">Fixing these problems results in:
+</p><pre>    function <span class="hl kwd">htmlToText</span><span class="hl opt">(</span>html<span class="hl opt">) {</span>
+      <span class="hl kwa">return</span> html<span class="hl opt">.</span>
+        <span class="hl kwd">replace</span><span class="hl opt">(/(.|</span><span class="hl esc">\n</span><span class="hl opt">)*</span>\<span class="hl opt">&lt;</span>body<span class="hl opt">[^</span>\<span class="hl opt">&gt;]*</span>\<span class="hl opt">&gt;/</span>i<span class="hl opt">,</span> <span class="hl str">&apos;&apos;</span><span class="hl opt">).</span> <span class="hl slc">//remove header</span>
+        <span class="hl kwd">replace</span><span class="hl opt">(/</span>\<span class="hl opt">&lt;</span>\<span class="hl opt">/</span><span class="hl kwd">body</span><span class="hl opt">(.|</span><span class="hl esc">\n</span><span class="hl opt">)</span>*/i<span class="hl opt">,</span> <span class="hl str">&apos;&apos;</span><span class="hl opt">).</span> <span class="hl slc">//remove footer</span>
+        <span class="hl kwd">replace</span><span class="hl opt">(/</span>\<span class="hl opt">&lt;[^</span>\<span class="hl opt">&gt;]+</span>\<span class="hl opt">&gt;/</span>g<span class="hl opt">,</span> <span class="hl str">&apos;&apos;</span><span class="hl opt">).</span> <span class="hl slc">//remove tags</span>
+        <span class="hl kwd">replace</span><span class="hl opt">(/^</span>\s<span class="hl opt">*</span><span class="hl esc">\n</span><span class="hl opt">/</span>gm<span class="hl opt">,</span> <span class="hl str">&apos;&apos;</span><span class="hl opt">);</span>  <span class="hl slc">//remove empty lines</span>
+    <span class="hl opt">}</span></pre></li></ol></section>
+</div> <!-- #content -->
+</div> <!-- #main -->
+<div id="footer">&nbsp;</div>
+</div> <!-- #page -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../../assets/scripts/nav.js"></script>
+</body>
+</html>
