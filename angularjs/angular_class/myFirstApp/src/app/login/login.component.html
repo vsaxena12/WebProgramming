@@ -1,0 +1,14 @@
+<div class="heading">
+    <h1 style="text-align:center;"> Welcome Login! </h1>
+    </div>
+    <br>
+    
+    <div class="log-form">
+        <h2>Login to your account</h2>
+        <form>
+          <input type="text" title="username" placeholder="username"  [(ngModel)]="entered_username" name="uname" />
+          <input type="password" title="userpassword" placeholder="password" [(ngModel)]="entered_password" name="pname"/>
+          <button type="button" class="btn btn-danger" (click)="submit()">Submit</button>
+          
+        </form>
+    </div>
